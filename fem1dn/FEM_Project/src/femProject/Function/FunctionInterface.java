@@ -97,6 +97,7 @@ public class FunctionInterface {
     public static void main(String[] args) {
         JFrame frame = new JFrame("FunctionInterface");
         FunctionInterface fi = new FunctionInterface();
+
         frame.setContentPane(fi.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
