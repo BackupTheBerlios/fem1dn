@@ -275,7 +275,16 @@
       </value>
     </option>
   </component>
-  <component name="libraryTable" />
+  <component name="libraryTable">
+    <library name="de">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/classes/production/FEM_Project/de" />
+        <root url="file://$PROJECT_DIR$/classes/production/FEM_Project/de/olikurt/parser" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
   <component name="uidesigner-configuration">
     <option name="INSTRUMENT_CLASSES" value="true" />
     <option name="COPY_FORMS_RUNTIME_TO_OUTPUT" value="true" />

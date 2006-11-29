@@ -1,4 +1,6 @@
 package femProject.Function;
+import de.olikurt.parser.Variable;
+import de.olikurt.parser.Function;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -6,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,13 +72,17 @@ public class FunctionInterface {
                     String f = functionTextField.getText(),
                             a = rangeBegTextField.getText(),
                             b = rangeEndTextField.getText();
+
                     functionListModel.addElement(f);
                     rangeListModel.addElement(leftBrBtn.getText() + a + ";" + b + rightBrBtn.getText());
+
 
                 }
             }
 
         });
+
+        
         functionList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 rangeList.setSelectedIndex(functionList.getSelectedIndex());
@@ -87,7 +94,7 @@ public class FunctionInterface {
             }
         });
 
-
+       
     }
 
     private boolean checkFunction() {
