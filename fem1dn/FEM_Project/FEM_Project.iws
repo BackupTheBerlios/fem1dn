@@ -162,7 +162,7 @@
       <file leaf-file-name="DrawingPanel.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/femProject/Drawing/DrawingPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="36" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.5328467">
+            <state line="15" column="13" selection-start="340" selection-end="340" vertical-scroll-proportion="0.310219">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -698,7 +698,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Drawing/DrawingPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="36" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.5328467">
+        <state line="15" column="13" selection-start="340" selection-end="340" vertical-scroll-proportion="0.310219">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
