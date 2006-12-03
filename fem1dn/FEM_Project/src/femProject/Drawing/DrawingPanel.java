@@ -82,16 +82,48 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void keyTyped(KeyEvent keyEvent) {
-        keyTyped(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
+        //keyTyped(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     public void keyPressed(KeyEvent keyEvent) {
-        keyPressed(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
+        //keyPressed(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
+        float xStep = (xMax - xMin)/this.tab.get(0)[0].length, yStep = (yMax - yMin)/this.tab.get(0)[0].length;
+        switch(keyEvent.getKeyCode()){
+        case 107: //+
+            xMax -=xStep;
+            xMin +=xStep;
+            yMax -=yStep;
+            yMin +=yStep;
+            break;
+        case 109: //-
+            xMax +=xStep;
+            xMin -=xStep;
+            yMax +=yStep;
+            yMin -=yStep;
+            break;
+        case 37:  //lewa strzalka
+            xMax +=xStep;
+            xMin +=xStep;
+            break;
+        case 38:  //strzalka do gory
+            yMax -=yStep;
+            yMin -=yStep;
+            break;
+        case 39:  //prawa strzalka
+            xMax -=xStep;
+            xMin -=xStep;
+            break;
+        case 40: //strzalka w dol
+            yMax +=yStep;
+            yMin +=yStep;
+            break;
+        }
+        this.repaint();
     }
 
 
     public void keyReleased(KeyEvent keyEvent) {
-        keyReleased(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
+        //keyReleased(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     public void computeBoundary() {
@@ -156,6 +188,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     public static void main(String[] args) {
         JFrame frame = new JFrame("DrawingPanel");
         DrawingPanel fi = new DrawingPanel();
+        frame.addKeyListener(fi);
         frame.setContentPane(fi);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
