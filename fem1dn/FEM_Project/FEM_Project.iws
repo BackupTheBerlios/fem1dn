@@ -17,9 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Drawing/DrawingPanel.java" afterPath="$PROJECT_DIR$/src/femProject/Drawing/DrawingPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iws" afterPath="$PROJECT_DIR$/FEM_Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iml" afterPath="$PROJECT_DIR$/FEM_Project.iml" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -626,7 +624,7 @@
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
     <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
     <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
-    <option name="ERROR_OCCURED" value="true" />
+    <option name="ERROR_OCCURED" value="false" />
     <option name="ACTIVE_VCS_NAME" value="CVS" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
