@@ -19,6 +19,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     private List<float[][]> tab;
     private List<Color> color;
     private float xMin = -1, xMax = 1, yMin = -1, yMax = 1;
+    private final float  EPS = 0.01f;
 
     public DrawingPanel() {
         this.addKeyListener(this);
@@ -33,12 +34,12 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
 
-    public float getxMin() {
+     public float getxMin() {
         return xMin;
     }
 
     public void setxMin(float xMin) {
-        this.xMin = xMin - Float.MIN_VALUE;
+        this.xMin = xMin - EPS;
     }
 
     public float getxMax() {
@@ -46,7 +47,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void setxMax(float xMax) {
-        this.xMax = xMax + Float.MIN_VALUE;
+        this.xMax = xMax + EPS;
     }
 
     public float getyMin() {
@@ -54,7 +55,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void setyMin(float yMin) {
-        this.yMin = yMin - Float.MIN_VALUE;
+        this.yMin = yMin - EPS;
     }
 
     public float getyMax() {
@@ -62,7 +63,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void setyMax(float yMax) {
-        this.yMax = yMax + Float.MIN_VALUE;
+        this.yMax = yMax + EPS;
     }
 
     public List<float[][]> getTab() {
@@ -169,14 +170,10 @@ public class DrawingPanel extends JPanel implements KeyListener {
                 g.setColor(Color.red);
             float[][] aTab = this.tab.get(k);
             for (int i = 0; i < aTab[0].length - 1; ++i) {
-                int x1 = (int) (this.getWidth() * (aTab[0][i] - xMin) / (xMax - xMin)),
-                        x2 = (int) (this.getWidth() * (aTab[0][i + 1] - xMin) / (xMax - xMin)),
-                        y1 = this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i]) / (yMax - yMin)),
-                        y2 = this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i + 1]) / (yMax - yMin));
-                g.drawLine(x1,
-                        y1,
-                        x2,
-                        y2);
+                g.drawLine((int) (this.getWidth() * (aTab[0][i] - xMin) / (xMax - xMin)),
+                        this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i]) / (yMax - yMin)),
+                        (int) (this.getWidth() * (aTab[0][i + 1] - xMin) / (xMax - xMin)),
+                         this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i + 1]) / (yMax - yMin)));
             }
         }
     }
@@ -202,15 +199,39 @@ public class DrawingPanel extends JPanel implements KeyListener {
         for (int i = 0; i < pTab.length; ++i) {
             pTab[i] = new float[100];
         }
-        float x = -3.14f;
-        for (int i = 0; i < pTab[0].length; ++i) {
-            x = pTab[0][i] = x + 6.28f / pTab[0].length;
-            pTab[1][i] = (float) Math.sin(x);
+        float x=-3.14f;
+        for(int i=0;i<pTab[0].length;++i){
+            x = pTab[0][i] = x + 6.28f/pTab[0].length;
+            pTab[1][i] = (float)Math.sin(x);
         }
         this.color = new ArrayList<Color>();
         color.add(Color.red);
         this.tab = new ArrayList<float[][]>();
         this.tab.add(pTab);
+
+        float[][] aTab = new float[2][];
+        for(int i=0;i<aTab.length;++i){
+            aTab[i] = new float[1000];
+        }
+
+        x=-1;
+        for(int i=0;i<aTab[0].length;++i){
+            x = aTab[0][i] = x + 6f/aTab[0].length;
+            if(i<aTab[0].length/4){
+                aTab[1][i] = -3f;
+            }
+            else if(i>aTab[0].length/4){
+                aTab[1][i] = 1f;
+            }
+            else {
+                aTab[1][i] = -3f;
+                ++i;
+                aTab[0][i] = x;
+                aTab[1][i] = 1f;
+            }
+        }
+        this.color.add(Color.green);
+        this.tab.add(aTab);
         this.computeBoundary();
         this.repaint();
     }
