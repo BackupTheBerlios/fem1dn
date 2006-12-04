@@ -1,4 +1,5 @@
 package femProject.Function;
+
 import de.olikurt.parser.Variable;
 import de.olikurt.parser.Function;
 
@@ -9,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,7 +21,7 @@ import java.awt.event.ComponentAdapter;
  * Time: 17:03:51
  * To change this template use File | Settings | File Templates.
  */
-public class FunctionInterface {
+public class FunctionInterface extends JDialog {
     private static String INFINITY_SYMBOL = "\u221E";
     private JPanel panel1;
     private JTextField functionTextField;
@@ -34,20 +38,52 @@ public class FunctionInterface {
     private JTextField rangeBegTextField;
     private DefaultListModel functionListModel;
     private DefaultListModel rangeListModel;
+    private femProject.Function.Function function;
+    private ArrayList<Range> ranges;
+    private ArrayList<String> functions;
+    private boolean inclBeg, inclEnd;
+    private de.olikurt.parser.Variable var;
+    private Vector vect;
+
+
+    private static final int WIDTH = 400,
+            HEIGHT = 300;
 
 
     public FunctionInterface() {
+        var = new Variable('x');
+        vect = new Vector();
+        vect.add(var);
+
+        ranges = new ArrayList<Range>();
+        functions = new ArrayList<String>();
+        inclBeg = false;
+        inclEnd = false;
+        this.setModal(true);
+        this.setContentPane(panel1);
+        this.setSize(WIDTH, HEIGHT);
+
         leftBrBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if (leftBrBtn.getText().compareTo("(") == 0) leftBrBtn.setText("[");
-                else leftBrBtn.setText("(");
+                if (leftBrBtn.getText().compareTo("(") == 0) {
+                    leftBrBtn.setText("[");
+                    inclBeg = true;
+                } else {
+                    leftBrBtn.setText("(");
+                    inclBeg = false;
+                }
 
             }
         });
         rightBrBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if (rightBrBtn.getText().compareTo(")") == 0) rightBrBtn.setText("]");
-                else rightBrBtn.setText(")");
+                if (rightBrBtn.getText().compareTo(")") == 0) {
+                    rightBrBtn.setText("]");
+                    inclEnd = true;
+                } else {
+                    rightBrBtn.setText(")");
+                    inclEnd = false;
+                }
             }
         });
         leftInfBtn.setText("-" + INFINITY_SYMBOL);
@@ -68,36 +104,118 @@ public class FunctionInterface {
         });
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if (checkFunction()) {
-                    String f = functionTextField.getText(),
-                            a = rangeBegTextField.getText(),
-                            b = rangeEndTextField.getText();
-
-                    functionListModel.addElement(f);
-                    rangeListModel.addElement(leftBrBtn.getText() + a + ";" + b + rightBrBtn.getText());
-
+                String f = functionTextField.getText(),
+                        a = rangeBegTextField.getText(),
+                        b = rangeEndTextField.getText();
+                if (checkFunction(f, a, b)) {
 
                 }
             }
 
         });
 
-        
+
         functionList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 rangeList.setSelectedIndex(functionList.getSelectedIndex());
+                fillTextFields();
             }
         });
         rangeList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 functionList.setSelectedIndex(rangeList.getSelectedIndex());
+                fillTextFields();
             }
         });
 
-       
+
+        finishButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                Range[] rangeTab = new Range[ranges.size()];
+                String[] funTab = new String[functions.size()];
+                for (int i = 0; i < ranges.size(); i++) {
+                    rangeTab[i] = ranges.get(i);
+                    funTab[i] = functions.get(i);
+                }
+                try {
+                    function = new femProject.Function.Function(rangeTab, funTab);
+                } catch (Exception e) {
+                }
+                setVisible(false);
+
+            }
+        });
+        editButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                int indx = rangeList.getSelectedIndex();
+                if (indx >= 0 && indx <= ranges.size()) {
+                    ranges.remove(indx);
+                    functions.remove(indx);
+                    rangeListModel.removeElementAt(indx);
+                    functionListModel.removeElementAt(indx);
+                }
+            }
+        });
     }
 
-    private boolean checkFunction() {
+    private void fillTextFields() {
+        int indx = functionList.getSelectedIndex();
+        if (indx > 0 && indx < ranges.size()) {
+            String fun = functions.get(indx);
+            Range rng = ranges.get(indx);
+            functionTextField.setText(fun);
+            String beg = rng.getBeg() == Float.NEGATIVE_INFINITY ?
+                    "-" + INFINITY_SYMBOL : String.valueOf(rng.getBeg());
+            String end = rng.getEnd() == Float.POSITIVE_INFINITY ?
+                    "+" + INFINITY_SYMBOL : String.valueOf(rng.getEnd());
+            rangeBegTextField.setText(beg);
+            rangeEndTextField.setText(end);
+        }
+    }
+
+    public femProject.Function.Function getFunction() {
+        return function;
+    }
+
+    private boolean checkFunction(String fun, String a, String b) {
+        try {
+            if (a.length() < 1 || b.length() < 1 || fun.length() < 1) return false;
+
+            float beg, end, val;
+            if (a.compareTo("-" + INFINITY_SYMBOL) == 0) beg = Float.NEGATIVE_INFINITY;
+            else beg = Float.valueOf(a);
+
+            if (b.compareTo("+" + INFINITY_SYMBOL) == 0) end = Float.POSITIVE_INFINITY;
+            else end = Float.valueOf(b);
+
+            if (end < beg || (end == beg && (!inclBeg || !inclEnd))) return false;
+
+            if (beg != Float.NEGATIVE_INFINITY) {
+                if (end != Float.POSITIVE_INFINITY)
+                    val = (end - beg) / 2;
+                else val = beg + 1;
+            } else if (end != Float.POSITIVE_INFINITY) val = end - 1;
+            else val = 0;
+
+            de.olikurt.parser.Function funct = new Function(fun);
+
+            var.setValue((double) val);
+            funct.calculate(vect);
+
+            Range range = new Range(beg, end, inclBeg, inclEnd);
+            Range currRange;
+            for (int i = 0; i < ranges.size(); i++) {
+                currRange = ranges.get(i);
+                if (range.intersects(currRange)) return false;
+            }
+            ranges.add(range);
+            functions.add(fun);
+            functionListModel.addElement(fun);
+            rangeListModel.addElement(leftBrBtn.getText() + a + ";" + b + rightBrBtn.getText());
+
+        } catch (Exception ex) {
+            return false;
+        }
         return true;
     }
 

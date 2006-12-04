@@ -124,7 +124,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="Dodaj/Zmień"/>
+              <text value="Dodaj"/>
             </properties>
           </component>
           <component id="9105f" class="javax.swing.JButton" binding="editButton">
@@ -133,7 +133,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="Edytuj"/>
+              <text value="Usuń"/>
             </properties>
           </component>
         </children>

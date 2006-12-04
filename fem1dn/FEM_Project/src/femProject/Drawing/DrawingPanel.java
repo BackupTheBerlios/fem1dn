@@ -87,36 +87,36 @@ public class DrawingPanel extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent keyEvent) {
         //keyPressed(keyEvent);    //To change body of overridden methods use File | Settings | File Templates.
-        float xStep = (xMax - xMin)/this.tab.get(0)[0].length, yStep = (yMax - yMin)/this.tab.get(0)[0].length;
-        switch(keyEvent.getKeyCode()){
-        case 107: //+
-            xMax -=xStep;
-            xMin +=xStep;
-            yMax -=yStep;
-            yMin +=yStep;
-            break;
-        case 109: //-
-            xMax +=xStep;
-            xMin -=xStep;
-            yMax +=yStep;
-            yMin -=yStep;
-            break;
-        case 37:  //lewa strzalka
-            xMax +=xStep;
-            xMin +=xStep;
-            break;
-        case 38:  //strzalka do gory
-            yMax -=yStep;
-            yMin -=yStep;
-            break;
-        case 39:  //prawa strzalka
-            xMax -=xStep;
-            xMin -=xStep;
-            break;
-        case 40: //strzalka w dol
-            yMax +=yStep;
-            yMin +=yStep;
-            break;
+        float xStep = (xMax - xMin) / this.tab.get(0)[0].length, yStep = (yMax - yMin) / this.tab.get(0)[0].length;
+        switch (keyEvent.getKeyCode()) {
+            case 107: //+
+                xMax -= xStep;
+                xMin += xStep;
+                yMax -= yStep;
+                yMin += yStep;
+                break;
+            case 109: //-
+                xMax += xStep;
+                xMin -= xStep;
+                yMax += yStep;
+                yMin -= yStep;
+                break;
+            case 37:  //lewa strzalka
+                xMax += xStep;
+                xMin += xStep;
+                break;
+            case 38:  //strzalka do gory
+                yMax -= yStep;
+                yMin -= yStep;
+                break;
+            case 39:  //prawa strzalka
+                xMax -= xStep;
+                xMin -= xStep;
+                break;
+            case 40: //strzalka w dol
+                yMax += yStep;
+                yMin += yStep;
+                break;
         }
         this.repaint();
     }
@@ -170,9 +170,9 @@ public class DrawingPanel extends JPanel implements KeyListener {
             float[][] aTab = this.tab.get(k);
             for (int i = 0; i < aTab[0].length - 1; ++i) {
                 int x1 = (int) (this.getWidth() * (aTab[0][i] - xMin) / (xMax - xMin)),
-                    x2 =  (int) (this.getWidth() * (aTab[0][i + 1] - xMin) / (xMax - xMin)),
-                    y1 =  this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i]) / (yMax - yMin)),
-                    y2 = this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i + 1]) / (yMax - yMin));
+                        x2 = (int) (this.getWidth() * (aTab[0][i + 1] - xMin) / (xMax - xMin)),
+                        y1 = this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i]) / (yMax - yMin)),
+                        y2 = this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i + 1]) / (yMax - yMin));
                 g.drawLine(x1,
                         y1,
                         x2,
@@ -197,15 +197,15 @@ public class DrawingPanel extends JPanel implements KeyListener {
         fi.test();
     }
 
-    public void test(){
+    public void test() {
         float[][] pTab = new float[2][];
-        for(int i=0;i<pTab.length;++i){
+        for (int i = 0; i < pTab.length; ++i) {
             pTab[i] = new float[100];
         }
-        float x=-3.14f;
-        for(int i=0;i<pTab[0].length;++i){
-            x = pTab[0][i] = x + 6.28f/pTab[0].length;
-            pTab[1][i] = (float)Math.sin(x);
+        float x = -3.14f;
+        for (int i = 0; i < pTab[0].length; ++i) {
+            x = pTab[0][i] = x + 6.28f / pTab[0].length;
+            pTab[1][i] = (float) Math.sin(x);
         }
         this.color = new ArrayList<Color>();
         color.add(Color.red);
