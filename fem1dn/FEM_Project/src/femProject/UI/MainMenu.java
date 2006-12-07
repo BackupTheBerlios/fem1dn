@@ -1,6 +1,7 @@
 package femProject.UI;
 
 import femProject.Function.FunctionInterface;
+import femProject.Dirichlet.Dirichlet;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -22,14 +23,8 @@ public class MainMenu extends JFrame {
 
         warunkiDirichletaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                FunctionInterface funInt = new FunctionInterface();
-                funInt.setVisible(true);
-                femProject.Function.Function fun = funInt.getFunction();
-                try {
-                    resultForm.setFunction(fun);
-                } catch (Exception e) {
-                }
-                resultForm.setVisible(true);
+                Dirichlet dirichlet = new Dirichlet();
+                //dirichlet
             }
         });
         koniecButton.addActionListener(new ActionListener() {

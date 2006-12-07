@@ -4,6 +4,7 @@ import de.olikurt.parser.Variable;
 import de.olikurt.parser.Function;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
@@ -36,6 +37,8 @@ public class FunctionInterface extends JDialog {
     private JButton addButton;
     private JButton editButton;
     private JTextField rangeBegTextField;
+    private JTextArea textArea1;
+    private JLabel functionName;
     private DefaultListModel functionListModel;
     private DefaultListModel rangeListModel;
     private femProject.Function.Function function;
@@ -46,7 +49,7 @@ public class FunctionInterface extends JDialog {
     private Vector vect;
 
 
-    private static final int WIDTH = 400,
+    private static final int WIDTH = 450,
             HEIGHT = 300;
 
 
@@ -62,6 +65,8 @@ public class FunctionInterface extends JDialog {
         this.setModal(true);
         this.setContentPane(panel1);
         this.setSize(WIDTH, HEIGHT);
+        this.setUndecorated(false);
+     
 
         leftBrBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
@@ -157,7 +162,9 @@ public class FunctionInterface extends JDialog {
             }
         });
     }
-
+    public void setFunctionName(String name){
+        this.functionName.setText(name);        
+    }
     private void fillTextFields() {
         int indx = functionList.getSelectedIndex();
         if (indx > 0 && indx < ranges.size()) {
