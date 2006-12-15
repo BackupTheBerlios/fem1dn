@@ -67,19 +67,18 @@ end{u};
     private Function p, q, r, f, pp, u;
 
     private int nmax = 1000;
-    private int n, i, ig, jg;
+    private int n;
     private float a, b, upa, upb, h;
-    private char z;
     private boolean bb;
     private float[] xi, aa, ab, ac, af, ax;
-    
-    public Neumann(float a, float b, int n, float upa, float upb){
+
+    public Neumann(float a, float b, int n, float upa, float upb) {
         FunctionInterface functionInterface = new FunctionInterface();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        int     posX = (int) (dim.getWidth() / 2) - functionInterface.getWidth() / 2,
+        int posX = (int) (dim.getWidth() / 2) - functionInterface.getWidth() / 2,
                 posY = (int) (dim.getHeight() / 2) - functionInterface.getHeight() / 2;
-        functionInterface.setLocation(posX,posY);
+        functionInterface.setLocation(posX, posY);
 
         functionInterface.setFunctionName("p");
         functionInterface.setVisible(true);
@@ -104,11 +103,70 @@ end{u};
         functionInterface.setFunctionName("u");
         functionInterface.setVisible(true);
         u = functionInterface.getFunction();
-        
-        h = (b-a)/n;
+
+        this.a = a;
+        this.b = b;
+        this.n = n;
+        this.upa = upa;
+        this.upb = upb;
     }
 
-    /*
+    public int getN() {
+        return n;
+    }
+
+    public void setN(int n) {
+        this.n = n;
+    }
+
+    public float getA() {
+        return a;
+    }
+
+    public void setA(float a) {
+        this.a = a;
+    }
+
+    public float getB() {
+        return b;
+    }
+
+    public void setB(float b) {
+        this.b = b;
+    }
+
+    public float getUpa() {
+        return upa;
+    }
+
+    public void setUpa(float upa) {
+        this.upa = upa;
+    }
+
+    public float getUpb() {
+        return upb;
+    }
+
+    public void setUpb(float upb) {
+        this.upb = upb;
+    }
+
+
+    public float[] getAx() {
+        return ax;
+    }
+
+    public void setAx(float[] ax) {
+        this.ax = ax;
+    }
+
+    public float[] getXi() {
+        return xi;
+    }
+
+    public void setXi(float[] xi) {
+        this.xi = xi;
+    }/*
     {**********************************************************}
 
     function v(i:integer;x:real):real;
@@ -248,18 +306,110 @@ end{trojdiag};
 */
 
 
-        private void trojdiag(int n, float[] a, float[] b, float[] c, float[] f, float[] x){
+    private void trojdiag(int n, float[] a, float[] b, float[] c, float[] f, float[] x) {
         float m;
 
-        for(int k=1; k < n-1; k++){
-            m=b[k]/a[k-1];
-            a[k]-=m*c[k-1];
-            f[k]-=m*f[k-1];
+        for (int k = 2; k <= n; k++) {
+            m = b[k] / a[k - 1];
+            a[k] -= m * c[k - 1];
+            f[k] -= m * f[k - 1];
         }
-        x[n-1] = f[n-1]/a[n-1];
-        for(int k=n-2; k>=0; k--){
-             x[k]=(f[k]-c[k]*x[k+1])/a[k];
+        x[n] = f[n] / a[n];
+        for (int k = n - 1; k > 0; k--) {
+            x[k] = (f[k] - c[k] * x[k + 1]) / a[k];
         }
+    }
+
+    /*
+   for i:=0 to n-1 do xi[i]:=a+i*h;
+   xi[n]:=b;
+
+   {Obliczanie wspolczynnikow macierzy}
+   for i:=1 to n do ab[i]:=calka(0,i-1,i,xi[i-1],xi[i]);
+   aa[0]:=calka(0,0,0,xi[0],xi[1]);
+   for i:=1 to n-1 do aa[i]:=calka(0,i,i,xi[i-1],xi[i])
+                            +calka(0,i,i,xi[i],xi[i+1]);
+   aa[n]:=calka(0,n,n,xi[n-1],xi[n]);
+   for i:=0 to n-1 do ac[i]:=calka(0,i+1,i,xi[i],xi[i+1]);
+
+   {Obliczanie prawych stron}
+   af[0]:=-p(a)*upa+calka(1,0,0,xi[0],xi[1]);
+   for i:=1 to n-1 do af[i]:=calka(1,i,i,xi[i-1],xi[i])
+                            +calka(1,i,i,xi[i],xi[i+1]);
+   af[n]:=p(b)*upb+calka(1,n,n,xi[n-1],xi[n]);
+
+   for i:=n+1 downto 1 do
+   begin
+    ab[i]:=ab[i-1];
+    aa[i]:=aa[i-1];
+    ac[i]:=ac[i-1];
+    af[i]:=af[i-1]
+   end;
+
+   {Rozwiazanie ukladu rownan}
+   trojdiag(n+1,aa,ab,ac,af,ax);
+
+   for i:=1 to n+1 do ax[i-1]:=ax[i];
+
+   clrscr;
+   write('NR WEZLA    WARTOSC x     ROZ.DOKLADNE    ROZ.PRZYBLIZONE     BLAD');
+   window(2,3,79,25);
+   clrscr;
+   for i:=0 to n do
+   begin
+    write(i:5,'    ',xi[i]:10:6,'      ',u(a+i*h):10:6);
+    writeln('       ',uu(a+i*h):10:6,'      ',u(a+i*h)-uu(a+i*h):12);
+    if ((i+1) div 20*20=i+1) or (i=n) then ENTER
+   end;
+
+    */
+    private void tabInit() {
+        xi = new float[n + 1];
+        aa = new float[n + 1];
+        ab = new float[n + 1];
+        ac = new float[n + 1];
+        af = new float[n + 1];
+        ax = new float[n + 1];
+    }
+
+    public void start() {
+        this.tabInit();
+        h = (b - a) / n;
+
+        for (int i = 0; i < n - 1; ++i)
+            xi[i] = a + i * h;
+        xi[n - 1] = b;
+
+        try {
+            //{Obliczanie wspolczynnikow macierzy}
+            for (int i = 1; i <= n; ++i)
+                ab[i] = calka(0, i - 1, i, xi[i - 1], xi[i]);
+            aa[0] = calka(0, 0, 0, xi[0], xi[1]);
+            for (int i = 1; i <= n - 1; ++i)
+                aa[i] = calka(0, i, i, xi[i - 1], xi[i]) + calka(0, i, i, xi[i], xi[i + 1]);
+            aa[n] = calka(0, n, n, xi[n - 1], xi[n]);
+            for (int i = 0; i <= n - 1; ++i)
+                ac[i] = calka(0, i + 1, i, xi[i], xi[i + 1]);
+
+            //{Obliczanie prawych stron}
+            af[0] = -p.getValue(a) * upa + calka(1, 0, 0, xi[0], xi[1]);
+            for(int i=1;i<=n-1;++i)
+              af[i]=calka(1,i,i,xi[i-1],xi[i])+calka(1,i,i,xi[i],xi[i+1]);
+            af[n]=p.getValue(b)*upb+calka(1,n,n,xi[n-1],xi[n]);
+
+            for(int i=n;i>=0;--i){
+                ab[i]=ab[i-1];
+                aa[i]=aa[i-1];
+                ac[i]=ac[i-1];
+                af[i]=af[i-1];
+            }
+            //{Rozwiazanie ukladu rownan}
+            trojdiag(n,aa,ab,ac,af,ax);
+            for(int i=0;i<=n;++i)
+            ax[i-1]=ax[i];
+        } catch (Exception ex) {
+        }
+
     }
 }
 

@@ -33,6 +33,11 @@ public class DrawingPanel extends JPanel implements KeyListener {
         this.color = color;
     }
 
+    public void addFunction(float[][] tab, Color color){
+        this.tab.add(tab);
+        this.color.add(color);
+    }
+
 
      public float getxMin() {
         return xMin;

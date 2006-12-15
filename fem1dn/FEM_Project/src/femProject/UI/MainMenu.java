@@ -3,6 +3,7 @@ package femProject.UI;
 import femProject.Function.FunctionInterface;
 import femProject.Dirichlet.Dirichlet;
 import femProject.Neumann.Neumann;
+import femProject.Drawing.DrawingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -43,6 +44,27 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(getConditions()){
                     Neumann neumann = new Neumann(a,b,n,upa,upb);
+                    neumann.start();
+                    float[] xi = neumann.getXi();
+                    float[] ax = neumann.getAx();
+                    float[][] tab = new float[2][];
+                    tab[0] = new float[n+1];
+                    tab[1] = new float[n+1];
+                    for(int i=0;i<=n;++i){
+                        tab[0][i] = xi[i];
+                        tab[1][i] = ax[i];
+                    }
+                           JFrame frame = new JFrame("DrawingPanel");
+        DrawingPanel fi = new DrawingPanel();
+        frame.addKeyListener(fi);
+        frame.setContentPane(fi);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setBounds(50, 50, 500, 500);
+        frame.setVisible(true);
+            fi.addFunction(tab, Color.green);
+            fi.computeBoundary();
+            fi.repaint();
                 }
                 
             }
