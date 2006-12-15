@@ -72,48 +72,6 @@ end{u};
     private char z;
     private boolean bb;
     private float[] xi, aa, ab, ac, af, ax;
-
-
-    public Neumann(){
-        a=0;
-        b=1;
-        n=100;
-        upa =0;
-        upb=1;
-        
-        FunctionInterface functionInterface = new FunctionInterface();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-        int     posX = (int) (dim.getWidth() / 2) - functionInterface.getWidth() / 2,
-                posY = (int) (dim.getHeight() / 2) - functionInterface.getHeight() / 2;
-        functionInterface.setLocation(posX,posY);
-
-        functionInterface.setFunctionName("p");
-        functionInterface.setVisible(true);
-        p = functionInterface.getFunction();
-
-        functionInterface.setFunctionName("pp");
-        functionInterface.setVisible(true);
-        pp = functionInterface.getFunction();
-
-        functionInterface.setFunctionName("q");
-        functionInterface.setVisible(true);
-        q = functionInterface.getFunction();
-
-        functionInterface.setFunctionName("r");
-        functionInterface.setVisible(true);
-        r = functionInterface.getFunction();
-
-        functionInterface.setFunctionName("f");
-        functionInterface.setVisible(true);
-        f = functionInterface.getFunction();
-
-        functionInterface.setFunctionName("u");
-        functionInterface.setVisible(true);
-        u = functionInterface.getFunction();
-
-        h = (b-a)/n;
-    }
     
     public Neumann(float a, float b, int n, float upa, float upb){
         FunctionInterface functionInterface = new FunctionInterface();

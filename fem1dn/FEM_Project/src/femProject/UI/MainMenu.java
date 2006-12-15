@@ -15,12 +15,15 @@ public class MainMenu extends JFrame {
     private JButton warunkiDirichletaButton;
     private JButton warunkiNeumannaButton;
     private JButton koniecButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
+    private JTextField aTextField;
+    private JTextField bTextField;
+    private JTextField nTextField;
+    private JTextField upaTextField;
+    private JTextField upbTextField;
     private ResultForm resultForm;
+
+    private float a,b,upa,upb;
+    private int n;
 
     public MainMenu() {
         setContentPane(contentPane);
@@ -29,15 +32,19 @@ public class MainMenu extends JFrame {
 
         warunkiDirichletaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                Dirichlet dirichlet = new Dirichlet();
-                //dirichlet
+                if(getConditions()){
+                    Dirichlet dirichlet = new Dirichlet();
+                    //dirichlet
+                }
             }
         });
 
         warunkiNeumannaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                Neumann neumann = new Neumann();
-                //dirichlet
+                if(getConditions()){
+                    Neumann neumann = new Neumann(a,b,n,upa,upb);
+                }
+                
             }
         });
         koniecButton.addActionListener(new ActionListener() {
@@ -61,5 +68,21 @@ public class MainMenu extends JFrame {
         dialog.setLocation(posX, posY);
 
         dialog.setVisible(true);
+    }
+
+    private boolean getConditions(){
+        try{
+            a = Float.parseFloat(this.aTextField.getText());
+            b = Float.parseFloat(this.bTextField.getText());
+            upa = Float.parseFloat(this.upaTextField.getText());
+            upb = Float.parseFloat(this.upbTextField.getText());
+            n = Integer.parseInt(this.nTextField.getText());
+            if(n>0 && n<=1000)
+                return true;
+            else
+                return false;
+        }   catch(Exception ex){
+            return false;
+        }
     }
 }
