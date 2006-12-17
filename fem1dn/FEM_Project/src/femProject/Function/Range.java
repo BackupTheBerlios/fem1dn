@@ -12,6 +12,7 @@ public class Range {
     boolean inclBeg;
     float end;
     boolean inclEnd;
+    private static String INFINITY_SYMBOL = "\u221E";
 
     public Range(float beg, float end, boolean inclBeg, boolean inclEnd) {
         this.begin = beg;
@@ -62,8 +63,11 @@ public class Range {
 
     }
     public String toString(){
-        String s = (inclBeg?"[":"(") + String.valueOf(begin) + ";" +
-                    String.valueOf(end) + (inclEnd?"]":")");
+       String beg = begin == Float.NEGATIVE_INFINITY ?
+                    "-" + INFINITY_SYMBOL : String.valueOf(begin);
+       String ends = end == Float.POSITIVE_INFINITY ?
+                    "+" + INFINITY_SYMBOL : String.valueOf(end);
+        String s = (inclBeg?"[":"(") + beg + " ; " + ends + (inclEnd?"]":")");
         return s;                            
     }
 }

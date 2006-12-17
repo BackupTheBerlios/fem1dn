@@ -19,7 +19,34 @@ public class Function {
     private Vector vect;
     private float minX, maxX;
 
-   
+    public Function(StoredFunction textFunction) throws Exception {
+         if (textFunction != null) {
+             
+            this.functions = new de.olikurt.parser.Function[textFunction.getSize()];
+            this.rangeNum = textFunction.getSize();
+
+            minX = Float.POSITIVE_INFINITY;
+            maxX = Float.NEGATIVE_INFINITY;
+
+            this.var = new Variable('x');
+            this.vect = new Vector();
+            vect.add(var);
+            textFunction.initEnum();
+             int i=0;
+            while(textFunction.nextPoint()){
+                this.functions[i] = new de.olikurt.parser.Function(textFunction.currentFunction());
+                this.ranges[i] = textFunction.currentRange();
+                if (ranges[i].getBeg() < minX)
+                    minX = ranges[i].getBeg();
+                if (ranges[i].getEnd() > maxX)
+                    maxX = ranges[i].getEnd();
+                i++;
+            }
+        } else throw new Exception("Invalid argument");
+        
+    }
+
+
     public float getMinX() {
         return minX;
     }

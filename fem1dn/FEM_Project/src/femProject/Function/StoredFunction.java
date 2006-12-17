@@ -1,6 +1,7 @@
 package femProject.Function;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,29 +12,22 @@ import java.util.ArrayList;
  */
 public class StoredFunction {
 
-      private ArrayList<Range> ranges;
-
-      public ArrayList<String> getFunctions() {
-          return functions;
-      }
-
-      public ArrayList<Range> getRanges() {
-          return ranges;
-      }
-
-      private ArrayList<String> functions;
-
+      private ArrayList<FunctionPoint> points;
+      private int enumPos;
 
       public StoredFunction(ArrayList<String> functions, ArrayList<Range> ranges) {
-          this.functions = new ArrayList<String>();
-          this.ranges = new ArrayList<Range>();
+         points = new ArrayList<FunctionPoint>();
 
           for(int i=0; i < functions.size(); i++){
-              this.functions.add(new String(functions.get(i)));
-              this.ranges.add(new Range(ranges.get(i)));
+              this.points.add(new FunctionPoint(functions.get(i),ranges.get(i)));              
           }
       }
-      public static ArrayList<StoredFunction> getStoredFunctions(String type){
+
+    public StoredFunction() {
+        points = new ArrayList<FunctionPoint>();
+    }
+
+    public static ArrayList<StoredFunction> getStoredFunctions(String type){
            ArrayList<String> funs = new ArrayList<String>();
            ArrayList<Range> rngs = new ArrayList<Range>();
            ArrayList<StoredFunction> storedFuns = new ArrayList<StoredFunction>();
@@ -82,6 +76,71 @@ public class StoredFunction {
 
            return storedFuns;
        }
+
+    public void remove(int indx) {
+        points.remove(indx);
+    }
+
+    public Range getRanges(int indx) {
+        return points.get(indx).range;
+    }
+
+    public String getFuction(int indx) {
+        return points.get(indx).function;
+    }
+
+    public void add(String fun, Range range) {
+        points.add(new FunctionPoint(fun,range));
+        Collections.sort(points);        
+    }
+
+    public boolean isRangeOk() {
+        Range curr,prev;
+
+        for(int i=points.size()-1; i>0; i--){
+            curr = points.get(i).range;
+            prev = points.get(i-1).range;
+            if(curr.end != prev.begin || (!curr.inclEnd && !prev.inclBeg) ||
+                curr.begin >= curr.end )
+                return false;
+        }
+        return true;
+
+    }
+
+
+    private class FunctionPoint implements Comparable{
+        String function;
+        Range range;
+
+        public FunctionPoint(String s, Range range) {
+            this.function = new String(s);
+            this.range = new Range(range); 
+        }
+
+        public int compareTo(Object o) {
+            FunctionPoint fp = (FunctionPoint)o;            
+            return (int)(fp.range.begin - this.range.begin);
+
+        }
+    }
+    public void initEnum(){
+        enumPos = -1;
+        
+    }
+    public boolean nextPoint(){
+        enumPos++;
+        return enumPos<points.size();
+    }
+    public String currentFunction(){
+        return points.get(enumPos).function;
+    }
+    public Range currentRange(){
+        return points.get(enumPos).range;
+    }
+    public int getSize(){
+        return points.size();
+    }
 
 
 }

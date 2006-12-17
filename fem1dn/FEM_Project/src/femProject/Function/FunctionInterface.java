@@ -4,14 +4,11 @@ import de.olikurt.parser.Variable;
 import de.olikurt.parser.Function;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -35,7 +32,7 @@ public class FunctionInterface extends JDialog {
     private JList rangeList;
     private JButton finishButton;
     private JButton addButton;
-    private JButton editButton;
+    private JButton deleteButton;
     private JTextField rangeBegTextField;
     private JTextArea textArea1;
     private JLabel functionName;
@@ -44,13 +41,13 @@ public class FunctionInterface extends JDialog {
     private DefaultListModel functionListModel;
     private DefaultListModel rangeListModel;
     private femProject.Function.Function function;
-    private ArrayList<Range> ranges;
-    private ArrayList<String> functions;
+    private StoredFunction textFunction;
     private boolean inclBeg, inclEnd;
     private de.olikurt.parser.Variable var;
     private Vector vect;
     private ArrayList<StoredFunction> storedFunctions;
     private int currStoredFunctionIndx;
+    private JDialog dial;
 
 
     private static final int WIDTH = 450,
@@ -62,8 +59,7 @@ public class FunctionInterface extends JDialog {
         vect = new Vector();
         vect.add(var);
 
-        ranges = new ArrayList<Range>();
-        functions = new ArrayList<String>();
+        textFunction = new StoredFunction();
         inclBeg = false;
         inclEnd = false;
         this.setModal(true);
@@ -72,7 +68,8 @@ public class FunctionInterface extends JDialog {
         this.setUndecorated(false);
         storedFunctions = new ArrayList<StoredFunction>();
         currStoredFunctionIndx = 0;
-     
+        dial = this;
+
 
         leftBrBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
@@ -99,8 +96,6 @@ public class FunctionInterface extends JDialog {
         });
         leftInfBtn.setText("-" + INFINITY_SYMBOL);
         rightInfBtn.setText("+" + INFINITY_SYMBOL);
-
-
         leftInfBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 rangeBegTextField.setText("-" + INFINITY_SYMBOL);
@@ -118,14 +113,12 @@ public class FunctionInterface extends JDialog {
                 String f = functionTextField.getText(),
                         a = rangeBegTextField.getText(),
                         b = rangeEndTextField.getText();
-                if (checkFunction(f, a, b)) {
+                if (!checkFunction(f, a, b))
+                    JOptionPane.showMessageDialog(dial,"B³êdna funkcja");
 
-                }
             }
 
         });
-
-
         functionList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 rangeList.setSelectedIndex(functionList.getSelectedIndex());
@@ -138,32 +131,30 @@ public class FunctionInterface extends JDialog {
                 fillTextFields();
             }
         });
-
-
         finishButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-                Range[] rangeTab = new Range[ranges.size()];
-                String[] funTab = new String[functions.size()];
-                for (int i = 0; i < ranges.size(); i++) {
-                    rangeTab[i] = ranges.get(i);
-                    funTab[i] = functions.get(i);
+            public void actionPerformed(ActionEvent actionEvent) {               
+                if(textFunction.isRangeOk()){
+                    try {                  
+                        function = new femProject.Function.Function(textFunction);
+                    } catch (Exception e) {
+
+                    }
+                    setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(dial,"Funkcja nie jest poprawnie okre¶lona na przedziale.");
                 }
-                try {
-                    function = new femProject.Function.Function(rangeTab, funTab);
-                } catch (Exception e) {
-                }
-                setVisible(false);
+
 
             }
         });
-        editButton.addActionListener(new ActionListener() {
+        deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 int indx = rangeList.getSelectedIndex();
-                if (indx >= 0 && indx <= ranges.size()) {
-                    ranges.remove(indx);
-                    functions.remove(indx);
+                if (indx >= 0 && indx <= textFunction.getSize()) {
+                    textFunction.remove(indx);
                     rangeListModel.removeElementAt(indx);
                     functionListModel.removeElementAt(indx);
+                    resetLists();
                 }
             }
         });
@@ -171,8 +162,7 @@ public class FunctionInterface extends JDialog {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(storedFunctions.size() > 0){
                     currStoredFunctionIndx = ((storedFunctions.size()+currStoredFunctionIndx-1)%storedFunctions.size());
-                    functions = storedFunctions.get(currStoredFunctionIndx).getFunctions();
-                    ranges = storedFunctions.get(currStoredFunctionIndx).getRanges();
+                    textFunction = storedFunctions.get(currStoredFunctionIndx);
                     resetLists();
                 }
 
@@ -182,8 +172,7 @@ public class FunctionInterface extends JDialog {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(storedFunctions.size() > 0){
                     currStoredFunctionIndx = (currStoredFunctionIndx+1)%storedFunctions.size();
-                    functions = storedFunctions.get(currStoredFunctionIndx).getFunctions();
-                    ranges = storedFunctions.get(currStoredFunctionIndx).getRanges();
+                    textFunction = storedFunctions.get(currStoredFunctionIndx);
                     resetLists();
                 }
 
@@ -191,13 +180,13 @@ public class FunctionInterface extends JDialog {
         });
     }
     public void setFunctionName(String name){
-        this.functionName.setText(name);        
+        this.functionName.setText(name);      
     }
     private void fillTextFields() {
         int indx = functionList.getSelectedIndex();
-        if (indx > 0 && indx < ranges.size()) {
-            String fun = functions.get(indx);
-            Range rng = ranges.get(indx);
+        if (indx >= 0 && indx < textFunction.getSize()) {
+            String fun = textFunction.getFuction(indx);
+            Range rng = textFunction.getRanges(indx);
             functionTextField.setText(fun);
             String beg = rng.getBeg() == Float.NEGATIVE_INFINITY ?
                     "-" + INFINITY_SYMBOL : String.valueOf(rng.getBeg());
@@ -216,9 +205,9 @@ public class FunctionInterface extends JDialog {
         functionListModel.clear();
         rangeListModel.clear();
 
-        for(int i=0; i < functions.size(); i++){
-            functionListModel.addElement(functions.get(i));
-            rangeListModel.addElement(ranges.get(i).toString());
+        for(int i=0; i < textFunction.getSize(); i++){
+            functionListModel.addElement(textFunction.getFuction(i));
+            rangeListModel.addElement(textFunction.getRanges(i).toString());
         }
 
     
@@ -233,6 +222,7 @@ public class FunctionInterface extends JDialog {
 
             if (b.compareTo("+" + INFINITY_SYMBOL) == 0) end = Float.POSITIVE_INFINITY;
             else end = Float.valueOf(b);
+
 
             if (end < beg || (end == beg && (!inclBeg || !inclEnd))) return false;
 
@@ -249,15 +239,13 @@ public class FunctionInterface extends JDialog {
             funct.calculate(vect);
 
             Range range = new Range(beg, end, inclBeg, inclEnd);
-            Range currRange;
-            for (int i = 0; i < ranges.size(); i++) {
-                currRange = ranges.get(i);
+            /*Range currRange;
+            for (int i = 0; i < textFunction.getSize(); i++) {
+                currRange = textFunction.getRanges(i);
                 if (range.intersects(currRange)) return false;
-            }
-            ranges.add(range);
-            functions.add(fun);
-            functionListModel.addElement(fun);
-            rangeListModel.addElement(leftBrBtn.getText() + a + ";" + b + rightBrBtn.getText());
+            } */
+            textFunction.add(fun,range);
+            resetLists();
 
         } catch (Exception ex) {
             return false;
@@ -265,16 +253,6 @@ public class FunctionInterface extends JDialog {
         return true;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("FunctionInterface");
-        FunctionInterface fi = new FunctionInterface();
-
-        frame.setContentPane(fi.panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-
-        frame.setVisible(true);
-    }
 
     private void createUIComponents() {
         functionListModel = new DefaultListModel();
@@ -394,13 +372,13 @@ public class FunctionInterface extends JDialog {
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel3.add(addButton, gbc);
-        editButton = new JButton();
-        editButton.setText("Edytuj");
+        deleteButton = new JButton();
+        deleteButton.setText("Edytuj");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.NORTH;
-        panel3.add(editButton, gbc);
+        panel3.add(deleteButton, gbc);
         final JPanel spacer1 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 2;

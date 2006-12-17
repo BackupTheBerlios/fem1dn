@@ -17,10 +17,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" afterPath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java" afterPath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" afterPath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Function.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Function.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" afterPath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iws" afterPath="$PROJECT_DIR$/FEM_Project.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form" afterPath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Range.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Range.java" />
@@ -147,7 +146,54 @@
     </subPane>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="FunctionInterface.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="81" column="45" selection-start="2561" selection-end="2561" vertical-scroll-proportion="0.71428573">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#actionPerformed#0;class#3596:3996" expanded="false" />
+                <element signature="class#4337:4575" expanded="false" />
+                <element signature="method#actionPerformed#0;class#4621:5178" expanded="false" />
+                <element signature="class#5224:5675" expanded="false" />
+                <element signature="class#5719:6130" expanded="false" />
+                <element signature="class#6174:6560" expanded="false" />
+                <marker date="1166378949000" expanded="false" signature="9445:14656" placeholder="UI Designer generated code" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Function.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="82" column="47" selection-start="2677" selection-end="2677" vertical-scroll-proportion="2.120448">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StoredFunction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="98" column="11" selection-start="3133" selection-end="3133" vertical-scroll-proportion="0.4117647">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FunctionInterface.form" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -474,7 +520,7 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure PackagesPane="false" Scope="false" Favorites="false" ProjectPane="false" />
+      <showStructure Favorites="false" Scope="false" PackagesPane="false" ProjectPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
@@ -524,24 +570,19 @@
         <option name="Run ant target" value="false" />
       </method>
     </tempConfiguration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="/home/zagi/idea-5784/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <module name="" />
+      <method>
+        <option name="Make" value="true" />
+        <option name="Run ant target" value="false" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -562,19 +603,24 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
       <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="/home/zagi/idea-5784/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <module name="" />
-      <method>
-        <option name="Make" value="true" />
-        <option name="Run ant target" value="false" />
-      </method>
     </configuration>
     <configuration default="false" name="DrawingPanel" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" value="femProject.Drawing.DrawingPanel" />
@@ -676,24 +722,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1024" height="737" extended-state="6" />
+    <frame x="0" y="0" width="1020" height="737" extended-state="4" />
     <editor active="false" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2523268" order="3" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25129804" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" order="7" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19441572" order="0" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30010384" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="1" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24922441" order="1" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24922119" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1623578" order="3" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16095535" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34114888" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3256579" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39802632" order="4" />
@@ -784,13 +830,6 @@
     <option name="myLastEditedConfigurable" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/de/olikurt/parser/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="26" selection-start="305" selection-end="305" vertical-scroll-proportion="0.22181146">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/de/olikurt/parser/NodeFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="111" column="17" selection-start="3229" selection-end="3229" vertical-scroll-proportion="0.02851711">
@@ -833,49 +872,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/Range.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="17" selection-start="1903" selection-end="1903" vertical-scroll-proportion="0.8130841">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="30" selection-start="606" selection-end="606" vertical-scroll-proportion="0.8163842">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Drawing/DrawingPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="30" selection-start="1035" selection-end="1035" vertical-scroll-proportion="-0.084745765">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="25" selection-start="894" selection-end="894" vertical-scroll-proportion="0.5762712">
-          <folding>
-            <element signature="method#StoredFunction#0;class#StoredFunction#0" expanded="false" />
-            <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="35" selection-start="7627" selection-end="7627" vertical-scroll-proportion="1.8022599">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1166369238000" expanded="false" signature="10150:15355" placeholder="UI Designer generated code" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,6 +895,58 @@
             <element signature="imports" expanded="true" />
             <element signature="method#Neumann#0;class#Neumann#0" expanded="false" />
             <element signature="method#start#0;class#Neumann#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/Range.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="17" selection-start="1737" selection-end="1737" vertical-scroll-proportion="0.44852942">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///opt/sun-jdk-1.5.0.08/jre/lib/rt.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="2426" selection-end="2426" vertical-scroll-proportion="1.6548042">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="47" selection-start="2677" selection-end="2677" vertical-scroll-proportion="2.120448">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="11" selection-start="3133" selection-end="3133" vertical-scroll-proportion="0.4117647">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="45" selection-start="2561" selection-end="2561" vertical-scroll-proportion="0.71428573">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#actionPerformed#0;class#3596:3996" expanded="false" />
+            <element signature="class#4337:4575" expanded="false" />
+            <element signature="method#actionPerformed#0;class#4621:5178" expanded="false" />
+            <element signature="class#5224:5675" expanded="false" />
+            <element signature="class#5719:6130" expanded="false" />
+            <element signature="class#6174:6560" expanded="false" />
+            <marker date="1166378949000" expanded="false" signature="9445:14656" placeholder="UI Designer generated code" />
           </folding>
         </state>
       </provider>
