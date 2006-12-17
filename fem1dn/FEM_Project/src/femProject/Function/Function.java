@@ -23,6 +23,7 @@ public class Function {
          if (textFunction != null) {
              
             this.functions = new de.olikurt.parser.Function[textFunction.getSize()];
+            this.ranges = new Range[textFunction.getSize()];
             this.rangeNum = textFunction.getSize();
 
             minX = Float.POSITIVE_INFINITY;

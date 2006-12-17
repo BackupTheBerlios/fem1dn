@@ -120,7 +120,7 @@ public class Dirichlet {
     */
 
     private float s(int i, int j, float x) throws Exception {
-        return p.getValue(x)*dv(i,x) + q.getValue(x)*dv(i,x) *v(j,x)+r.getValue(x)*v(i,x)*v(j,x);
+        return p.getValue(x)*dv(i,x)*dv(j,x) + q.getValue(x)*dv(i,x)*v(j,x)+r.getValue(x)*v(i,x)*v(j,x);
     }
     /*
     function s(i,j:integer;x:real):real;
@@ -198,13 +198,13 @@ public class Dirichlet {
     private void trojdiag(int n, float[] a, float[] b, float[] c, float[] f, float[] x){
         float m;
 
-        for(int k=1; k < n-1; k++){
+        for(int k=2; k <= n; k++){
             m=b[k]/a[k-1];
             a[k]-=m*c[k-1];
             f[k]-=m*f[k-1];
         }
-        x[n-1] = f[n-1]/a[n-1];
-        for(int k=n-2; k>=0; k--){
+        x[n] = f[n]/a[n];
+        for(int k=n-1; k>0; k--){
              x[k]=(f[k]-c[k]*x[k+1])/a[k];
         }
     }
@@ -276,7 +276,7 @@ public class Dirichlet {
     }
     
 
-    public void start(){
+    public void start() throws Exception {
         h = (b - a)/n;
 
 
@@ -285,20 +285,21 @@ public class Dirichlet {
         xi[n] = b;
 
         //Obliczanie wspolczynnikow macierzy}
-        try{
-            for(int i=1; i < n-1; i++)
+        //try{
+            for(int i=2; i <= n-1; i++)
                 ab[i]=integral(0,i-1,i,xi[i-1],xi[i]);
 
-            for(int i=0; i < n-1;i++)
+            for(int i=1; i <= n-1;i++)
                 aa[i]=integral(0,i,i,xi[i-1],xi[i])+integral(0,i,i,xi[i],xi[i+1]);
 
-            for(int i=0; i< n-2; i++)
+            for(int i=1; i<= n-2; i++)
                 ac[i]=integral(0,i+1,i,xi[i],xi[i+1]);
 
             //Obliczanie wektora prawych stron
-            for(int i=1; i <n-1;i++)
+            for(int i=1; i <=n-1;i++)
                 af[i]=integral(1,i,i,xi[i-1],xi[i])+integral(1,i,i,xi[i],xi[i+1]);
-        }catch(Exception e){}
+
+       // }catch(Exception e){}
 
         //Rozwiazanie ukladu rownan
         trojdiag(n-1,aa,ab,ac,af,ax);
@@ -386,11 +387,14 @@ public class Dirichlet {
     END{Koniec programu}.
 */
 
-    public float[] getXi() {
+    public float[] getX() {
         return xi;
     }
 
-    public float[] getAx() {
-        return ax;
+    public float[] getY() {
+        float[] y = new float[xi.length];
+        for(int i=0; i < y.length; i++)
+            y[i]=this.u(xi[i]);
+        return y;
     }
 }

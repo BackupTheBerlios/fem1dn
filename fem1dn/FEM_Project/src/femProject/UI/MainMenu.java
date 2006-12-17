@@ -35,9 +35,13 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(getConditions()){
                     Dirichlet dirichlet = new Dirichlet(a,b,n,upa,upb);
-                    dirichlet.start();
-                    float[] xi = dirichlet.getXi();
-                    float[] ax = dirichlet.getAx();
+                    try {
+                        dirichlet.start();
+                    } catch (Exception e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+                    float[] xi = dirichlet.getX();
+                    float[] ax = dirichlet.getY();
                     float[][] tab = new float[2][];
                     tab[0] = new float[n+1];
                     tab[1] = new float[n+1];

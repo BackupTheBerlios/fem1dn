@@ -136,10 +136,11 @@ public class FunctionInterface extends JDialog {
                 if(textFunction.isRangeOk()){
                     try {                  
                         function = new femProject.Function.Function(textFunction);
+                         setVisible(false);
                     } catch (Exception e) {
 
                     }
-                    setVisible(false);
+
                 }else{
                     JOptionPane.showMessageDialog(dial,"Funkcja nie jest poprawnie okre¶lona na przedziale.");
                 }
