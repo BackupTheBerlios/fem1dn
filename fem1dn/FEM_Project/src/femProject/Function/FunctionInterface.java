@@ -39,6 +39,8 @@ public class FunctionInterface extends JDialog {
     private JTextField rangeBegTextField;
     private JTextArea textArea1;
     private JLabel functionName;
+    private JButton prevButton;
+    private JButton nextButton;
     private DefaultListModel functionListModel;
     private DefaultListModel rangeListModel;
     private femProject.Function.Function function;
@@ -47,12 +49,14 @@ public class FunctionInterface extends JDialog {
     private boolean inclBeg, inclEnd;
     private de.olikurt.parser.Variable var;
     private Vector vect;
+    private ArrayList<StoredFunction> storedFunctions;
+    private int currStoredFunctionIndx;
 
 
     private static final int WIDTH = 450,
-            HEIGHT = 300;
+                                HEIGHT = 300;
 
-
+   
     public FunctionInterface() {
         var = new Variable('x');
         vect = new Vector();
@@ -66,6 +70,8 @@ public class FunctionInterface extends JDialog {
         this.setContentPane(panel1);
         this.setSize(WIDTH, HEIGHT);
         this.setUndecorated(false);
+        storedFunctions = new ArrayList<StoredFunction>();
+        currStoredFunctionIndx = 0;
      
 
         leftBrBtn.addActionListener(new ActionListener() {
@@ -161,6 +167,28 @@ public class FunctionInterface extends JDialog {
                 }
             }
         });
+        prevButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(storedFunctions.size() > 0){
+                    currStoredFunctionIndx = ((storedFunctions.size()+currStoredFunctionIndx-1)%storedFunctions.size());
+                    functions = storedFunctions.get(currStoredFunctionIndx).getFunctions();
+                    ranges = storedFunctions.get(currStoredFunctionIndx).getRanges();
+                    resetLists();
+                }
+
+            }
+        });
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(storedFunctions.size() > 0){
+                    currStoredFunctionIndx = (currStoredFunctionIndx+1)%storedFunctions.size();
+                    functions = storedFunctions.get(currStoredFunctionIndx).getFunctions();
+                    ranges = storedFunctions.get(currStoredFunctionIndx).getRanges();
+                    resetLists();
+                }
+
+            }
+        });
     }
     public void setFunctionName(String name){
         this.functionName.setText(name);        
@@ -184,6 +212,17 @@ public class FunctionInterface extends JDialog {
         return function;
     }
 
+    private void resetLists(){
+        functionListModel.clear();
+        rangeListModel.clear();
+
+        for(int i=0; i < functions.size(); i++){
+            functionListModel.addElement(functions.get(i));
+            rangeListModel.addElement(ranges.get(i).toString());
+        }
+
+    
+    }
     private boolean checkFunction(String fun, String a, String b) {
         try {
             if (a.length() < 1 || b.length() < 1 || fun.length() < 1) return false;
@@ -396,5 +435,9 @@ public class FunctionInterface extends JDialog {
 
     public JComponent $$$getRootComponent$$$() {
         return panel1;
+    }
+
+    public void setStoredFunctions(ArrayList<StoredFunction> storedFunctions) {
+        this.storedFunctions = storedFunctions;
     }
 }

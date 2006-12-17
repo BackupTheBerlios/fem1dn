@@ -20,6 +20,13 @@ public class Range {
         this.inclEnd = inclEnd;
     }
 
+    public Range(Range range) {
+        this.begin = range.begin;
+        this.end = range.end;
+        this.inclBeg = range.inclBeg;
+        this.inclEnd = range.inclEnd;
+    }
+
     public boolean isInRange(float x) {
         boolean endOk = false;
         if (x < end)
@@ -53,5 +60,10 @@ public class Range {
         else return false;
 
 
+    }
+    public String toString(){
+        String s = (inclBeg?"[":"(") + String.valueOf(begin) + ";" +
+                    String.valueOf(end) + (inclEnd?"]":")");
+        return s;                            
     }
 }

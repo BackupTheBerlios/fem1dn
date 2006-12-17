@@ -34,8 +34,28 @@ public class MainMenu extends JFrame {
         warunkiDirichletaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(getConditions()){
-                    Dirichlet dirichlet = new Dirichlet();
-                    //dirichlet
+                    Dirichlet dirichlet = new Dirichlet(a,b,n,upa,upb);
+                    dirichlet.start();
+                    float[] xi = dirichlet.getXi();
+                    float[] ax = dirichlet.getAx();
+                    float[][] tab = new float[2][];
+                    tab[0] = new float[n+1];
+                    tab[1] = new float[n+1];
+                    for(int i=0;i<=n;++i){
+                        tab[0][i] = xi[i];
+                        tab[1][i] = ax[i];
+                    }
+                    JFrame frame = new JFrame("DrawingPanel");
+                    DrawingPanel fi = new DrawingPanel();
+                    frame.addKeyListener(fi);
+                    frame.setContentPane(fi);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.pack();
+                    frame.setBounds(50, 50, 500, 500);
+                    frame.setVisible(true);
+                    fi.addFunction(tab, Color.green);
+                    fi.computeBoundary();
+                    fi.repaint();
                 }
             }
         });
@@ -54,21 +74,21 @@ public class MainMenu extends JFrame {
                         tab[0][i] = xi[i];
                         tab[1][i] = ax[i];
                     }
-                           JFrame frame = new JFrame("DrawingPanel");
-        DrawingPanel fi = new DrawingPanel();
-        frame.addKeyListener(fi);
-        frame.setContentPane(fi);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setBounds(50, 50, 500, 500);
-        frame.setVisible(true);
-            fi.addFunction(tab, Color.green);
-            fi.computeBoundary();
-            fi.repaint();
-                }
-                
-            }
-        });
+                    JFrame frame = new JFrame("DrawingPanel");
+                    DrawingPanel fi = new DrawingPanel();
+                    frame.addKeyListener(fi);
+                    frame.setContentPane(fi);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.pack();
+                    frame.setBounds(50, 50, 500, 500);
+                    frame.setVisible(true);
+                        fi.addFunction(tab, Color.green);
+                        fi.computeBoundary();
+                        fi.repaint();
+                            }
+
+                        }
+                });
         koniecButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.exit(0);

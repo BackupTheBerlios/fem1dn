@@ -2,6 +2,7 @@ package femProject.Dirichlet;
 
 import femProject.Function.Function;
 import femProject.Function.FunctionInterface;
+import femProject.Function.StoredFunction;
 
 import java.awt.*;
 
@@ -23,7 +24,7 @@ public class Dirichlet {
     private char z;
     private float[] xi,aa,ab,ac,af,ax;
 
-    public Dirichlet() {
+    public Dirichlet(float a, float b, int n, float upa, float upb) {
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -33,16 +34,20 @@ public class Dirichlet {
         functionInterfacep.setLocation(posX,posY);
 
         functionInterfacep.setFunctionName("p");
+        functionInterfacep.setStoredFunctions(StoredFunction.getStoredFunctions("p"));
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
       
         FunctionInterface functionInterfacepp = new FunctionInterface();
+
         functionInterfacepp.setLocation(posX,posY);
         functionInterfacepp.setFunctionName("pp");
+        functionInterfacepp.setStoredFunctions(StoredFunction.getStoredFunctions("pp"));
         functionInterfacepp.setVisible(true);
         pp = functionInterfacepp.getFunction();
 
         FunctionInterface functionInterfaceq = new FunctionInterface();
+        functionInterfaceq.setStoredFunctions(StoredFunction.getStoredFunctions("q"));
         functionInterfaceq.setLocation(posX,posY);
         functionInterfaceq.setFunctionName("q");
         functionInterfaceq.setVisible(true);
@@ -52,6 +57,7 @@ public class Dirichlet {
         FunctionInterface functionInterfacer = new FunctionInterface();
         functionInterfacer.setLocation(posX,posY);
         functionInterfacer.setFunctionName("r");
+        functionInterfacer.setStoredFunctions(StoredFunction.getStoredFunctions("r"));
         functionInterfacer.setVisible(true);
         r = functionInterfacer.getFunction();
 
@@ -258,7 +264,47 @@ public class Dirichlet {
      end
     end{wykres};
       */
+    private void tabInit(){     
+        xi = new float[n + 1];
+        aa = new float[n + 1];
+        ab = new float[n + 1];
+        ac = new float[n + 1];
+        af = new float[n + 1];
+        ax = new float[n + 1];
+    }
+    
 
+    public void start(){
+        h = (b - a)/n;
+
+
+        for(int i=0; i < n; i++)
+            xi[i]=a+i*h;
+        xi[n] = b;
+
+        //Obliczanie wspolczynnikow macierzy}
+        try{
+            for(int i=1; i < n-1; i++)
+                ab[i]=integral(0,i-1,i,xi[i-1],xi[i]);
+
+            for(int i=0; i < n-1;i++)
+                aa[i]=integral(0,i,i,xi[i-1],xi[i])+integral(0,i,i,xi[i],xi[i+1]);
+
+            for(int i=0; i< n-2; i++)
+                ac[i]=integral(0,i+1,i,xi[i],xi[i+1]);
+
+            //Obliczanie wektora prawych stron
+            for(int i=1; i <n-1;i++)
+                af[i]=integral(1,i,i,xi[i-1],xi[i])+integral(1,i,i,xi[i],xi[i+1]);
+        }catch(Exception e){}
+
+        //Rozwiazanie ukladu rownan
+        trojdiag(n-1,aa,ab,ac,af,ax);
+        ax[0]=0;
+        ax[n]=0;
+        
+        
+    }
     /*
     BEGIN {Poczatek programu}
 
@@ -337,4 +383,12 @@ public class Dirichlet {
 
     END{Koniec programu}.
 */
+
+    public float[] getXi() {
+        return xi;
+    }
+
+    public float[] getAx() {
+        return ax;
+    }
 }
