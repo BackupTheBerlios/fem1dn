@@ -17,12 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java" afterPath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Function.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Function.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" afterPath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iws" afterPath="$PROJECT_DIR$/FEM_Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form" afterPath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Range.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Range.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -150,15 +145,24 @@
       <file leaf-file-name="FunctionInterface.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="45" selection-start="2561" selection-end="2561" vertical-scroll-proportion="0.71428573">
+            <state line="214" column="0" selection-start="7765" selection-end="7765" vertical-scroll-proportion="2.135182">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#FunctionInterface#0;class#FunctionInterface#0" expanded="false" />
+                <element signature="class#2209:2586" expanded="false" />
+                <element signature="class#2630:3009" expanded="false" />
+                <element signature="class#3156:3332" expanded="false" />
+                <element signature="class#3377:3553" expanded="false" />
+                <element signature="class#3596:3996" expanded="false" />
                 <element signature="method#actionPerformed#0;class#3596:3996" expanded="false" />
+                <element signature="class#4049:4287" expanded="false" />
                 <element signature="class#4337:4575" expanded="false" />
+                <element signature="class#4621:5178" expanded="false" />
                 <element signature="method#actionPerformed#0;class#4621:5178" expanded="false" />
                 <element signature="class#5224:5675" expanded="false" />
                 <element signature="class#5719:6130" expanded="false" />
                 <element signature="class#6174:6560" expanded="false" />
+                <element signature="method#checkFunction#0;class#FunctionInterface#0" expanded="false" />
                 <marker date="1166378949000" expanded="false" signature="9445:14656" placeholder="UI Designer generated code" />
               </folding>
             </state>
@@ -168,7 +172,7 @@
       <file leaf-file-name="Function.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="47" selection-start="2677" selection-end="2677" vertical-scroll-proportion="2.120448">
+            <state line="82" column="47" selection-start="2677" selection-end="2677" vertical-scroll-proportion="1.3469751">
               <folding />
             </state>
           </provider>
@@ -177,7 +181,7 @@
       <file leaf-file-name="StoredFunction.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="11" selection-start="3133" selection-end="3133" vertical-scroll-proportion="0.4117647">
+            <state line="98" column="11" selection-start="3133" selection-end="3133" vertical-scroll-proportion="0.26156583">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
@@ -739,7 +743,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16095535" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34114888" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3256579" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3256579" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39802632" order="4" />
@@ -915,14 +919,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="47" selection-start="2677" selection-end="2677" vertical-scroll-proportion="2.120448">
+        <state line="82" column="47" selection-start="2677" selection-end="2677" vertical-scroll-proportion="1.3469751">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="11" selection-start="3133" selection-end="3133" vertical-scroll-proportion="0.4117647">
+        <state line="98" column="11" selection-start="3133" selection-end="3133" vertical-scroll-proportion="0.26156583">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
@@ -937,15 +941,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="45" selection-start="2561" selection-end="2561" vertical-scroll-proportion="0.71428573">
+        <state line="214" column="0" selection-start="7765" selection-end="7765" vertical-scroll-proportion="2.135182">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#FunctionInterface#0;class#FunctionInterface#0" expanded="false" />
+            <element signature="class#2209:2586" expanded="false" />
+            <element signature="class#2630:3009" expanded="false" />
+            <element signature="class#3156:3332" expanded="false" />
+            <element signature="class#3377:3553" expanded="false" />
+            <element signature="class#3596:3996" expanded="false" />
             <element signature="method#actionPerformed#0;class#3596:3996" expanded="false" />
+            <element signature="class#4049:4287" expanded="false" />
             <element signature="class#4337:4575" expanded="false" />
+            <element signature="class#4621:5178" expanded="false" />
             <element signature="method#actionPerformed#0;class#4621:5178" expanded="false" />
             <element signature="class#5224:5675" expanded="false" />
             <element signature="class#5719:6130" expanded="false" />
             <element signature="class#6174:6560" expanded="false" />
+            <element signature="method#checkFunction#0;class#FunctionInterface#0" expanded="false" />
             <marker date="1166378949000" expanded="false" signature="9445:14656" placeholder="UI Designer generated code" />
           </folding>
         </state>
