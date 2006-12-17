@@ -19,7 +19,7 @@ public class Function {
     private Vector vect;
     private float minX, maxX;
 
-
+   
     public float getMinX() {
         return minX;
     }

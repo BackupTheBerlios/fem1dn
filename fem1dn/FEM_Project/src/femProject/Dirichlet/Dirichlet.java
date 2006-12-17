@@ -24,33 +24,43 @@ public class Dirichlet {
     private float[] xi,aa,ab,ac,af,ax;
 
     public Dirichlet() {
-        FunctionInterface functionInterface = new FunctionInterface();
+
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        int     posX = (int) (dim.getWidth() / 2) - functionInterface.getWidth() / 2,
-                posY = (int) (dim.getHeight() / 2) - functionInterface.getHeight() / 2;
-        functionInterface.setLocation(posX,posY);
+        FunctionInterface functionInterfacep = new FunctionInterface();
+        int     posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
+                posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
+        functionInterfacep.setLocation(posX,posY);
 
-        functionInterface.setFunctionName("p");
-        functionInterface.setVisible(true);
-        p = functionInterface.getFunction();
+        functionInterfacep.setFunctionName("p");
+        functionInterfacep.setVisible(true);
+        p = functionInterfacep.getFunction();
       
-        functionInterface.setFunctionName("pp");
-        functionInterface.setVisible(true);
-        pp = functionInterface.getFunction();
+        FunctionInterface functionInterfacepp = new FunctionInterface();
+        functionInterfacepp.setLocation(posX,posY);
+        functionInterfacepp.setFunctionName("pp");
+        functionInterfacepp.setVisible(true);
+        pp = functionInterfacepp.getFunction();
 
-        functionInterface.setFunctionName("q");
-        functionInterface.setVisible(true);
-        q = functionInterface.getFunction();
+        FunctionInterface functionInterfaceq = new FunctionInterface();
+        functionInterfaceq.setLocation(posX,posY);
+        functionInterfaceq.setFunctionName("q");
+        functionInterfaceq.setVisible(true);
+        q = functionInterfaceq.getFunction();
 
-        functionInterface.setFunctionName("r");
-        functionInterface.setVisible(true);
-        r = functionInterface.getFunction();
 
-        functionInterface.setFunctionName("f");
-        functionInterface.setVisible(true);
-        f = functionInterface.getFunction();
+        FunctionInterface functionInterfacer = new FunctionInterface();
+        functionInterfacer.setLocation(posX,posY);
+        functionInterfacer.setFunctionName("r");
+        functionInterfacer.setVisible(true);
+        r = functionInterfacer.getFunction();
 
+
+        FunctionInterface functionInterfacef = new FunctionInterface();
+        functionInterfacef.setLocation(posX,posY);
+        functionInterfacef.setFunctionName("f");
+        functionInterfacef.setVisible(true);
+        f = functionInterfacef.getFunction();
     }
     private float v(int i, float x){
         if(i==0) return  (a-x)/h+1;

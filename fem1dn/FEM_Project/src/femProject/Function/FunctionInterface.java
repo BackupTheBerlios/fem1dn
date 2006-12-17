@@ -180,7 +180,7 @@ public class FunctionInterface extends JDialog {
         }
     }
 
-    public femProject.Function.Function getFunction() {
+    public femProject.Function.Function getFunction(){
         return function;
     }
 
