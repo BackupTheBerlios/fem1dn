@@ -180,7 +180,8 @@ public class FunctionInterface extends JDialog {
         });
     }
     public void setFunctionName(String name){
-        this.functionName.setText(name);      
+        this.functionName.setText(name);
+        this.setStoredFunctions(StoredFunction.getStoredFunctions(name));
     }
     private void fillTextFields() {
         int indx = functionList.getSelectedIndex();

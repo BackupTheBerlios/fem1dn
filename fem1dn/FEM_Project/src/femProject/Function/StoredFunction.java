@@ -66,11 +66,19 @@ public class StoredFunction {
                funs.add("1");               
                storedFuns.add(new StoredFunction(funs,rngs));
            }else if(type.equalsIgnoreCase("u")){
-               funs.add("x*(x-1)");               
+               funs.add("x*(x-1)");
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
                funs.add("sin(3.14*x)");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+            }else if(type.equalsIgnoreCase("f")){
+               funs.add("-2");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
+               funs.add("x-3.5");
                storedFuns.add(new StoredFunction(funs,rngs));
            }
 

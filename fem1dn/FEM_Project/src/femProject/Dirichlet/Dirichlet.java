@@ -24,8 +24,13 @@ public class Dirichlet {
     private char z;
     private float[] xi,aa,ab,ac,af,ax;
 
-    public Dirichlet(float a, float b, int n, float upa, float upb) {
-
+    public Dirichlet(float a, float b, int n, float ua, float ub) {
+        this.a = a;
+        this.b = b;
+        this.n = n;
+        this.ua = ua;
+        this.ub = ub;
+        
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         FunctionInterface functionInterfacep = new FunctionInterface();
@@ -33,8 +38,7 @@ public class Dirichlet {
                 posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
         functionInterfacep.setLocation(posX,posY);
 
-        functionInterfacep.setFunctionName("p");
-        functionInterfacep.setStoredFunctions(StoredFunction.getStoredFunctions("p"));
+        functionInterfacep.setFunctionName("p");      
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
       
@@ -42,12 +46,10 @@ public class Dirichlet {
 
         functionInterfacepp.setLocation(posX,posY);
         functionInterfacepp.setFunctionName("pp");
-        functionInterfacepp.setStoredFunctions(StoredFunction.getStoredFunctions("pp"));
         functionInterfacepp.setVisible(true);
         pp = functionInterfacepp.getFunction();
 
         FunctionInterface functionInterfaceq = new FunctionInterface();
-        functionInterfaceq.setStoredFunctions(StoredFunction.getStoredFunctions("q"));
         functionInterfaceq.setLocation(posX,posY);
         functionInterfaceq.setFunctionName("q");
         functionInterfaceq.setVisible(true);
@@ -56,17 +58,17 @@ public class Dirichlet {
 
         FunctionInterface functionInterfacer = new FunctionInterface();
         functionInterfacer.setLocation(posX,posY);
-        functionInterfacer.setFunctionName("r");
-        functionInterfacer.setStoredFunctions(StoredFunction.getStoredFunctions("r"));
+        functionInterfacer.setFunctionName("r");        
         functionInterfacer.setVisible(true);
         r = functionInterfacer.getFunction();
 
 
         FunctionInterface functionInterfacef = new FunctionInterface();
         functionInterfacef.setLocation(posX,posY);
-        functionInterfacef.setFunctionName("f");
+        functionInterfacef.setFunctionName("f");       
         functionInterfacef.setVisible(true);
         f = functionInterfacef.getFunction();
+        this.tabInit();
     }
     private float v(int i, float x){
         if(i==0) return  (a-x)/h+1;

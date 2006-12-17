@@ -96,7 +96,7 @@ public class MainMenu extends JFrame {
         });
     }
 
-    private static final int WIDTH = 320,
+    private static final int WIDTH = 300,
             HEIGHT = 280;
 
     public static void main(String[] args) {
