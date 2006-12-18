@@ -64,7 +64,7 @@ begin
 end{u};
 */
 
-    private Function p, q, r, f, pp, u;
+    private Function p, q, r, f, u;
 
     private int nmax = 1000;
     private int n;
@@ -84,12 +84,6 @@ end{u};
         functionInterfacep.setFunctionName("p");
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
-
-        FunctionInterface functionInterfacepp = new FunctionInterface();
-        functionInterfacepp.setLocation(posX, posY);
-        functionInterfacepp.setFunctionName("pp");
-        functionInterfacepp.setVisible(true);
-        pp = functionInterfacepp.getFunction();
 
         FunctionInterface functionInterfaceq = new FunctionInterface();
         functionInterfaceq.setLocation(posX, posY);
@@ -163,21 +157,32 @@ end{u};
     }
 
 
-    public float[] getAx() {
-        return ax;
+    public float[] getY() {
+        float[] y = new float[xi.length];
+        for(int i=0; i < y.length; i++)
+            y[i]=this.uu(xi[i]);
+        return y;
     }
 
-    public void setAx(float[] ax) {
-        this.ax = ax;
+    public float[][] getU(int count) throws Exception{
+        float[][] y = new float[2][];
+        y[0] = new float[count];
+        y[1] = new float[count];
+        float step = (this.u.getMaxX() - this.u.getMinX())/count;
+        float min = this.u.getMinX();
+        for(int i=0; i < count-1; i++){
+            y[0][i] = min+i*step;
+            y[1][i]=this.u.getValue(y[0][i]);
+        }
+        y[0][count-1]=this.u.getMaxX();
+        y[1][count-1]=this.u.getValue(u.getMaxX());
+        return y;
     }
 
-    public float[] getXi() {
+    public float[] getX() {
         return xi;
     }
-
-    public void setXi(float[] xi) {
-        this.xi = xi;
-    }/*
+/*
     {**********************************************************}
 
     function v(i:integer;x:real):real;
@@ -250,7 +255,7 @@ end{s};
 
     */
     private float s(int i, int j, float x) throws Exception {
-        return p.getValue(x) * dv(i, x) + q.getValue(x) * dv(i, x) * v(j, x) + r.getValue(x) * v(i, x) * v(j, x);
+        return p.getValue(x) * dv(i, x)* dv(j, x) + q.getValue(x) * dv(i, x) * v(j, x) + r.getValue(x) * v(i, x) * v(j, x);
     }
 
     /*
@@ -282,11 +287,11 @@ end{g};
     */
     private float calka(int k, int i, int j, float alfa, float beta) throws Exception {
         int l;
-        float tau = (beta - alfa) / 2,
-                s = (beta + alfa) / 2,
-                t = (float) (tau * Math.sqrt(3.0) / 3),
-                a1 = s - t,
-                a2 = s + t;
+        float tau = (beta - alfa) / 2;
+        float s = (beta + alfa) / 2;
+        float t = (float) (tau * Math.sqrt(3.0) / 3);
+        float a1 = s - t;
+        float a2 = s + t;
         return tau * (g(k, i, j, a1) + g(k, i, j, a2));
     }
 
@@ -326,7 +331,7 @@ end{trojdiag};
             f[k] -= m * f[k - 1];
         }
         x[n] = f[n] / a[n];
-        for (int k = n - 1; k > 0; k--) {
+        for (int k = n - 1; k >= 1; k--) {
             x[k] = (f[k] - c[k] * x[k + 1]) / a[k];
         }
     }
@@ -375,23 +380,23 @@ end{trojdiag};
 
     */
     private void tabInit() {
-        xi = new float[n + 1];
-        aa = new float[n + 1];
-        ab = new float[n + 1];
-        ac = new float[n + 1];
-        af = new float[n + 1];
-        ax = new float[n + 1];
+        xi = new float[n + 2];
+        aa = new float[n + 2];
+        ab = new float[n + 2];
+        ac = new float[n + 2];
+        af = new float[n + 2];
+        ax = new float[n + 2];
     }
 
-    public void start() {
+    public void start()  throws Exception{
         this.tabInit();
         h = (b - a) / n;
 
-        for (int i = 0; i < n - 1; ++i)
+        for (int i = 0; i < n; ++i)
             xi[i] = a + i * h;
-        xi[n - 1] = b;
+        xi[n] = b;
 
-        try {
+        //try {
             //{Obliczanie wspolczynnikow macierzy}
             for (int i = 1; i <= n; ++i)
                 ab[i] = calka(0, i - 1, i, xi[i - 1], xi[i]);
@@ -408,7 +413,7 @@ end{trojdiag};
               af[i]=calka(1,i,i,xi[i-1],xi[i])+calka(1,i,i,xi[i],xi[i+1]);
             af[n]=p.getValue(b)*upb+calka(1,n,n,xi[n-1],xi[n]);
 
-            for(int i=n;i>=0;--i){
+            for(int i=n+1;i>=1;--i){
                 ab[i]=ab[i-1];
                 aa[i]=aa[i-1];
                 ac[i]=ac[i-1];
@@ -416,10 +421,10 @@ end{trojdiag};
             }
             //{Rozwiazanie ukladu rownan}
             trojdiag(n,aa,ab,ac,af,ax);
-            for(int i=0;i<=n;++i)
+            for(int i=1;i<=n+1;++i)
             ax[i-1]=ax[i];
-        } catch (Exception ex) {
-        }
+        //} catch (Exception ex) {
+        //}
 
     }
 }

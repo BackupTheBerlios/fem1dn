@@ -68,28 +68,33 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(getConditions()){
                     Neumann neumann = new Neumann(a,b,n,upa,upb);
+                    try{
+                    int count = 1000;
                     neumann.start();
-                    float[] xi = neumann.getXi();
-                    float[] ax = neumann.getAx();
+                    float[] xi = neumann.getX();
+                    float[] yi = neumann.getY();
+                    float[][] u = neumann.getU(count);
                     float[][] tab = new float[2][];
                     tab[0] = new float[n+1];
-                    tab[1] = new float[n+1];
+                    tab[1] = new float[n+1];                     
                     for(int i=0;i<=n;++i){
                         tab[0][i] = xi[i];
-                        tab[1][i] = ax[i];
+                        tab[1][i] = yi[i];
                     }
                     JFrame frame = new JFrame("DrawingPanel");
                     DrawingPanel fi = new DrawingPanel();
                     frame.addKeyListener(fi);
                     frame.setContentPane(fi);
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.pack();
                     frame.setBounds(50, 50, 500, 500);
                     frame.setVisible(true);
                         fi.addFunction(tab, Color.green);
+                        fi.addFunction(u,Color.red);
                         fi.computeBoundary();
                         fi.repaint();
-                            }
+                    }catch(Exception ex){}
+                }
 
                         }
                 });

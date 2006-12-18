@@ -19,7 +19,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     private List<float[][]> tab;
     private List<Color> color;
     private float xMin = -1, xMax = 1, yMin = -1, yMax = 1;
-    private final float  EPS = 0.01f;
+    private final float EPS = 0.01f;
 
     public DrawingPanel() {
         this.addKeyListener(this);
@@ -33,17 +33,18 @@ public class DrawingPanel extends JPanel implements KeyListener {
         this.color = color;
     }
 
-    public void addFunction(float[][] tab, Color color){
+    public void addFunction(float[][] tab, Color color) {
         this.tab.add(tab);
         this.color.add(color);
     }
 
 
-     public float getxMin() {
+    public float getxMin() {
         return xMin;
     }
 
     public void setxMin(float xMin) {
+        //if(xMin<-1)
         this.xMin = xMin - EPS;
     }
 
@@ -52,6 +53,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void setxMax(float xMax) {
+        //if(xMax>1)
         this.xMax = xMax + EPS;
     }
 
@@ -60,6 +62,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void setyMin(float yMin) {
+        //if(yMin<-1)
         this.yMin = yMin - EPS;
     }
 
@@ -68,6 +71,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
     }
 
     public void setyMax(float yMax) {
+        //if(yMax>1)
         this.yMax = yMax + EPS;
     }
 
@@ -178,8 +182,18 @@ public class DrawingPanel extends JPanel implements KeyListener {
                 g.drawLine((int) (this.getWidth() * (aTab[0][i] - xMin) / (xMax - xMin)),
                         this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i]) / (yMax - yMin)),
                         (int) (this.getWidth() * (aTab[0][i + 1] - xMin) / (xMax - xMin)),
-                         this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i + 1]) / (yMax - yMin)));
+                        this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i + 1]) / (yMax - yMin)));
             }
+            g.setColor(Color.black);
+            g.drawLine((int) (this.getWidth() * (-EPS - xMin) / (xMax - xMin)),
+                    this.getHeight() + (int) (this.getHeight() * (yMin - 1) / (yMax - yMin)),
+                    (int) (this.getWidth() * (EPS - xMin) / (xMax - xMin)),
+                    this.getHeight() + (int) (this.getHeight() * (yMin - 1) / (yMax - yMin)));
+            g.drawLine((int) (this.getWidth() * (1 - xMin) / (xMax - xMin)),
+                    this.getHeight() + (int) (this.getHeight() * (yMin - -EPS) / (yMax - yMin)),
+                    (int) (this.getWidth() * (1 - xMin) / (xMax - xMin)),
+                    this.getHeight() + (int) (this.getHeight() * (yMin - EPS) / (yMax - yMin)));
+
         }
     }
 
@@ -204,10 +218,10 @@ public class DrawingPanel extends JPanel implements KeyListener {
         for (int i = 0; i < pTab.length; ++i) {
             pTab[i] = new float[100];
         }
-        float x=-3.14f;
-        for(int i=0;i<pTab[0].length;++i){
-            x = pTab[0][i] = x + 6.28f/pTab[0].length;
-            pTab[1][i] = (float)Math.sin(x);
+        float x = -3.14f;
+        for (int i = 0; i < pTab[0].length; ++i) {
+            x = pTab[0][i] = x + 6.28f / pTab[0].length;
+            pTab[1][i] = (float) Math.sin(x);
         }
         this.color = new ArrayList<Color>();
         color.add(Color.red);
@@ -215,20 +229,18 @@ public class DrawingPanel extends JPanel implements KeyListener {
         this.tab.add(pTab);
 
         float[][] aTab = new float[2][];
-        for(int i=0;i<aTab.length;++i){
+        for (int i = 0; i < aTab.length; ++i) {
             aTab[i] = new float[1000];
         }
 
-        x=-1;
-        for(int i=0;i<aTab[0].length;++i){
-            x = aTab[0][i] = x + 6f/aTab[0].length;
-            if(i<aTab[0].length/4){
+        x = -1;
+        for (int i = 0; i < aTab[0].length; ++i) {
+            x = aTab[0][i] = x + 6f / aTab[0].length;
+            if (i < aTab[0].length / 4) {
                 aTab[1][i] = -3f;
-            }
-            else if(i>aTab[0].length/4){
+            } else if (i > aTab[0].length / 4) {
                 aTab[1][i] = 1f;
-            }
-            else {
+            } else {
                 aTab[1][i] = -3f;
                 ++i;
                 aTab[0][i] = x;
