@@ -22,8 +22,9 @@ public class MainMenu extends JFrame {
     private JTextField upaTextField;
     private JTextField upbTextField;
     private ResultForm resultForm;
+    private Neumann neumann = null;
 
-    private float a,b,upa,upb;
+    private float a, b, upa, upb;
     private int n;
 
     public MainMenu() {
@@ -33,8 +34,8 @@ public class MainMenu extends JFrame {
 
         warunkiDirichletaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if(getConditions()){
-                    Dirichlet dirichlet = new Dirichlet(a,b,n,upa,upb);
+                if (getConditions()) {
+                    Dirichlet dirichlet = new Dirichlet(a, b, n, upa, upb);
                     try {
                         dirichlet.start();
                     } catch (Exception e) {
@@ -43,9 +44,9 @@ public class MainMenu extends JFrame {
                     float[] xi = dirichlet.getX();
                     float[] ax = dirichlet.getY();
                     float[][] tab = new float[2][];
-                    tab[0] = new float[n+1];
-                    tab[1] = new float[n+1];
-                    for(int i=0;i<=n;++i){
+                    tab[0] = new float[n + 1];
+                    tab[1] = new float[n + 1];
+                    for (int i = 0; i <= n; ++i) {
                         tab[0][i] = xi[i];
                         tab[1][i] = ax[i];
                     }
@@ -66,38 +67,47 @@ public class MainMenu extends JFrame {
 
         warunkiNeumannaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if(getConditions()){
-                    Neumann neumann = new Neumann(a,b,n,upa,upb);
-                    try{
-                    int count = 1000;
-                    neumann.start();
-                    float[] xi = neumann.getX();
-                    float[] yi = neumann.getY();
-                    float[][] u = neumann.getU(count);
-                    float[][] tab = new float[2][];
-                    tab[0] = new float[n+1];
-                    tab[1] = new float[n+1];                     
-                    for(int i=0;i<=n;++i){
-                        tab[0][i] = xi[i];
-                        tab[1][i] = yi[i];
+                if (getConditions()) {
+                    if (neumann == null)
+                        neumann = new Neumann(a, b, n, upa, upb);
+                    else {
+                        neumann.setA(a);
+                        neumann.setB(b);
+                        neumann.setUpa(upa);
+                        neumann.setUpb(upb);
+                        neumann.setN(n);
                     }
-                    JFrame frame = new JFrame("DrawingPanel");
-                    DrawingPanel fi = new DrawingPanel();
-                    frame.addKeyListener(fi);
-                    frame.setContentPane(fi);
-                    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.pack();
-                    frame.setBounds(50, 50, 500, 500);
-                    frame.setVisible(true);
+                    try {
+                        int count = 1000;
+                        neumann.start();
+                        float[] xi = neumann.getX();
+                        float[] yi = neumann.getY();
+                        float[][] u = neumann.getU(count);
+                        float[][] tab = new float[2][];
+                        tab[0] = new float[n + 1];
+                        tab[1] = new float[n + 1];
+                        for (int i = 0; i <= n; ++i) {
+                            tab[0][i] = xi[i];
+                            tab[1][i] = yi[i];
+                        }
+                        JFrame frame = new JFrame("DrawingPanel");
+                        DrawingPanel fi = new DrawingPanel();
+                        frame.addKeyListener(fi);
+                        frame.setContentPane(fi);
+                        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.pack();
+                        frame.setBounds(50, 50, 500, 500);
+                        frame.setVisible(true);
                         fi.addFunction(tab, Color.green);
-                        fi.addFunction(u,Color.red);
+                        fi.addFunction(u, Color.red);
                         fi.computeBoundary();
                         fi.repaint();
-                    }catch(Exception ex){}
+                    } catch (Exception ex) {
+                    }
                 }
 
-                        }
-                });
+            }
+        });
         koniecButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.exit(0);
@@ -110,6 +120,7 @@ public class MainMenu extends JFrame {
 
     public static void main(String[] args) {
         MainMenu dialog = new MainMenu();
+        dialog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         int posX = (int) (dim.getWidth() / 2) - WIDTH / 2,
@@ -121,18 +132,18 @@ public class MainMenu extends JFrame {
         dialog.setVisible(true);
     }
 
-    private boolean getConditions(){
-        try{
+    private boolean getConditions() {
+        try {
             a = Float.parseFloat(this.aTextField.getText());
             b = Float.parseFloat(this.bTextField.getText());
             upa = Float.parseFloat(this.upaTextField.getText());
             upb = Float.parseFloat(this.upbTextField.getText());
             n = Integer.parseInt(this.nTextField.getText());
-            if(n>0 && n<=1000)
+            if (n > 0 && n <= 1000)
                 return true;
             else
                 return false;
-        }   catch(Exception ex){
+        } catch (Exception ex) {
             return false;
         }
     }

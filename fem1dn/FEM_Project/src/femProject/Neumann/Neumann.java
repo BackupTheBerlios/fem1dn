@@ -158,8 +158,9 @@ end{u};
 
 
     public float[] getY() {
-        float[] y = new float[xi.length];
-        for(int i=0; i < y.length; i++)
+        float[] y = new float[n+1];
+        bb = false;
+        for(int i=0; i < n+1; i++)
             y[i]=this.uu(xi[i]);
         return y;
     }
@@ -334,7 +335,17 @@ end{trojdiag};
         for (int k = n - 1; k >= 1; k--) {
             x[k] = (f[k] - c[k] * x[k + 1]) / a[k];
         }
-    }
+
+/*        for (int k = 1; k <= n; k++) {
+            m = b[k] / a[k - 1];
+            a[k] -= m * c[k - 1];
+            f[k] -= m * f[k - 1];
+        }
+        x[n] = f[n] / a[n];
+        for (int k = n - 1; k >= 0; k--) {
+            x[k] = (f[k] - c[k] * x[k + 1]) / a[k];
+        }
+*/    }
 
     /*
    for i:=0 to n-1 do xi[i]:=a+i*h;
@@ -392,7 +403,7 @@ end{trojdiag};
         this.tabInit();
         h = (b - a) / n;
 
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i <= n-1; ++i)
             xi[i] = a + i * h;
         xi[n] = b;
 
@@ -413,6 +424,7 @@ end{trojdiag};
               af[i]=calka(1,i,i,xi[i-1],xi[i])+calka(1,i,i,xi[i],xi[i+1]);
             af[n]=p.getValue(b)*upb+calka(1,n,n,xi[n-1],xi[n]);
 
+            //co to za dziwne cofanie indeksow
             for(int i=n+1;i>=1;--i){
                 ab[i]=ab[i-1];
                 aa[i]=aa[i-1];
@@ -420,9 +432,10 @@ end{trojdiag};
                 af[i]=af[i-1];
             }
             //{Rozwiazanie ukladu rownan}
+            //jaka kicha - jak tutaj daje n+1 to sie nawet psuje
             trojdiag(n,aa,ab,ac,af,ax);
             for(int i=1;i<=n+1;++i)
-            ax[i-1]=ax[i];
+                ax[i-1]=ax[i];
         //} catch (Exception ex) {
         //}
 

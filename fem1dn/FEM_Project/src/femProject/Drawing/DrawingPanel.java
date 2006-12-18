@@ -179,6 +179,7 @@ public class DrawingPanel extends JPanel implements KeyListener {
                 g.setColor(Color.red);
             float[][] aTab = this.tab.get(k);
             for (int i = 0; i < aTab[0].length - 1; ++i) {
+                if(aTab[0][i]!=aTab[0][i+1])
                 g.drawLine((int) (this.getWidth() * (aTab[0][i] - xMin) / (xMax - xMin)),
                         this.getHeight() + (int) (this.getHeight() * (yMin - aTab[1][i]) / (yMax - yMin)),
                         (int) (this.getWidth() * (aTab[0][i + 1] - xMin) / (xMax - xMin)),
