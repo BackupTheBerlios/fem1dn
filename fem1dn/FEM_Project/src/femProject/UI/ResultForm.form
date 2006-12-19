@@ -121,7 +121,9 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <horizontalScrollBar value="21da6"/>
+                      <horizontalScrollBar value=""/>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBar value="21da6"/>
                     </properties>
                     <border type="none"/>
                     <children>
@@ -136,6 +138,7 @@
                       <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <horizontalScrollBarPolicy value="31"/>
                       <verticalScrollBar value="21da6"/>
                     </properties>
                     <border type="none"/>
