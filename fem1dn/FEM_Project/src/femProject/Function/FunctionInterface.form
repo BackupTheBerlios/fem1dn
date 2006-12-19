@@ -45,7 +45,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="("/>
+              <text value="["/>
             </properties>
           </component>
           <component id="2fd26" class="javax.swing.JButton" binding="rightBrBtn">
@@ -54,7 +54,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value=") "/>
+              <text value="]"/>
             </properties>
           </component>
           <component id="98c19" class="javax.swing.JTextField" binding="rangeBegTextField">
@@ -107,7 +107,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <text value="Zakończ"/>
+          <text value="OK"/>
         </properties>
       </component>
       <grid id="d2b35" layout-manager="GridBagLayout">

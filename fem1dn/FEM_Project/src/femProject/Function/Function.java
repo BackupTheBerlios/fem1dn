@@ -3,6 +3,8 @@ package femProject.Function;
 import java.util.Vector;
 
 import org.nfunk.jep.JEP;
+import org.nfunk.jep.Variable;
+import org.nfunk.jep.ParseException;
 import org.lsmp.djep.rpe.RpCommandList;
 import org.lsmp.djep.rpe.RpEval;
 import org.lsmp.djep.xjep.XJep;
@@ -21,9 +23,10 @@ public class Function {
     private float minX, maxX;
     private JEP jep;
     private RpEval rpe;
+    private int ref;
 
 
-    private void initJep(){
+    private void initJep() throws ParseException {
           jep = new XJep();
           jep.addStandardConstants();
           jep.addStandardFunctions();
@@ -31,7 +34,7 @@ public class Function {
           jep.setAllowUndeclared(true);
           jep.setImplicitMul(true);
           jep.setAllowAssignment(true);
-          rpe = new RpEval(jep);
+          rpe = new RpEval(jep);         
     }
     private void initTabs(int size){
         this.functions = new RpCommandList[size];
@@ -93,7 +96,9 @@ public class Function {
         }
 
         if (i < rangeNum) {
-            rpe.setVarValue(0,x);
+            try{
+                rpe.setVarValue(0,x);
+            }catch(Exception e){};
             return (float) rpe.evaluate(functions[i]);
         } else throw new Exception("Invalid argument");
     }

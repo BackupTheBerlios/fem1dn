@@ -78,7 +78,7 @@ public class StoredFunction {
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
-               funs.add("x-3.5");
+               funs.add("2*x^2-5*x-1.5");
                storedFuns.add(new StoredFunction(funs,rngs));
            }
 

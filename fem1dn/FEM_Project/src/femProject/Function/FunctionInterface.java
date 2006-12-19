@@ -50,11 +50,21 @@ public class FunctionInterface extends JDialog {
                                 HEIGHT = 300;
 
    
-    public FunctionInterface() {
+    public FunctionInterface()
+    {        
+        construct();
+    }
+    public FunctionInterface(float defaultBeg, float defaultEnd) {
 
+        rangeBegTextField.setText(String.valueOf(defaultBeg));
+        rangeEndTextField.setText(String.valueOf(defaultEnd));
+        construct();
+    }
+    private void construct(){
         textFunction = new StoredFunction();
-        inclBeg = false;
-        inclEnd = false;
+        inclBeg = true;
+        inclEnd = true;
+
         this.setModal(true);
         this.setContentPane(panel1);
         this.setSize(WIDTH, HEIGHT);
@@ -108,7 +118,6 @@ public class FunctionInterface extends JDialog {
                         b = rangeEndTextField.getText();
                 if (!checkFunction(f, a, b))
                     JOptionPane.showMessageDialog(dial,"B³êdna funkcja");
-
             }
 
         });
@@ -125,9 +134,9 @@ public class FunctionInterface extends JDialog {
             }
         });
         finishButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {               
+            public void actionPerformed(ActionEvent actionEvent) {
                 if(textFunction.isRangeOk()){
-                    try {                  
+                    try {
                         function = new femProject.Function.Function(textFunction);
                          setVisible(false);
                     } catch (Exception e) {

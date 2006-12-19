@@ -37,11 +37,24 @@ public class ResultForm extends JFrame {
     private DefaultListModel argListModel;
     private DefaultListModel valListModel;
     
-    private static final int WIDTH = 400,
+    private static final int WIDTH = 500,
             HEIGHT = 300;
     private DefaultListModel errListModel;
     private DefaultListModel fvalListModel;
 
+    private void setAllListSelections(int val){
+        valList.setSelectedIndex(val);
+        valList.ensureIndexIsVisible(val);
+        argList.setSelectedIndex(val);
+        argList.ensureIndexIsVisible(val);
+        if(fvalList.isEnabled()){
+            errorList.setSelectedIndex(val);
+            errorList.ensureIndexIsVisible(val);
+            fvalList.setSelectedIndex(val);
+            fvalList.ensureIndexIsVisible(val);
+        }
+
+    }
     public ResultForm() {
         super();
         this.setContentPane(panel1);
@@ -52,19 +65,34 @@ public class ResultForm extends JFrame {
 
 
         argList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                int val = argList.getSelectedIndex();
-                valList.setSelectedIndex(val);
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {               
+                setAllListSelections(argList.getSelectedIndex());
             }
         });
         valList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                argList.setSelectedIndex(valList.getSelectedIndex());
+                setAllListSelections(valList.getSelectedIndex());
+
             }
         });
         errorList.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                setAllListSelections(errorList.getSelectedIndex());
 
+            }
+        });
+        scrollBar1.addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent adjustmentEvent) {
+                setAllListSelections(adjustmentEvent.getValue());
+
+
+
+
+            }
+        });
+        fvalList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                setAllListSelections(fvalList.getSelectedIndex());
             }
         });
     }

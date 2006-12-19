@@ -37,23 +37,22 @@ public class MainMenu extends JFrame {
         warunkiDirichletaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (getConditions()) {
-                    Dirichlet dirichlet = new Dirichlet(a, b, n, upa, upb);
+
                     try {
+                        Dirichlet dirichlet = new Dirichlet(a, b, n, upa, upb,errorCheckBox.isSelected());
                         dirichlet.start();
-                    } catch (Exception e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    }
-                    float[] xi = dirichlet.getX();
-                    float[] ax = dirichlet.getY();
-                    float[][] tab = new float[2][];
-                    tab[0] = new float[n + 1];
-                    tab[1] = new float[n + 1];
-                    for (int i = 0; i <= n; ++i) {
-                        tab[0][i] = xi[i];
-                        tab[1][i] = ax[i];
-                    }
-                    ResultForm result = new ResultForm();
-                    try {
+
+                        float[] xi = dirichlet.getX();
+                        float[] ax = dirichlet.getY();
+                        float[][] tab = new float[2][];
+                        tab[0] = new float[n + 1];
+                        tab[1] = new float[n + 1];
+                        for (int i = 0; i <= n; ++i) {
+                            tab[0][i] = xi[i];
+                            tab[1][i] = ax[i];
+                        }
+                        ResultForm result = new ResultForm();
+
                         result.addFunction(Color.green,tab);
 
                         if(errorCheckBox.isSelected()){
@@ -62,18 +61,19 @@ public class MainMenu extends JFrame {
                             fTab[1] = new float[n+1];
                             for (int i = 0; i <= n; ++i) {
                                fTab[0][i] = xi[i];
-                               fTab[1][i] = dirichlet.getF(xi[i]);                              
+                               fTab[1][i] = dirichlet.getU(xi[i]);                              
                             }
                             result.addFunction(Color.BLUE,fTab);
                             result.setFunctionLists(tab,fTab[1]);                            
                         }else  result.setFunctionLists(tab);
 
                         result.refresh();
+                        result.setVisible(true);
                     } catch (Exception e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
 
-                    result.setVisible(true);
+
                 }
             }
         });
