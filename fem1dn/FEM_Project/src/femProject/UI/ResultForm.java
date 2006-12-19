@@ -4,7 +4,12 @@ import femProject.Function.Function;
 import femProject.Drawing.DrawingPanel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.ComponentAdapter;
 import java.util.ArrayList;
 
 /**
@@ -19,37 +24,99 @@ public class ResultForm extends JFrame {
 
     private JPanel panel1;
     private DrawingPanel drawingPanel;
+    private JPanel errors;
+    private JList argList;
+    private JList valList;
+    private JScrollBar scrollBar1;
+    private JScrollPane scrollPane1;
+    private JScrollPane scrollPane2;
+    private JList fvalList;
+    private JList errorList;
+    private DefaultListModel argListModel;
+    private DefaultListModel valListModel;
+    
     private static final int WIDTH = 400,
             HEIGHT = 300;
+    private DefaultListModel errListModel;
+    private DefaultListModel fvalListModel;
 
     public ResultForm() {
         super();
         this.setContentPane(panel1);
         this.setSize(WIDTH, HEIGHT);
+        panel1.addKeyListener(drawingPanel);
         tabbedPane1.addKeyListener(drawingPanel);
+        this.addKeyListener(drawingPanel);
+
+
+        argList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                int val = argList.getSelectedIndex();
+                valList.setSelectedIndex(val);
+            }
+        });
+        valList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                argList.setSelectedIndex(valList.getSelectedIndex());
+            }
+        });
+        errorList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+
+            }
+        });
+    }
+
+    public void addFunction(Color col, float[][] tab) throws Exception {
+        drawingPanel.addFunction(tab,col);       
+    }
+    public void setFunctionLists(float[][] tab){
+        argListModel.clear();
+        valListModel.clear();
+        errListModel.clear();
+        fvalListModel.clear();
+
+        for(int i=0; i < tab[0].length; i++){
+            argListModel.addElement(tab[0][i]);
+            valListModel.addElement(tab[1][i]);
+            
+        }
+        scrollBar1.setMaximum(tab[0].length);
+    }
+
+    private void createUIComponents() {
+        argListModel = new DefaultListModel();
+        valListModel = new DefaultListModel();
+        errListModel = new DefaultListModel();
+        fvalListModel = new DefaultListModel();
+
+        argList = new JList(argListModel);
+        valList = new JList(valListModel);
+        errorList = new JList(errListModel);
+        fvalList = new JList(fvalListModel);
 
     }
 
-    public void setFunction(Function fun) throws Exception {
-        ArrayList<Color> colors = new ArrayList<Color>();
-        colors.add(Color.RED);
-        float[][] pTab = new float[2][];
-        for (int i = 0; i < pTab.length; ++i) {
-            pTab[i] = new float[100];
-        }
-        float x = (fun.getMinX() == Float.NEGATIVE_INFINITY) ? -10 : fun.getMinX();
-        float endX = (fun.getMaxX() == Float.POSITIVE_INFINITY) ? 10 : fun.getMaxX();
-        float diff = (endX - x) / 100;
-
-        for (int i = 0; i < pTab[0].length; ++i) {
-            x = pTab[0][i] = x + diff;
-            pTab[1][i] = fun.getValue(x);
-        }
-
-        ArrayList<float[][]> l = new ArrayList<float[][]>();
-        l.add(pTab);
-        drawingPanel.setTab(l);
-        drawingPanel.setColor(colors);
+    public void refresh() {
+        drawingPanel.computeBoundary();
         drawingPanel.repaint();
     }
+
+    public void setFunctionLists(float[][] tab, float[] fval){
+        argListModel.clear();
+        valListModel.clear();
+        errListModel.clear();
+        fvalListModel.clear();
+
+        for(int i=0; i < tab[0].length; i++){
+            argListModel.addElement(tab[0][i]);
+            valListModel.addElement(tab[1][i]);
+            fvalListModel.addElement(fval[i]);
+            errListModel.addElement(fval[i]-tab[1][i]);
+
+        }
+        scrollBar1.setMaximum(tab[0].length);
+    }
+
+    
 }

@@ -397,4 +397,8 @@ public class Dirichlet {
             y[i]=this.u(xi[i]);
         return y;
     }
+
+    public float getF(float v) throws Exception {
+        return f.getValue(v);
+    }
 }

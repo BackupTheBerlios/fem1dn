@@ -21,6 +21,7 @@ public class MainMenu extends JFrame {
     private JTextField nTextField;
     private JTextField upaTextField;
     private JTextField upbTextField;
+    private JCheckBox errorCheckBox;
     private ResultForm resultForm;
     private Neumann neumann = null;
 
@@ -29,6 +30,7 @@ public class MainMenu extends JFrame {
 
     public MainMenu() {
         setContentPane(contentPane);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         resultForm = new ResultForm();
 
 
@@ -50,17 +52,28 @@ public class MainMenu extends JFrame {
                         tab[0][i] = xi[i];
                         tab[1][i] = ax[i];
                     }
-                    JFrame frame = new JFrame("DrawingPanel");
-                    DrawingPanel fi = new DrawingPanel();
-                    frame.addKeyListener(fi);
-                    frame.setContentPane(fi);
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.pack();
-                    frame.setBounds(50, 50, 500, 500);
-                    frame.setVisible(true);
-                    fi.addFunction(tab, Color.green);
-                    fi.computeBoundary();
-                    fi.repaint();
+                    ResultForm result = new ResultForm();
+                    try {
+                        result.addFunction(Color.green,tab);
+
+                        if(errorCheckBox.isSelected()){
+                            float[][] fTab = new float[2][];
+                            fTab[0] = new float[n+1];
+                            fTab[1] = new float[n+1];
+                            for (int i = 0; i <= n; ++i) {
+                               tab[0][i] = xi[i];
+                               tab[1][i] = dirichlet.getF(xi[i]);
+                            }
+                            result.addFunction(Color.BLUE,fTab);
+                            result.setFunctionLists(tab,fTab[1]);                            
+                        }else  result.setFunctionLists(tab);
+
+                        result.refresh();
+                    } catch (Exception e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+
+                    result.setVisible(true);
                 }
             }
         });
@@ -115,8 +128,8 @@ public class MainMenu extends JFrame {
         });
     }
 
-    private static final int WIDTH = 300,
-            HEIGHT = 280;
+    private static final int    WIDTH = 300,
+                                HEIGHT = 320;
 
     public static void main(String[] args) {
         MainMenu dialog = new MainMenu();
