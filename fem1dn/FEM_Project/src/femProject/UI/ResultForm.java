@@ -32,6 +32,8 @@ public class ResultForm extends JFrame {
     private JScrollPane scrollPane2;
     private JList fvalList;
     private JList errorList;
+    private JScrollPane scrollPane3;
+    private JScrollPane scrollPane4;
     private DefaultListModel argListModel;
     private DefaultListModel valListModel;
     
@@ -74,7 +76,9 @@ public class ResultForm extends JFrame {
         argListModel.clear();
         valListModel.clear();
         errListModel.clear();
+        errorList.setEnabled(false);
         fvalListModel.clear();
+        fvalList.setEnabled(false);
 
         for(int i=0; i < tab[0].length; i++){
             argListModel.addElement(tab[0][i]);
@@ -107,6 +111,8 @@ public class ResultForm extends JFrame {
         valListModel.clear();
         errListModel.clear();
         fvalListModel.clear();
+        errorList.setEnabled(true);        
+        fvalList.setEnabled(true);
 
         for(int i=0; i < tab[0].length; i++){
             argListModel.addElement(tab[0][i]);

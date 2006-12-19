@@ -1,8 +1,11 @@
 package femProject.Function;
 
-import de.olikurt.parser.Variable;
-
 import java.util.Vector;
+
+import org.nfunk.jep.JEP;
+import org.lsmp.djep.rpe.RpCommandList;
+import org.lsmp.djep.rpe.RpEval;
+import org.lsmp.djep.xjep.XJep;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,40 +16,54 @@ import java.util.Vector;
  */
 public class Function {
     private Range[] ranges;
-    private de.olikurt.parser.Function[] functions;
+    private  RpCommandList[] functions;
     private int rangeNum;
-    private Variable var;
-    private Vector vect;
     private float minX, maxX;
+    private JEP jep;
+    private RpEval rpe;
 
+
+    private void initJep(){
+          jep = new XJep();
+          jep.addStandardConstants();
+          jep.addStandardFunctions();
+          jep.addComplex();
+          jep.setAllowUndeclared(true);
+          jep.setImplicitMul(true);
+          jep.setAllowAssignment(true);
+          rpe = new RpEval(jep);
+    }
+    private void initTabs(int size){
+        this.functions = new RpCommandList[size];
+        this.ranges = new Range[size];
+        this.rangeNum = size;
+        minX = Float.POSITIVE_INFINITY;
+        maxX = Float.NEGATIVE_INFINITY;
+    }
     public Function(StoredFunction textFunction) throws Exception {
          if (textFunction != null) {
-             
-            this.functions = new de.olikurt.parser.Function[textFunction.getSize()];
-            this.ranges = new Range[textFunction.getSize()];
-            this.rangeNum = textFunction.getSize();
-
-            minX = Float.POSITIVE_INFINITY;
-            maxX = Float.NEGATIVE_INFINITY;
-
-            this.var = new Variable('x');
-            this.vect = new Vector();
-            vect.add(var);
+            initJep();
+            initTabs(textFunction.getSize());
+                        
             textFunction.initEnum();
-             int i=0;
+            int i=0;
             while(textFunction.nextPoint()){
-                this.functions[i] = new de.olikurt.parser.Function(textFunction.currentFunction());
-                this.ranges[i] = textFunction.currentRange();
-                if (ranges[i].getBeg() < minX)
-                    minX = ranges[i].getBeg();
-                if (ranges[i].getEnd() > maxX)
-                    maxX = ranges[i].getEnd();
-                i++;
+                parseFunction(i,textFunction.currentFunction(),textFunction.currentRange());
+                i++;               
             }
         } else throw new Exception("Invalid argument");
         
     }
 
+    private void parseFunction(int ind, String fun, Range rng) throws Exception{
+        org.nfunk.jep.Node node = jep.parse(fun);
+        this.functions[ind] = rpe.compile(node);
+        this.ranges[ind] = rng;
+        if (ranges[ind].getBeg() < minX)
+            minX = ranges[ind].getBeg();
+        if (ranges[ind].getEnd() > maxX)
+            maxX = ranges[ind].getEnd();        
+    }
 
     public float getMinX() {
         return minX;
@@ -59,21 +76,11 @@ public class Function {
     public Function(Range[] ranges, String[] functions) throws Exception {
         if (ranges != null && functions != null && ranges.length > 0
                 && ranges.length == functions.length) {
-            this.functions = new de.olikurt.parser.Function[ranges.length];
-            this.rangeNum = ranges.length;
-            this.ranges = ranges;
-            minX = ranges[0].getBeg();
-            maxX = ranges[0].getEnd();
+            initJep();
+            initTabs(functions.length);
 
-            this.var = new Variable('x');
-            this.vect = new Vector();
-            vect.add(var);
             for (int i = 0; i < ranges.length; i++) {
-                this.functions[i] = new de.olikurt.parser.Function(functions[i]);
-                if (ranges[i].getBeg() < minX)
-                    minX = ranges[i].getBeg();
-                if (ranges[i].getEnd() > maxX)
-                    maxX = ranges[i].getEnd();
+                parseFunction(i,functions[i],ranges[i]);
             }
         } else throw new Exception("Invalid argument");
     }
@@ -86,8 +93,8 @@ public class Function {
         }
 
         if (i < rangeNum) {
-            this.var.setValue(x);
-            return (float) functions[i].calculate(this.vect);
+            rpe.setVarValue(0,x);
+            return (float) rpe.evaluate(functions[i]);
         } else throw new Exception("Invalid argument");
     }
 

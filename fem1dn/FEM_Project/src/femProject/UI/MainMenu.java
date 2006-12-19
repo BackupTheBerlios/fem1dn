@@ -62,7 +62,7 @@ public class MainMenu extends JFrame {
                             fTab[1] = new float[n+1];
                             for (int i = 0; i <= n; ++i) {
                                fTab[0][i] = xi[i];
-                               fTab[1][i] = dirichlet.getF(xi[i]);
+                               fTab[1][i] = dirichlet.getF(xi[i]);                              
                             }
                             result.addFunction(Color.BLUE,fTab);
                             result.setFunctionLists(tab,fTab[1]);                            

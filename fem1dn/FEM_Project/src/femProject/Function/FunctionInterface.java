@@ -1,8 +1,5 @@
 package femProject.Function;
 
-import de.olikurt.parser.Variable;
-import de.olikurt.parser.Function;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
@@ -43,7 +40,6 @@ public class FunctionInterface extends JDialog {
     private femProject.Function.Function function;
     private StoredFunction textFunction;
     private boolean inclBeg, inclEnd;
-    private de.olikurt.parser.Variable var;
     private Vector vect;
     private ArrayList<StoredFunction> storedFunctions;
     private int currStoredFunctionIndx;
@@ -55,9 +51,6 @@ public class FunctionInterface extends JDialog {
 
    
     public FunctionInterface() {
-        var = new Variable('x');
-        vect = new Vector();
-        vect.add(var);
 
         textFunction = new StoredFunction();
         inclBeg = false;
@@ -235,11 +228,15 @@ public class FunctionInterface extends JDialog {
             } else if (end != Float.POSITIVE_INFINITY) val = end - 1;
             else val = 0;
 
-            de.olikurt.parser.Function funct = new Function(fun);
 
-            var.setValue((double) val);
-            funct.calculate(vect);
+            org.nfunk.jep.JEP myParser = new org.nfunk.jep.JEP();
+            myParser.addStandardFunctions();
+            myParser.addStandardConstants();
 
+            myParser.addVariable("x", val);
+            myParser.parseExpression(fun);
+            myParser.getValue();
+            
             Range range = new Range(beg, end, inclBeg, inclEnd);
             /*Range currRange;
             for (int i = 0; i < textFunction.getSize(); i++) {
