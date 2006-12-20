@@ -276,10 +276,9 @@
     </option>
   </component>
   <component name="libraryTable">
-    <library name="de">
+    <library name="JEP">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/classes/production/FEM_Project/de" />
-        <root url="file://$PROJECT_DIR$/classes/production/FEM_Project/de/olikurt/parser" />
+        <root url="jar://$PROJECT_DIR$/JEP.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
