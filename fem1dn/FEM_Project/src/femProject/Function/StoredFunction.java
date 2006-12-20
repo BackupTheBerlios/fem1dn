@@ -34,6 +34,10 @@ public class StoredFunction {
            rngs.add(new Range(0.0f,1.0f,true,true));
 
            if(type.equalsIgnoreCase("p")){
+               funs.add("1+sin(x)");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
                funs.add("1");
                storedFuns.add(new StoredFunction(funs,rngs));
 
@@ -55,6 +59,10 @@ public class StoredFunction {
                funs.add("0.5");               
                storedFuns.add(new StoredFunction(funs,rngs));               
            }else if(type.equalsIgnoreCase("r")){
+               funs.add("exp(x)");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
                funs.add("0");               
                storedFuns.add(new StoredFunction(funs,rngs));
 
@@ -78,6 +86,10 @@ public class StoredFunction {
                storedFuns.add(new StoredFunction(funs,rngs));
 
             }else if(type.equalsIgnoreCase("f")){
+               funs.add("1/(1+x*x)");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
                funs.add("-2");
                storedFuns.add(new StoredFunction(funs,rngs));
 
@@ -143,13 +155,8 @@ public class StoredFunction {
         }
 
         public int compareTo(Object o) {
-            FunctionPoint fp = (FunctionPoint)o;
-
-            float res= (fp.range.begin - this.range.begin) ;
-            if(res < 0) return -1;
-            else if(res == 0) return 0;
-            else return 1;
-
+            FunctionPoint fp = (FunctionPoint)o;            
+            return (int)(fp.range.begin - this.range.begin);
 
         }
     }

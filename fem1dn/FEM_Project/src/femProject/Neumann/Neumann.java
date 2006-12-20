@@ -72,7 +72,7 @@ end{u};
     private boolean bb;
     private float[] xi, aa, ab, ac, af, ax;
 
-    public Neumann(float a, float b, int n, float upa, float upb) {
+    public Neumann(float a, float b, int n, float upa, float upb,  boolean inputU) throws Exception{
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -84,30 +84,40 @@ end{u};
         functionInterfacep.setFunctionName("p");
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
+        if(p==null) throw new Exception("Nie wprowadzono funkcji p");
 
         FunctionInterface functionInterfaceq = new FunctionInterface();
         functionInterfaceq.setLocation(posX, posY);
         functionInterfaceq.setFunctionName("q");
         functionInterfaceq.setVisible(true);
         q = functionInterfaceq.getFunction();
+        if(q==null) throw new Exception("Nie wprowadzono funkcji q");
 
         FunctionInterface functionInterfacer = new FunctionInterface();
         functionInterfacer.setLocation(posX, posY);
         functionInterfacer.setFunctionName("r");
         functionInterfacer.setVisible(true);
         r = functionInterfacer.getFunction();
+        if(r==null) throw new Exception("Nie wprowadzono funkcji r");
 
         FunctionInterface functionInterfacef = new FunctionInterface();
         functionInterfacef.setLocation(posX, posY);
         functionInterfacef.setFunctionName("f");
         functionInterfacef.setVisible(true);
         f = functionInterfacef.getFunction();
+        if(f==null) throw new Exception("Nie wprowadzono funkcji f");
 
+        if(inputU)
+        {
         FunctionInterface functionInterfaceu = new FunctionInterface();
         functionInterfaceu.setLocation(posX, posY);
         functionInterfaceu.setFunctionName("u");
         functionInterfaceu.setVisible(true);
         u = functionInterfaceu.getFunction();
+        if(u==null) throw new Exception("Nie wprowadzono funkcji u");
+        }
+        else
+        u = null;
 
         this.a = a;
         this.b = b;
@@ -182,6 +192,10 @@ end{u};
 
     public float[] getX() {
         return xi;
+    }
+
+        public float getU(float v) throws Exception {
+        return u.getValue(v);
     }
 /*
     {**********************************************************}
@@ -294,6 +308,20 @@ end{g};
         float a1 = s - t;
         float a2 = s + t;
         return tau * (g(k, i, j, a1) + g(k, i, j, a2));
+    }
+
+    private float calka1(float alfa, float beta) throws Exception {
+        int l;
+        float tau = (beta - alfa) / 2;
+        float s = (beta + alfa) / 2;
+        float t = (float) (tau * Math.sqrt(3.0) / 3);
+        float a1 = s - t;
+        float a2 = s + t;
+        return tau * (g1(a1) + g1(a2));
+    }
+
+    private float g1(float x) throws Exception{
+         return (float)Math.sqrt(Math.abs(u.getValue(x)-uu(x)));
     }
 
     /*
@@ -437,15 +465,25 @@ end{trojdiag};
             for(int i=1;i<=n+1;++i)
                 ax[i-1]=ax[i];
         //} catch (Exception ex) {
-        //}
-        for(int i=0;i<=n;++i){
-            af[i]=f.getValue(xi[i]);
-        }
-
+        //}*
     }
-}
+    public float error() throws Exception{
+        int n3 = 0;
+        if(n<=33)
+            n3 = 100;
+        else
+            n3 = 3*n;
+        float h3 = ((b-a)/n3);
+        float bs = 0;
+        for(int i=0;i<n3;++i){
+            float x3 = a+i*h3;
+            bs += calka1(x3, x3+h3);
+        }
+        return (float)Math.sqrt(Math.abs(bs));
+    }
 
-/*
+}
+  /*
 procedure ENTER;
 begin
  writeln;

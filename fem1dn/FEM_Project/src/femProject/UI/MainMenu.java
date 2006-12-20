@@ -22,6 +22,7 @@ public class MainMenu extends JFrame {
     private JTextField upaTextField;
     private JTextField upbTextField;
     private JCheckBox errorCheckBox;
+    private JCheckBox oldFunctions;
     private ResultForm resultForm;
     private Neumann neumann = null;
 
@@ -30,7 +31,7 @@ public class MainMenu extends JFrame {
 
     public MainMenu() {
         setContentPane(contentPane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         resultForm = new ResultForm();
 
 
@@ -39,7 +40,7 @@ public class MainMenu extends JFrame {
                 if (getConditions()) {
 
                     try {
-                        Dirichlet dirichlet = new Dirichlet(a, b, n, upa, upb,errorCheckBox.isSelected());
+                        Dirichlet dirichlet = new Dirichlet(a, b, n, upa, upb, errorCheckBox.isSelected());
                         dirichlet.start();
 
                         float[] xi = dirichlet.getX();
@@ -53,19 +54,19 @@ public class MainMenu extends JFrame {
                         }
                         ResultForm result = new ResultForm();
 
-                        result.addFunction(Color.green,tab);
+                        result.addFunction(Color.green, tab);
 
-                        if(errorCheckBox.isSelected()){
+                        if (errorCheckBox.isSelected()) {
                             float[][] fTab = new float[2][];
-                            fTab[0] = new float[n+1];
-                            fTab[1] = new float[n+1];
+                            fTab[0] = new float[n + 1];
+                            fTab[1] = new float[n + 1];
                             for (int i = 0; i <= n; ++i) {
-                               fTab[0][i] = xi[i];
-                               fTab[1][i] = dirichlet.getU(xi[i]);                              
+                                fTab[0][i] = xi[i];
+                                fTab[1][i] = dirichlet.getU(xi[i]);
                             }
-                            result.addFunction(Color.BLUE,fTab);
-                            result.setFunctionLists(tab,fTab[1]);                            
-                        }else  result.setFunctionLists(tab);
+                            result.addFunction(Color.BLUE, fTab);
+                            result.setFunctionLists(tab, fTab[1]);
+                        } else result.setFunctionLists(tab);
 
                         result.refresh();
                         result.setVisible(true);
@@ -81,21 +82,19 @@ public class MainMenu extends JFrame {
         warunkiNeumannaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (getConditions()) {
-                    if (neumann == null)
-                        neumann = new Neumann(a, b, n, upa, upb);
-                    else {
-                        neumann.setA(a);
-                        neumann.setB(b);
-                        neumann.setUpa(upa);
-                        neumann.setUpb(upb);
-                        neumann.setN(n);
-                    }
                     try {
-                        int count = 1000;
+                        if (neumann == null || !oldFunctions.isSelected())
+                            neumann = new Neumann(a, b, n, upa, upb, errorCheckBox.isSelected());
+                        else {
+                            neumann.setA(a);
+                            neumann.setB(b);
+                            neumann.setUpa(upa);
+                            neumann.setUpb(upb);
+                            neumann.setN(n);
+                        }
                         neumann.start();
                         float[] xi = neumann.getX();
                         float[] yi = neumann.getY();
-                        float[][] u = neumann.getU(count);
                         float[][] tab = new float[2][];
                         tab[0] = new float[n + 1];
                         tab[1] = new float[n + 1];
@@ -103,6 +102,7 @@ public class MainMenu extends JFrame {
                             tab[0][i] = xi[i];
                             tab[1][i] = yi[i];
                         }
+/*                        ResultForm result = new ResultForm();
                         JFrame frame = new JFrame("DrawingPanel");
                         DrawingPanel fi = new DrawingPanel();
                         frame.addKeyListener(fi);
@@ -115,7 +115,23 @@ public class MainMenu extends JFrame {
                         fi.addFunction(u, Color.red);
                         fi.computeBoundary();
                         fi.repaint();
-                    } catch (Exception ex) {
+*/
+                        ResultForm result = new ResultForm();
+
+                        result.addFunction(Color.green, tab);
+
+                        if (errorCheckBox.isSelected()) {
+                            int count = 1000;
+                            float[][] u = neumann.getU(count);
+                            result.addFunction(Color.BLUE, u);
+                            result.setFunctionLists(tab, neumann.getU(n + 1)[1]);
+                            result.setError(neumann.error());
+                        } else result.setFunctionLists(tab);
+
+                        result.refresh();
+                        result.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
                 }
 
@@ -128,8 +144,8 @@ public class MainMenu extends JFrame {
         });
     }
 
-    private static final int    WIDTH = 300,
-                                HEIGHT = 320;
+    private static final int WIDTH = 300,
+            HEIGHT = 340;
 
     public static void main(String[] args) {
         MainMenu dialog = new MainMenu();
@@ -152,7 +168,7 @@ public class MainMenu extends JFrame {
             upa = Float.parseFloat(this.upaTextField.getText());
             upb = Float.parseFloat(this.upbTextField.getText());
             n = Integer.parseInt(this.nTextField.getText());
-            if (n > 0 && n <= 1000)
+            if (n > 0 && n < 1000)
                 return true;
             else
                 return false;

@@ -34,20 +34,22 @@ public class ResultForm extends JFrame {
     private JList errorList;
     private JScrollPane scrollPane3;
     private JScrollPane scrollPane4;
+    private JLabel errorLabel;
     private DefaultListModel argListModel;
     private DefaultListModel valListModel;
-    
+
     private static final int WIDTH = 500,
             HEIGHT = 300;
     private DefaultListModel errListModel;
     private DefaultListModel fvalListModel;
+    private float error = 0;
 
-    private void setAllListSelections(int val){
+    private void setAllListSelections(int val) {
         valList.setSelectedIndex(val);
         valList.ensureIndexIsVisible(val);
         argList.setSelectedIndex(val);
         argList.ensureIndexIsVisible(val);
-        if(fvalList.isEnabled()){
+        if (fvalList.isEnabled()) {
             errorList.setSelectedIndex(val);
             errorList.ensureIndexIsVisible(val);
             fvalList.setSelectedIndex(val);
@@ -55,6 +57,7 @@ public class ResultForm extends JFrame {
         }
 
     }
+
     public ResultForm() {
         super();
         this.setContentPane(panel1);
@@ -62,10 +65,11 @@ public class ResultForm extends JFrame {
         panel1.addKeyListener(drawingPanel);
         tabbedPane1.addKeyListener(drawingPanel);
         this.addKeyListener(drawingPanel);
+        this.setFocusable(false);
 
 
         argList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {               
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 setAllListSelections(argList.getSelectedIndex());
             }
         });
@@ -86,8 +90,6 @@ public class ResultForm extends JFrame {
                 setAllListSelections(adjustmentEvent.getValue());
 
 
-
-
             }
         });
         fvalList.addListSelectionListener(new ListSelectionListener() {
@@ -98,9 +100,10 @@ public class ResultForm extends JFrame {
     }
 
     public void addFunction(Color col, float[][] tab) throws Exception {
-        drawingPanel.addFunction(tab,col);       
+        drawingPanel.addFunction(tab, col);
     }
-    public void setFunctionLists(float[][] tab){
+
+    public void setFunctionLists(float[][] tab) {
         argListModel.clear();
         valListModel.clear();
         errListModel.clear();
@@ -108,10 +111,10 @@ public class ResultForm extends JFrame {
         fvalListModel.clear();
         fvalList.setEnabled(false);
 
-        for(int i=0; i < tab[0].length; i++){
+        for (int i = 0; i < tab[0].length; i++) {
             argListModel.addElement(tab[0][i]);
             valListModel.addElement(tab[1][i]);
-            
+
         }
         scrollBar1.setMaximum(tab[0].length);
     }
@@ -134,23 +137,30 @@ public class ResultForm extends JFrame {
         drawingPanel.repaint();
     }
 
-    public void setFunctionLists(float[][] tab, float[] fval){
+    public void setFunctionLists(float[][] tab, float[] fval) {
         argListModel.clear();
         valListModel.clear();
         errListModel.clear();
         fvalListModel.clear();
-        errorList.setEnabled(true);        
+        errorList.setEnabled(true);
         fvalList.setEnabled(true);
 
-        for(int i=0; i < tab[0].length; i++){
+        for (int i = 0; i < tab[0].length; i++) {
             argListModel.addElement(tab[0][i]);
             valListModel.addElement(tab[1][i]);
             fvalListModel.addElement(fval[i]);
-            errListModel.addElement(fval[i]-tab[1][i]);
+            errListModel.addElement(fval[i] - tab[1][i]);
 
         }
         scrollBar1.setMaximum(tab[0].length);
     }
 
-    
+    public float getError() {
+        return error;
+    }
+
+    public void setError(float error) {
+        this.error = error;
+        this.errorLabel.setText("Blad sredniokwadratowy wynosi =" + error);
+    }
 }
