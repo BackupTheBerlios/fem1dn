@@ -223,6 +223,20 @@ public class Dirichlet {
     end;
     */
 
+    private float integral1(float alfa, float beta) throws Exception {
+            int l;
+            float tau = (beta - alfa) / 2;
+            float s = (beta + alfa) / 2;
+            float t = (float) (tau * Math.sqrt(3.0) / 3);
+            float a1 = s - t;
+            float a2 = s + t;
+            return tau * (g1(a1) + g1(a2));
+        }
+     private float g1(float x) throws Exception{
+         return (float)Math.sqrt(Math.abs(u.getValue(x)-uu(x)));
+    }
+
+
     private void trojdiag(int n, float[] a, float[] b, float[] c, float[] f, float[] x){
         float m;
 
@@ -430,5 +444,40 @@ public class Dirichlet {
 
     public float getU(float v) throws Exception {
         return u.getValue(v);
+    }
+
+     public float error() throws Exception{
+        int n3 = 0;
+        if(n<=33)
+            n3 = 100;
+        else
+            n3 = 3*n;
+        float h3 = ((b-a)/n3);
+        float bs = 0;
+        for(int i=0;i<n3;++i){
+            float x3 = a+i*h3;
+            bs += integral1(x3, x3+h3);
+        }
+        return (float)Math.sqrt(Math.abs(bs));
+    }
+
+    public void setUa(float ua) {
+        this.ua = ua;
+    }
+
+    public void setUb(float ub) {
+        this.ub = ub;
+    }
+
+    public void setA(float a) {
+        this.a = a;
+    }
+
+    public void setB(float b) {
+        this.b = b;
+    }
+
+    public void setN(int n) {
+        this.n = n;
     }
 }

@@ -6,6 +6,8 @@ import femProject.Neumann.Neumann;
 import femProject.Drawing.DrawingPanel;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.*;
@@ -41,7 +43,16 @@ public class MainMenu extends JFrame {
                 if (getConditions()) {
 
                     try {
-                        dirichlet.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());
+                        if(!oldFunctions.isSelected() || neumann.isNotUsed())
+                            dirichlet.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());
+                        else{
+                            dirichlet.setA(a);
+                            dirichlet.setB(b);
+                            dirichlet.setUa(upa);
+                            dirichlet.setUb(upb);
+                            dirichlet.setN(n);
+
+                        }
                         dirichlet.start();
 
                         float[] xi = dirichlet.getX();
@@ -66,12 +77,14 @@ public class MainMenu extends JFrame {
                             }
                             result.addFunction(Color.BLUE, fTab);
                             result.setFunctionLists(tab, fTab[1]);
+                            result.setError(dirichlet.error());
                         } else result.setFunctionLists(tab);
 
                         result.refresh();
                         result.showResults();
+                        if(oldFunctions.isSelected()) lockRangeTextFields(true);
                     } catch (Exception e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                      //  e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
 
 
@@ -84,8 +97,8 @@ public class MainMenu extends JFrame {
                 if (getConditions()) {
                     try {
                         if (!oldFunctions.isSelected() || neumann.isNotUsed())
-                            neumann.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());
-                        else {
+                            neumann.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());                            
+                        else {                            
                             neumann.setA(a);
                             neumann.setB(b);
                             neumann.setUpa(upa);
@@ -130,8 +143,9 @@ public class MainMenu extends JFrame {
 
                         result.refresh();
                         result.showResults();
+                        if(oldFunctions.isSelected()) lockRangeTextFields(true);
                     } catch (Exception e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                      //  e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
                 }
 
@@ -142,6 +156,17 @@ public class MainMenu extends JFrame {
                 System.exit(0);
             }
         });
+        errorCheckBox.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent changeEvent) {
+                if(!oldFunctions.isSelected()){
+                    lockRangeTextFields(false);
+                }
+            }
+        });
+    }
+    private void lockRangeTextFields(boolean val){
+        this.aTextField.setEditable(!val);
+        this.bTextField.setEditable(!val);
     }
 
     private static final int WIDTH = 300,
