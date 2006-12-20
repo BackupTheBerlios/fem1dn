@@ -144,99 +144,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainMenu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="58" selection-start="2345" selection-end="2345" vertical-scroll-proportion="2.1554253">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ResultForm.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/femProject/UI/ResultForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="39" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.48387095">
+            <state line="39" column="39" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.45961002">
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultForm.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/UI/ResultForm.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Dirichlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="75" selection-start="2810" selection-end="2810" vertical-scroll-proportion="0.18181819">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Function.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="34" selection-start="2990" selection-end="2990" vertical-scroll-proportion="2.431085">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FunctionInterface.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="5" selection-start="1619" selection-end="1619" vertical-scroll-proportion="0.28152493">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#construct#0;class#FunctionInterface#0" expanded="false" />
-                <element signature="method#actionPerformed#0;class#2297:2674" expanded="false" />
-                <element signature="method#actionPerformed#0;class#2718:3097" expanded="false" />
-                <element signature="class#3244:3420" expanded="false" />
-                <element signature="class#3465:3641" expanded="false" />
-                <element signature="class#3684:4083" expanded="false" />
-                <element signature="class#4136:4374" expanded="false" />
-                <element signature="class#4424:4662" expanded="false" />
-                <element signature="method#actionPerformed#0;class#4708:5238" expanded="false" />
-                <element signature="class#5284:5735" expanded="false" />
-                <element signature="class#5779:6190" expanded="false" />
-                <element signature="class#6234:6620" expanded="false" />
-                <marker date="1166562420000" expanded="false" signature="9721:14932" placeholder="UI Designer generated code" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FunctionInterface.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StoredFunction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="36" selection-start="2824" selection-end="2824" vertical-scroll-proportion="1.111437">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenu.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -347,54 +260,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="FEM_Project.ipr" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="FEM_Project" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/org" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="FEM_Project.ipr" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="FEM_Project" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/org" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/org/lsmp/djep" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -770,13 +635,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="58" selection-start="2345" selection-end="2345" vertical-scroll-proportion="2.1554253">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="80" column="36" selection-start="2824" selection-end="2824" vertical-scroll-proportion="1.111437">
@@ -836,9 +694,16 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="58" selection-start="2345" selection-end="2345" vertical-scroll-proportion="2.1554253">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/UI/ResultForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="39" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.48387095">
+        <state line="39" column="39" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.45961002">
           <folding />
         </state>
       </provider>
