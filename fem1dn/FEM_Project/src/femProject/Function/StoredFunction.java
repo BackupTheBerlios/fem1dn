@@ -73,12 +73,28 @@ public class StoredFunction {
                funs.add("sin(3.14*x)");
                storedFuns.add(new StoredFunction(funs,rngs));
 
+               funs.clear();
+               funs.add("x^5+4*x^3-x^2+2");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
             }else if(type.equalsIgnoreCase("f")){
                funs.add("-2");
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
                funs.add("2*x^2-5*x-1.5");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
+               funs.add("-20*x^3-24*x+2");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
+               funs.add("3.14*3.14*sin(3.14*x)");
+               storedFuns.add(new StoredFunction(funs,rngs));
+
+               funs.clear();
+               funs.add("sin(3.14*x)*(2+3.14*3.14*(x+1))-3.14*cos(3.14*x)/2");
                storedFuns.add(new StoredFunction(funs,rngs));
            }
 

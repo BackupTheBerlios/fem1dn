@@ -433,11 +433,14 @@ end{trojdiag};
             }
             //{Rozwiazanie ukladu rownan}
             //jaka kicha - jak tutaj daje n+1 to sie nawet psuje
-            trojdiag(n,aa,ab,ac,af,ax);
+            trojdiag(n+1,aa,ab,ac,af,ax);
             for(int i=1;i<=n+1;++i)
                 ax[i-1]=ax[i];
         //} catch (Exception ex) {
         //}
+        for(int i=0;i<=n;++i){
+            af[i]=f.getValue(xi[i]);
+        }
 
     }
 }
