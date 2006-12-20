@@ -22,19 +22,20 @@ import java.util.ArrayList;
 public class ResultForm extends JFrame {
     private JTabbedPane tabbedPane1;
 
+    private JFrame drawingFrame;
     private JPanel panel1;
     private DrawingPanel drawingPanel;
-    private JPanel errors;
     private JList argList;
     private JList valList;
     private JScrollBar scrollBar1;
-    private JScrollPane scrollPane1;
-    private JScrollPane scrollPane2;
     private JList fvalList;
     private JList errorList;
+    private JLabel errorLabel;
+    private JPanel errors;
+    private JScrollPane scrollPane1;
+    private JScrollPane scrollPane2;
     private JScrollPane scrollPane3;
     private JScrollPane scrollPane4;
-    private JLabel errorLabel;
     private DefaultListModel argListModel;
     private DefaultListModel valListModel;
 
@@ -60,11 +61,26 @@ public class ResultForm extends JFrame {
 
     public ResultForm() {
         super();
+
+       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       int     posX = (int) (dim.getWidth() / 2) - WIDTH / 2;               
+
+        drawingFrame = new JFrame();
+        drawingFrame.setSize(WIDTH,HEIGHT);
+        drawingFrame.setLocation(posX,0);
+        this.setLocation(posX,HEIGHT);
+        drawingPanel = new DrawingPanel();
+        drawingFrame.addKeyListener(drawingPanel);
+        drawingFrame.setContentPane(drawingPanel);
+        drawingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       
+         
         this.setContentPane(panel1);
         this.setSize(WIDTH, HEIGHT);
-        panel1.addKeyListener(drawingPanel);
-        tabbedPane1.addKeyListener(drawingPanel);
-        this.addKeyListener(drawingPanel);
+       // panel1.addKeyListener(drawingPanel);
+        //tabbedPane1.addKeyListener(drawingPanel);
+        //this.addKeyListener(drawingPanel);
         this.setFocusable(false);
 
 
@@ -97,10 +113,16 @@ public class ResultForm extends JFrame {
                 setAllListSelections(fvalList.getSelectedIndex());
             }
         });
-    }
 
+
+    }
+    
     public void addFunction(Color col, float[][] tab) throws Exception {
         drawingPanel.addFunction(tab, col);
+    }
+    public void showResults(){
+        this.setVisible(true);
+        drawingFrame.setVisible(true);
     }
 
     public void setFunctionLists(float[][] tab) {
@@ -134,6 +156,7 @@ public class ResultForm extends JFrame {
 
     public void refresh() {
         drawingPanel.computeBoundary();
+ 
         drawingPanel.repaint();
     }
 

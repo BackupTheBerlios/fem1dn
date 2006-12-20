@@ -22,17 +22,18 @@ public class MainMenu extends JFrame {
     private JTextField upaTextField;
     private JTextField upbTextField;
     private JCheckBox errorCheckBox;
-    private JCheckBox oldFunctions;
-    private ResultForm resultForm;
+    private JCheckBox oldFunctions;   
     private Neumann neumann = null;
+    private Dirichlet dirichlet = null;
 
     private float a, b, upa, upb;
     private int n;
 
     public MainMenu() {
         setContentPane(contentPane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        resultForm = new ResultForm();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
+        dirichlet = new Dirichlet();
+        neumann = new Neumann();
 
 
         warunkiDirichletaButton.addActionListener(new ActionListener() {
@@ -40,7 +41,7 @@ public class MainMenu extends JFrame {
                 if (getConditions()) {
 
                     try {
-                        Dirichlet dirichlet = new Dirichlet(a, b, n, upa, upb, errorCheckBox.isSelected());
+                        dirichlet.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());
                         dirichlet.start();
 
                         float[] xi = dirichlet.getX();
@@ -53,7 +54,6 @@ public class MainMenu extends JFrame {
                             tab[1][i] = ax[i];
                         }
                         ResultForm result = new ResultForm();
-
                         result.addFunction(Color.green, tab);
 
                         if (errorCheckBox.isSelected()) {
@@ -69,7 +69,7 @@ public class MainMenu extends JFrame {
                         } else result.setFunctionLists(tab);
 
                         result.refresh();
-                        result.setVisible(true);
+                        result.showResults();
                     } catch (Exception e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
@@ -83,8 +83,8 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (getConditions()) {
                     try {
-                        if (neumann == null || !oldFunctions.isSelected())
-                            neumann = new Neumann(a, b, n, upa, upb, errorCheckBox.isSelected());
+                        if (!oldFunctions.isSelected() || neumann.isNotUsed())
+                            neumann.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());
                         else {
                             neumann.setA(a);
                             neumann.setB(b);
@@ -102,7 +102,7 @@ public class MainMenu extends JFrame {
                             tab[0][i] = xi[i];
                             tab[1][i] = yi[i];
                         }
-/*                        ResultForm result = new ResultForm();
+/*                      ResultForm result = new ResultForm();
                         JFrame frame = new JFrame("DrawingPanel");
                         DrawingPanel fi = new DrawingPanel();
                         frame.addKeyListener(fi);
@@ -129,7 +129,7 @@ public class MainMenu extends JFrame {
                         } else result.setFunctionLists(tab);
 
                         result.refresh();
-                        result.setVisible(true);
+                        result.showResults();
                     } catch (Exception e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }

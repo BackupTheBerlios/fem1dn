@@ -71,50 +71,69 @@ end{u};
     private float a, b, upa, upb, h;
     private boolean bb;
     private float[] xi, aa, ab, ac, af, ax;
+    private FunctionInterface    functionInterfacep,functionInterfaceq,functionInterfacer,
+                                functionInterfaceu,functionInterfacef;
+    private boolean firstUse;
 
-    public Neumann(float a, float b, int n, float upa, float upb,  boolean inputU) throws Exception{
-
+    public Neumann() {
+        firstUse = true;
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        FunctionInterface functionInterfacep = new FunctionInterface();
+        functionInterfacep = new FunctionInterface();
         int posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
                         posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
-        
+
         functionInterfacep.setLocation(posX, posY);
         functionInterfacep.setFunctionName("p");
+
+
+        functionInterfaceq = new FunctionInterface();
+        functionInterfaceq.setLocation(posX, posY);
+        functionInterfaceq.setFunctionName("q");
+
+        functionInterfacer = new FunctionInterface();
+        functionInterfacer.setLocation(posX, posY);
+        functionInterfacer.setFunctionName("r");
+
+
+        functionInterfacef = new FunctionInterface();
+        functionInterfacef.setLocation(posX, posY);
+        functionInterfacef.setFunctionName("f");
+
+        functionInterfaceu = new FunctionInterface();
+        functionInterfaceu.setLocation(posX, posY);
+        functionInterfaceu.setFunctionName("u");
+      
+    }
+
+    public void setConditions(float a, float b, int n, float upa, float upb,  boolean inputU) throws Exception{
+
+        functionInterfacep.setDefaultRange(a,b);
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
         if(p==null) throw new Exception("Nie wprowadzono funkcji p");
 
-        FunctionInterface functionInterfaceq = new FunctionInterface();
-        functionInterfaceq.setLocation(posX, posY);
-        functionInterfaceq.setFunctionName("q");
+        functionInterfaceq.setDefaultRange(a,b);
         functionInterfaceq.setVisible(true);
         q = functionInterfaceq.getFunction();
         if(q==null) throw new Exception("Nie wprowadzono funkcji q");
 
-        FunctionInterface functionInterfacer = new FunctionInterface();
-        functionInterfacer.setLocation(posX, posY);
-        functionInterfacer.setFunctionName("r");
+        functionInterfacer.setDefaultRange(a,b);
         functionInterfacer.setVisible(true);
         r = functionInterfacer.getFunction();
         if(r==null) throw new Exception("Nie wprowadzono funkcji r");
 
-        FunctionInterface functionInterfacef = new FunctionInterface();
-        functionInterfacef.setLocation(posX, posY);
-        functionInterfacef.setFunctionName("f");
+        functionInterfacef.setDefaultRange(a,b);
         functionInterfacef.setVisible(true);
         f = functionInterfacef.getFunction();
         if(f==null) throw new Exception("Nie wprowadzono funkcji f");
 
         if(inputU)
         {
-        FunctionInterface functionInterfaceu = new FunctionInterface();
-        functionInterfaceu.setLocation(posX, posY);
-        functionInterfaceu.setFunctionName("u");
-        functionInterfaceu.setVisible(true);
-        u = functionInterfaceu.getFunction();
-        if(u==null) throw new Exception("Nie wprowadzono funkcji u");
+            functionInterfaceu.setDefaultRange(a,b);
+            functionInterfaceu.setVisible(true);
+            u = functionInterfaceu.getFunction();
+            if(u==null) throw new Exception("Nie wprowadzono funkcji u");
         }
         else
         u = null;
@@ -124,8 +143,12 @@ end{u};
         this.n = n;
         this.upa = upa;
         this.upb = upb;
+        this.firstUse = false;
     }
 
+    public boolean isNotUsed(){
+        return firstUse;
+    }
     public int getN() {
         return n;
     }

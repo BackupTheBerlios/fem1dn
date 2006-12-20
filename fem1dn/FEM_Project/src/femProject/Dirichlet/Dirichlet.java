@@ -23,62 +23,75 @@ public class Dirichlet {
     private float a,b,ua,ub,h;
     private char z;
     private float[] xi,aa,ab,ac,af,ax;
+    private FunctionInterface   functionInterfacep,functionInterfacepp,functionInterfaceq,
+                                functionInterfacer,functionInterfaceu,functionInterfacef;
 
-    public Dirichlet(float a, float b, int n, float ua, float ub, boolean inputU) throws Exception {
+    public Dirichlet() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+                functionInterfacep = new FunctionInterface();
+               int     posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
+                       posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
+
+               functionInterfacep.setLocation(posX,posY);
+               functionInterfacep.setFunctionName("p");
+
+               functionInterfacepp = new FunctionInterface();
+               functionInterfacepp.setLocation(posX,posY);
+               functionInterfacepp.setFunctionName("pp");
+
+               functionInterfaceq = new FunctionInterface();
+               functionInterfaceq.setLocation(posX,posY);
+               functionInterfaceq.setFunctionName("q");
+
+
+               functionInterfacer = new FunctionInterface();
+               functionInterfacer.setLocation(posX,posY);
+               functionInterfacer.setFunctionName("r");
+
+               functionInterfacef = new FunctionInterface();
+               functionInterfacef.setLocation(posX,posY);
+               functionInterfacef.setFunctionName("f");
+
+               functionInterfaceu = new FunctionInterface();
+               functionInterfaceu.setLocation(posX,posY);
+               functionInterfaceu.setFunctionName("u");
+    }
+    public void setConditions(float a, float b, int n, float ua, float ub, boolean inputU) throws Exception {
         this.a = a;
         this.b = b;
         this.n = n;
         this.ua = ua;
         this.ub = ub;
         
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-        FunctionInterface functionInterfacep = new FunctionInterface(a,b);
-        int     posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
-                posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
-        functionInterfacep.setLocation(posX,posY);
-
-        functionInterfacep.setFunctionName("p");      
+        functionInterfacep.setDefaultRange(a,b);
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
         if(p==null) throw new Exception("Nie wprowadzono funkcji p");
       
-        FunctionInterface functionInterfacepp = new FunctionInterface(a,b);
-
-        functionInterfacepp.setLocation(posX,posY);
-        functionInterfacepp.setFunctionName("pp");
+        functionInterfacepp.setDefaultRange(a,b);
         functionInterfacepp.setVisible(true);
         pp = functionInterfacepp.getFunction();
         if(pp==null) throw new Exception("Nie wprowadzono funkcji pp");
 
-        FunctionInterface functionInterfaceq = new FunctionInterface(a,b);
-        functionInterfaceq.setLocation(posX,posY);
-        functionInterfaceq.setFunctionName("q");
+        functionInterfaceq.setDefaultRange(a,b);
         functionInterfaceq.setVisible(true);
         q = functionInterfaceq.getFunction();
         if(q==null) throw new Exception("Nie wprowadzono funkcji q");
 
-
-        FunctionInterface functionInterfacer = new FunctionInterface(a,b);
-        functionInterfacer.setLocation(posX,posY);
-        functionInterfacer.setFunctionName("r");        
+        functionInterfacer.setDefaultRange(a,b);
         functionInterfacer.setVisible(true);
         r = functionInterfacer.getFunction();
         if(r==null) throw new Exception("Nie wprowadzono funkcji r");
 
-
-        FunctionInterface functionInterfacef = new FunctionInterface(a,b);
-        functionInterfacef.setLocation(posX,posY);
-        functionInterfacef.setFunctionName("f");       
+        functionInterfacef.setDefaultRange(a,b);
         functionInterfacef.setVisible(true);
         f = functionInterfacef.getFunction();
         if(f==null) throw new Exception("Nie wprowadzono funkcji f");
 
         if(inputU){
-           FunctionInterface functionInterfaceu = new FunctionInterface(a,b);
-            functionInterfaceu.setLocation(posX,posY);
-            functionInterfaceu.setFunctionName("u");
-            functionInterfaceu.setVisible(true);
+           functionInterfaceu.setDefaultRange(a,b);
+           functionInterfaceu.setVisible(true);
             u = functionInterfaceu.getFunction();
            if(u==null) throw new Exception("Nie wprowadzono funkcji u");
         }

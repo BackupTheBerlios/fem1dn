@@ -426,4 +426,9 @@ public class FunctionInterface extends JDialog {
     public void setStoredFunctions(ArrayList<StoredFunction> storedFunctions) {
         this.storedFunctions = storedFunctions;
     }
+
+    public void setDefaultRange(float a, float b) {
+        rangeBegTextField.setText(String.valueOf(a));
+        rangeEndTextField.setText(String.valueOf(b));
+    }
 }
