@@ -156,8 +156,10 @@ public class StoredFunction {
 
         public int compareTo(Object o) {
             FunctionPoint fp = (FunctionPoint)o;            
-            return (int)(fp.range.begin - this.range.begin);
-
+            float res = (fp.range.begin - this.range.begin);
+            if(res <0) return -1;
+            else if (res > 0 )return 1;
+            else return 0;
         }
     }
     public void initEnum(){

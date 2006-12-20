@@ -49,6 +49,7 @@ public class Range {
         return end;
     }
 
+
     public boolean intersects(Range r) {
         if ((this.begin < r.begin && r.begin < this.end) ||
                 (this.begin < r.end && r.end < this.end) ||
@@ -62,6 +63,7 @@ public class Range {
 
 
     }
+    
     public String toString(){
        String beg = begin == Float.NEGATIVE_INFINITY ?
                     "-" + INFINITY_SYMBOL : String.valueOf(begin);

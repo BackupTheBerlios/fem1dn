@@ -226,7 +226,7 @@ public class FunctionInterface extends JDialog {
 
             if (b.compareTo("+" + INFINITY_SYMBOL) == 0) end = Float.POSITIVE_INFINITY;
             else end = Float.valueOf(b);
-
+        
 
             if (end < beg || (end == beg && (!inclBeg || !inclEnd))) return false;
 
