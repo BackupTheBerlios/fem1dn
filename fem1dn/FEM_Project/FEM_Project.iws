@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4" relativePaths="false">
   <component name="BookmarkManager">
-    <editor_bookmark url="file://$PROJECT_DIR$/src/femProject/Function/Function.java" line="166" number="0" />
+    <editor_bookmark url="file://$PROJECT_DIR$/src/femProject/Function/Function.java" line="158" number="0" />
     <editor_bookmark url="file://$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" line="436" />
   </component>
   <component name="ChangeBrowserSettings">
@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" afterPath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/femProject/UI/FunctionInterface.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.form" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Function.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Function.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/femProject/UI/FunctionInterface.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" afterPath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Neumann/Neumann.java" afterPath="$PROJECT_DIR$/src/femProject/Neumann/Neumann.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/femProject/Function/FunctionInterface.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" afterPath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iml" afterPath="$PROJECT_DIR$/FEM_Project.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Function.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Function.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iws" afterPath="$PROJECT_DIR$/FEM_Project.iws" />
     </list>
   </component>
@@ -101,6 +93,21 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/femProject/Function/Function.java" line="155" class="femProject.Function.Function" package="femProject.Function">
+        <option name="ENABLED" value="true" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -158,7 +165,7 @@
       <file leaf-file-name="StoredFunction.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="45" selection-start="5579" selection-end="5579" vertical-scroll-proportion="0.6795252">
+            <state line="170" column="29" selection-start="5190" selection-end="5457" vertical-scroll-proportion="1.5341246">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
@@ -170,7 +177,7 @@
       <file leaf-file-name="Range.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/Function/Range.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.40356082">
+            <state line="40" column="0" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.421365">
               <folding />
             </state>
           </provider>
@@ -179,7 +186,7 @@
       <file leaf-file-name="Dirichlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="483" column="23" selection-start="13614" selection-end="13614" vertical-scroll-proportion="1.2136499">
+            <state line="68" column="0" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.36498517">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#start#0;class#Dirichlet#0" expanded="false" />
@@ -191,7 +198,7 @@
       <file leaf-file-name="FunctionInterface.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/UI/FunctionInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="28" selection-start="5118" selection-end="5118" vertical-scroll-proportion="-5.3204746">
+            <state line="143" column="28" selection-start="5118" selection-end="5118" vertical-scroll-proportion="0.57863504">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#actionPerformed#0;class#2222:2599" expanded="false" />
@@ -209,7 +216,7 @@
       <file leaf-file-name="Function.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="43" selection-start="5695" selection-end="5695" vertical-scroll-proportion="0.2670623">
+            <state line="167" column="30" selection-start="5328" selection-end="5328" vertical-scroll-proportion="0.47477746">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -220,8 +227,19 @@
       <file leaf-file-name="MainMenu.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="28" selection-start="2833" selection-end="2833" vertical-scroll-proportion="0.24332345">
+            <state line="83" column="25" selection-start="3320" selection-end="3320" vertical-scroll-proportion="0.7448071">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResultForm.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/femProject/UI/ResultForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="173" column="0" selection-start="5541" selection-end="5541" vertical-scroll-proportion="0.9886364">
+              <folding>
+                <element signature="method#setAllListSelections#0;class#ResultForm#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -317,6 +335,10 @@
           <option name="myItemId" value="FEM_Project.ipr" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
         </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="FEM_Project" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
       </PATH>
     </subPane>
   </component>
@@ -331,7 +353,7 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure PackagesPane="false" Scope="false" Favorites="false" ProjectPane="false" />
+      <showStructure ProjectPane="false" Scope="false" PackagesPane="false" Favorites="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
@@ -364,130 +386,7 @@
       <recent name="de.olikurt" />
     </key>
   </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="22.12.06 20:26" ActionInfo="Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-          <PATH>$PROJECT_DIR$/FEM_Project.iws</PATH>
-          <PATH>$PROJECT_DIR$/FEM_Project.iml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-          <PATH>$PROJECT_DIR$/start.sh</PATH>
-          <PATH>$PROJECT_DIR$/FEM_Project.jar</PATH>
-          <PATH>$PROJECT_DIR$/src/femProject/Function/test.java</PATH>
-          <PATH>$PROJECT_DIR$/start.bat</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Unknown" />
-          <option name="myStatusName" value="Unknown" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN_TYPE" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally modified removed from server" />
-          <option name="myStatusName" value="Locally modified removed from server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MOD_REMOVED_FROM_SERVER" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed modified on server" />
-          <option name="myStatusName" value="Locally removed modified on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED_MODIFIED_ON_SERVER" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created by second party" />
-          <option name="myStatusName" value="Created by second party" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED_BY_SECOND_PARTY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Binary file has to be merged" />
-          <option name="myStatusName" value="Binary file has to be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="BINARY_MERGED" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
-  </component>
+  <component name="RestoreUpdateTree" />
   <component name="RunManager" selected="Application.MainMenu">
     <tempConfiguration default="false" name="MainMenu" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" value="femProject.UI.MainMenu" />
@@ -525,13 +424,6 @@
         <option name="Run ant target" value="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -562,6 +454,13 @@
       <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="false" name="DrawingPanel" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" value="femProject.Drawing.DrawingPanel" />
@@ -663,14 +562,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1024" height="737" extended-state="6" />
+    <frame x="0" y="0" width="1022" height="737" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3150259" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" order="7" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34539813" order="0" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22901554" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489592" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3223684" order="8" />
@@ -802,15 +701,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/UI/ResultForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="185" column="23" selection-start="5832" selection-end="5832" vertical-scroll-proportion="1.1424581">
-          <folding>
-            <element signature="method#setAllListSelections#0;class#ResultForm#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Neumann/Neumann.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="347" column="7" selection-start="9022" selection-end="9137" vertical-scroll-proportion="0.8547486">
@@ -827,24 +717,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Function/Range.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.40356082">
+        <state line="40" column="0" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.421365">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="45" selection-start="5579" selection-end="5579" vertical-scroll-proportion="0.6795252">
+        <state line="167" column="30" selection-start="5328" selection-end="5328" vertical-scroll-proportion="0.47477746">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="483" column="23" selection-start="13614" selection-end="13614" vertical-scroll-proportion="1.2136499">
+        <state line="68" column="0" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.36498517">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#start#0;class#Dirichlet#0" expanded="false" />
@@ -852,18 +741,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/femProject/Function/Function.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="43" selection-start="5695" selection-end="5695" vertical-scroll-proportion="0.2670623">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/UI/FunctionInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="28" selection-start="5118" selection-end="5118" vertical-scroll-proportion="-5.3204746">
+        <state line="143" column="28" selection-start="5118" selection-end="5118" vertical-scroll-proportion="0.57863504">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#actionPerformed#0;class#2222:2599" expanded="false" />
@@ -877,9 +757,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/Function/StoredFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="170" column="29" selection-start="5190" selection-end="5457" vertical-scroll-proportion="1.5341246">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getStoredFunctions#0;class#StoredFunction#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/femProject/UI/ResultForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="173" column="0" selection-start="5541" selection-end="5541" vertical-scroll-proportion="0.9886364">
+          <folding>
+            <element signature="method#setAllListSelections#0;class#ResultForm#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="28" selection-start="2833" selection-end="2833" vertical-scroll-proportion="0.24332345">
+        <state line="83" column="25" selection-start="3320" selection-end="3320" vertical-scroll-proportion="0.7448071">
           <folding />
         </state>
       </provider>

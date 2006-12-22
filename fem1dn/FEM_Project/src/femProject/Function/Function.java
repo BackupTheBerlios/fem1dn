@@ -153,45 +153,23 @@ public class Function {
         }
     }
     public float[][] getValuesForRange(float a, float b) throws Exception {
-        float[][] tab = new float[2][];        
-        ArrayList<Float> list = new ArrayList<Float>();
-        for(int i=0; i < ranges.length; i++){
-            if(ranges[i].begin<= b && ranges[i].begin>=a)
-                list.add(ranges[i].begin);
-            if(ranges[i].end<= b && ranges[i].end>=a)
-                list.add(ranges[i].end);
-        }
-        Collections.sort(list);
-        tab[0] = new float[POINTS_NUMBER+list.size()];
-        tab[1] = new float[POINTS_NUMBER+list.size()];
+        float[][] tab = new float[2][];
+        tab[0] = new float[POINTS_NUMBER];
+        tab[1] = new float[POINTS_NUMBER];
         float diff = (b-a)/POINTS_NUMBER;
         float x =a;
-        int len = list.size();
 
-        for(int i=0; i < POINTS_NUMBER; ){
-            if(list.size() > 0 && x>= list.get(0)){
-                tab[0][i] = list.get(0);
-                tab[1][i] = this.apprValue(list.get(0));
-                list.remove(0);
-                continue;
-            }
+        for(int i=0; i < POINTS_NUMBER-1; i++){
             tab[0][i] = x;
             tab[1][i] = this.getValue(x);
             x+=diff;
-            i++;
         }
-        int ind = POINTS_NUMBER;
-        for(int i=0; i < ranges.length; i++){
-            if(ranges[i].begin<= b && ranges[i].begin>=a){
-                tab[0][ind] = ranges[i].begin;
-                tab[1][ind++] = this.apprValue(ranges[i].begin);
-            }
-            if(ranges[i].end<= b && ranges[i].end>=a){
-                tab[0][ind] = ranges[i].end;
-                tab[1][ind++] = this.apprValue(ranges[i].end);
-            }
-        }
+        tab[0][POINTS_NUMBER-1] = b;
+        tab[1][POINTS_NUMBER-1] = this.getValue(b);
+            
         return tab;
     }
+
+
 
 }

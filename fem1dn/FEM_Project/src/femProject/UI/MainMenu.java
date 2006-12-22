@@ -72,8 +72,7 @@ public class MainMenu extends JFrame {
                                 fTab[0][i] = xi[i];
                                 fTab[1][i] = dirichlet.getU(xi[i]);
                             }
-                          //  fTab = dirichlet.getUFun(a,b);
-                            result.addFunction(Color.BLUE, fTab);
+                            result.addFunction(Color.BLUE, dirichlet.getUFun(a,b));
                             result.setFunctionLists(tab, fTab[1]);
                             result.setError(dirichlet.error());
                         } else result.setFunctionLists(tab);
@@ -82,7 +81,7 @@ public class MainMenu extends JFrame {
                         result.showResults();
                         if(oldFunctions.isSelected()) lockRangeTextFields(true);
                     } catch (Exception e) {
-                      //  e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                       // e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
 
 
