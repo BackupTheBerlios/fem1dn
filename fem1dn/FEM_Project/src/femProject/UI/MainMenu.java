@@ -1,9 +1,7 @@
 package femProject.UI;
 
-import femProject.Function.FunctionInterface;
 import femProject.Dirichlet.Dirichlet;
 import femProject.Neumann.Neumann;
-import femProject.Drawing.DrawingPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -11,7 +9,6 @@ import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class MainMenu extends JFrame {
     private JPanel contentPane;
@@ -75,6 +72,7 @@ public class MainMenu extends JFrame {
                                 fTab[0][i] = xi[i];
                                 fTab[1][i] = dirichlet.getU(xi[i]);
                             }
+                          //  fTab = dirichlet.getUFun(a,b);
                             result.addFunction(Color.BLUE, fTab);
                             result.setFunctionLists(tab, fTab[1]);
                             result.setError(dirichlet.error());

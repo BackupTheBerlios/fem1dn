@@ -136,15 +136,23 @@ public class StoredFunction {
         for(int i=points.size()-1; i>0; i--){
             curr = points.get(i).range;
             prev = points.get(i-1).range;
-            if(curr.end != prev.begin || (!curr.inclEnd && !prev.inclBeg) ||
+            if(curr.end != prev.begin || (curr.inclEnd  == prev.inclBeg) ||
                 curr.begin >= curr.end )
                 return false;
         }
         return true;
 
     }
+    public boolean isInRange(float x){
+        Range curr;
 
-
+        for(int i=0; i<points.size(); i++){
+            curr = points.get(i).range;
+            if(curr.isInRange(x)) return true;            
+        }
+        return false;
+        
+    }
     private class FunctionPoint implements Comparable{
         String function;
         Range range;

@@ -1,4 +1,7 @@
-package femProject.Function;
+package femProject.UI;
+
+import femProject.Function.StoredFunction;
+import femProject.Function.Range;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -44,20 +47,16 @@ public class FunctionInterface extends JDialog {
     private ArrayList<StoredFunction> storedFunctions;
     private int currStoredFunctionIndx;
     private JDialog dial;
+    private float defBeg, defEnd;
 
 
     private static final int WIDTH = 450,
                                 HEIGHT = 300;
 
-   
-    public FunctionInterface()
-    {        
-        construct();
-    }
-    public FunctionInterface(float defaultBeg, float defaultEnd) {
-
-        rangeBegTextField.setText(String.valueOf(defaultBeg));
-        rangeEndTextField.setText(String.valueOf(defaultEnd));
+       
+    public FunctionInterface() {
+        defBeg = 0;
+        defEnd = 1;        
         construct();
     }
     private void construct(){
@@ -136,16 +135,22 @@ public class FunctionInterface extends JDialog {
         finishButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(textFunction.isRangeOk()){
-                    try {
-                        function = new femProject.Function.Function(textFunction);
-                         setVisible(false);
-                    } catch (Exception e) {
+                    if(textFunction.isInRange(defBeg) && textFunction.isInRange(defEnd))
+                        try {
+                            function = new femProject.Function.Function(textFunction);
+                            setVisible(false);
+                        } catch (Exception e)
+                        {
+                            JOptionPane.showMessageDialog(dial,"Funkcja nie jest poprawna");
+                        }
+                    else
+                        JOptionPane.showMessageDialog(dial,"Funkcja musi byæ okre¶lona na przedziale ["+defBeg+";"+defEnd+"]");
 
-                    }
 
-                }else{
+
+                }else
                     JOptionPane.showMessageDialog(dial,"Funkcja nie jest poprawnie okre¶lona na przedziale.");
-                }
+
 
 
             }
@@ -430,5 +435,7 @@ public class FunctionInterface extends JDialog {
     public void setDefaultRange(float a, float b) {
         rangeBegTextField.setText(String.valueOf(a));
         rangeEndTextField.setText(String.valueOf(b));
+        defBeg = a;
+        defEnd = b;
     }
 }

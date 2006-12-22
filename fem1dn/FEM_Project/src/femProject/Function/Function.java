@@ -1,10 +1,13 @@
 package femProject.Function;
 
 import java.util.Vector;
+import java.util.Collections;
+import java.util.ArrayList;
 
 import org.nfunk.jep.JEP;
 import org.nfunk.jep.Variable;
 import org.nfunk.jep.ParseException;
+import org.nfunk.jep.SymbolTable;
 import org.lsmp.djep.rpe.RpCommandList;
 import org.lsmp.djep.rpe.RpEval;
 import org.lsmp.djep.xjep.XJep;
@@ -19,18 +22,21 @@ import org.lsmp.djep.xjep.XJep;
 public class Function {
     private Range[] ranges;
     private  RpCommandList[] functions;
-    private int rangeNum;
+    private int rangeNum, symTabMaxSize, symTabSize;
     private float minX, maxX;
     private JEP jep;
     private RpEval rpe;
-    private int ref;
+    private final int POINTS_NUMBER = 10;
+    private static final float EPSILON = 0.00001f;
 
 
     private void initJep() throws ParseException {
           jep = new XJep();
-          jep.addStandardConstants();
           jep.addStandardFunctions();
-          jep.addComplex();
+          jep.addStandardConstants();
+          symTabMaxSize = jep.getSymbolTable().size() + 1; //pocz±tkowa liczba zapisanych sta³ych + 1 niewiadoma
+
+          //jep.addComplex();
           jep.setAllowUndeclared(true);
           jep.setImplicitMul(true);
           jep.setAllowAssignment(true);
@@ -54,13 +60,19 @@ public class Function {
                 parseFunction(i,textFunction.currentFunction(),textFunction.currentRange());
                 i++;               
             }
+            symTabSize = jep.getSymbolTable().size();
         } else throw new Exception("Invalid argument");
         
     }
 
     private void parseFunction(int ind, String fun, Range rng) throws Exception{
+    //    fun = fun.replaceAll("pi",String.valueOf(Math.PI));
         org.nfunk.jep.Node node = jep.parse(fun);
+
+        
         this.functions[ind] = rpe.compile(node);
+        SymbolTable sym = jep.getSymbolTable();
+        if(sym.size() > symTabMaxSize) throw new Exception("Zbyt wiele niewiadomych");
         this.ranges[ind] = rng;
         if (ranges[ind].getBeg() < minX)
             minX = ranges[ind].getBeg();
@@ -85,6 +97,7 @@ public class Function {
             for (int i = 0; i < ranges.length; i++) {
                 parseFunction(i,functions[i],ranges[i]);
             }
+            symTabSize = jep.getSymbolTable().size();
         } else throw new Exception("Invalid argument");
     }
 
@@ -97,16 +110,88 @@ public class Function {
 
         if (i < rangeNum) {
             try{
-                rpe.setVarValue(0,x);
+                if(symTabSize == symTabMaxSize) //tzn ze jest niewiadoma
+                    rpe.setVarValue(0,x);
             }catch(Exception e){};
             return (float) rpe.evaluate(functions[i]);
         } else throw new Exception("Invalid argument");
+    }
+    private float apprValue(float x) throws Exception {
+        int i = 0;
+        while (i < rangeNum) {
+            if (ranges[i].isInRange(x)) break;
+            else i++;
+        }
+        if(i>=rangeNum){
+            i=0;
+            while (i < rangeNum) {
+                if (ranges[i].begin == x){
+                    x+=EPSILON;
+                    break;
+                }else if(ranges[i].end == x){
+                    x-=EPSILON;
+                    break;
+                }
+            else i++;
+        }
+            
+        }
+
+        if (i < rangeNum) {
+            try{
+                if(symTabSize == symTabMaxSize) //tzn ze jest niewiadoma
+                    rpe.setVarValue(0,x);
+            }catch(Exception e){};
+            return (float) rpe.evaluate(functions[i]);
+        } else throw new Exception("Invalid argument");
+
     }
 
     public void getValues(float[][] xyTab) throws Exception {
         for (int i = 0; i < xyTab[0].length; i++) {
             xyTab[1][i] = this.getValue(xyTab[0][i]);
         }
-
     }
+    public float[][] getValuesForRange(float a, float b) throws Exception {
+        float[][] tab = new float[2][];        
+        ArrayList<Float> list = new ArrayList<Float>();
+        for(int i=0; i < ranges.length; i++){
+            if(ranges[i].begin<= b && ranges[i].begin>=a)
+                list.add(ranges[i].begin);
+            if(ranges[i].end<= b && ranges[i].end>=a)
+                list.add(ranges[i].end);
+        }
+        Collections.sort(list);
+        tab[0] = new float[POINTS_NUMBER+list.size()];
+        tab[1] = new float[POINTS_NUMBER+list.size()];
+        float diff = (b-a)/POINTS_NUMBER;
+        float x =a;
+        int len = list.size();
+
+        for(int i=0; i < POINTS_NUMBER; ){
+            if(list.size() > 0 && x>= list.get(0)){
+                tab[0][i] = list.get(0);
+                tab[1][i] = this.apprValue(list.get(0));
+                list.remove(0);
+                continue;
+            }
+            tab[0][i] = x;
+            tab[1][i] = this.getValue(x);
+            x+=diff;
+            i++;
+        }
+        int ind = POINTS_NUMBER;
+        for(int i=0; i < ranges.length; i++){
+            if(ranges[i].begin<= b && ranges[i].begin>=a){
+                tab[0][ind] = ranges[i].begin;
+                tab[1][ind++] = this.apprValue(ranges[i].begin);
+            }
+            if(ranges[i].end<= b && ranges[i].end>=a){
+                tab[0][ind] = ranges[i].end;
+                tab[1][ind++] = this.apprValue(ranges[i].end);
+            }
+        }
+        return tab;
+    }
+
 }

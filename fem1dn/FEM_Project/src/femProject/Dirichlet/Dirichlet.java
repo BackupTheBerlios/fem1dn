@@ -1,8 +1,7 @@
 package femProject.Dirichlet;
 
 import femProject.Function.Function;
-import femProject.Function.FunctionInterface;
-import femProject.Function.StoredFunction;
+import femProject.UI.FunctionInterface;
 
 import java.awt.*;
 
@@ -23,13 +22,13 @@ public class Dirichlet {
     private float a,b,ua,ub,h;
     private char z;
     private float[] xi,aa,ab,ac,af,ax;
-    private FunctionInterface   functionInterfacep,functionInterfacepp,functionInterfaceq,
+    private FunctionInterface functionInterfacep,functionInterfacepp,functionInterfaceq,
                                 functionInterfacer,functionInterfaceu,functionInterfacef;
 
     public Dirichlet() {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-                functionInterfacep = new FunctionInterface();
+               functionInterfacep = new FunctionInterface();
                int     posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
                        posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
 
@@ -479,5 +478,9 @@ public class Dirichlet {
 
     public void setN(int n) {
         this.n = n;
+    }
+
+    public float[][] getUFun(float a, float b) throws Exception {
+        return u.getValuesForRange(a,b);
     }
 }
