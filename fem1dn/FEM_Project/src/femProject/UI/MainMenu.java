@@ -21,14 +21,35 @@ public class MainMenu extends JFrame {
     private JTextField upaTextField;
     private JTextField upbTextField;
     private JCheckBox errorCheckBox;
-    private JCheckBox oldFunctions;   
+    private JCheckBox oldFunctions;
+    private JButton helpButton;
     private Neumann neumann = null;
     private Dirichlet dirichlet = null;
+    private JFrame frame;
+    private static final int WIDTH = 300,
+                             HEIGHT = 380;
+
 
     private float a, b, upa, upb;
     private int n;
+    private static final String PROGRAM_INFO =  "Program rozwiazuje metoda elementu skonczonego rownanie\n" +
+                                                "\n -(p(x)u')'+ q(x)u'+ r(x)u = f(x)  dla xî(a;b)\n\n" +
+                                                "z zastosowaniem elementow liniowych,"+
+                                                "z warunkami brzegowymi: \n"+
+                                                "Dirichleta u(a)=ua, u(b)=ub, lub \n" +
+                                                "Neumana u'(a)=upa, u'(b)=upb.\n"+
+                                                "\nAplikacja rozpoznaje funkcje:\n"+
+                                                "sin(x) cos(x) tan(x)\n" +
+                                                "asin(x) acos(x) atan(x)\n"+
+                                                "sinh(x) cosh(x) tanh(x) asinh(x) acosh(x) atanh(x)\n"+
+                                                "ln(x) log(x) exp(x) abs(x) sqrt(x)\n"+
+                                                "mod(x,y) - x modulo y\n"+
+                                                "x^y -  x do potêgi y\n"+
+                                                "oraz sta³e pi e"+                                                                                                
+                                                "\n\nAutorzy:\n\tJakub ¦lepowroñski\n\tPawe³ Zawistowski";
 
     public MainMenu() {
+        frame = this;
         setContentPane(contentPane);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
         dirichlet = new Dirichlet();
@@ -127,7 +148,6 @@ public class MainMenu extends JFrame {
                         fi.repaint();
 */
                         ResultForm result = new ResultForm();
-
                         result.addFunction(Color.green, tab);
 
                         if (errorCheckBox.isSelected()) {
@@ -160,14 +180,17 @@ public class MainMenu extends JFrame {
                 }
             }
         });
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                  JOptionPane.showMessageDialog(frame,PROGRAM_INFO);                 
+            }
+        });
     }
     private void lockRangeTextFields(boolean val){
         this.aTextField.setEditable(!val);
         this.bTextField.setEditable(!val);
     }
 
-    private static final int WIDTH = 300,
-            HEIGHT = 340;
 
     public static void main(String[] args) {
         MainMenu dialog = new MainMenu();

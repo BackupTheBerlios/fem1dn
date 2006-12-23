@@ -44,7 +44,7 @@ public class StoredFunction {
                funs.clear();
                funs.add("x+1");               
                storedFuns.add(new StoredFunction(funs,rngs));
-           }else if(type.equalsIgnoreCase("pp")){
+           }else if(type.equalsIgnoreCase("p'")){
                funs.add("0");
                storedFuns.add(new StoredFunction(funs,rngs));
 

@@ -37,7 +37,7 @@ public class Dirichlet {
 
                functionInterfacepp = new FunctionInterface();
                functionInterfacepp.setLocation(posX,posY);
-               functionInterfacepp.setFunctionName("pp");
+               functionInterfacepp.setFunctionName("p'");
 
                functionInterfaceq = new FunctionInterface();
                functionInterfaceq.setLocation(posX,posY);
@@ -71,7 +71,7 @@ public class Dirichlet {
         functionInterfacepp.setDefaultRange(a,b);
         functionInterfacepp.setVisible(true);
         pp = functionInterfacepp.getFunction();
-        if(pp==null) throw new Exception("Nie wprowadzono funkcji pp");
+        if(pp==null) throw new Exception("Nie wprowadzono funkcji p'");
 
         functionInterfaceq.setDefaultRange(a,b);
         functionInterfaceq.setVisible(true);
