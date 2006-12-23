@@ -172,7 +172,7 @@
             </constraints>
             <properties>
               <selected value="true"/>
-              <text value="Uwzględniaj wcześniejsze funkcje"/>
+              <text value="uwzgledniaj wczesniejsze funkcje"/>
             </properties>
           </component>
           <component id="d8ead" class="javax.swing.JButton" binding="helpButton">

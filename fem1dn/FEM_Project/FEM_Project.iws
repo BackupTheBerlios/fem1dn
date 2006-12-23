@@ -20,6 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" afterPath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" afterPath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" afterPath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/MainMenu.form" afterPath="$PROJECT_DIR$/src/femProject/UI/MainMenu.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iws" afterPath="$PROJECT_DIR$/FEM_Project.iws" />
     </list>
@@ -225,7 +228,7 @@
       <file leaf-file-name="MainMenu.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="68" selection-start="8582" selection-end="8582" vertical-scroll-proportion="0.11275964">
+            <state line="184" column="68" selection-start="8582" selection-end="8582" vertical-scroll-proportion="0.2462908">
               <folding>
                 <element signature="class#2688:5045" expanded="false" />
                 <element signature="class#5101:7930" expanded="false" />
@@ -1030,7 +1033,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/femProject/UI/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="68" selection-start="8582" selection-end="8582" vertical-scroll-proportion="0.11275964">
+        <state line="184" column="68" selection-start="8582" selection-end="8582" vertical-scroll-proportion="0.2462908">
           <folding>
             <element signature="class#2688:5045" expanded="false" />
             <element signature="class#5101:7930" expanded="false" />
