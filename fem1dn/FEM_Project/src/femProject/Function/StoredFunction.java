@@ -78,7 +78,7 @@ public class StoredFunction {
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
-               funs.add("sin(3.14*x)");
+               funs.add("sin(pi*x)");
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
@@ -102,11 +102,11 @@ public class StoredFunction {
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
-               funs.add("3.14*3.14*sin(3.14*x)");
+               funs.add("pi*pi*sin(pi*x)");
                storedFuns.add(new StoredFunction(funs,rngs));
 
                funs.clear();
-               funs.add("sin(3.14*x)*(2+3.14*3.14*(x+1))-3.14*cos(3.14*x)/2");
+               funs.add("sin(pi*x)*(2+pi*pi*(x+1))-pi*cos(pi*x)/2");
                storedFuns.add(new StoredFunction(funs,rngs));
            }
 

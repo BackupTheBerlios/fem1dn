@@ -67,9 +67,7 @@ public class Function {
 
     private void parseFunction(int ind, String fun, Range rng) throws Exception{
     //    fun = fun.replaceAll("pi",String.valueOf(Math.PI));
-        org.nfunk.jep.Node node = jep.parse(fun);
-
-        
+        org.nfunk.jep.Node node = jep.parse(fun);        
         this.functions[ind] = rpe.compile(node);
         SymbolTable sym = jep.getSymbolTable();
         if(sym.size() > symTabMaxSize) throw new Exception("Zbyt wiele niewiadomych");
@@ -110,9 +108,14 @@ public class Function {
 
         if (i < rangeNum) {
             try{
-                if(symTabSize == symTabMaxSize) //tzn ze jest niewiadoma
-                    rpe.setVarValue(0,x);
-            }catch(Exception e){};
+                if(symTabSize == symTabMaxSize){ //tzn ze jest niewiadoma                 
+                    Variable v = jep.getVar("x");
+                    int ref = rpe.getVarRef(v);
+                    rpe.setVarValue(ref,x);
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }            
             return (float) rpe.evaluate(functions[i]);
         } else throw new Exception("Invalid argument");
     }
@@ -152,23 +155,7 @@ public class Function {
             xyTab[1][i] = this.getValue(xyTab[0][i]);
         }
     }
-    public float[][] getValuesForRange(float a, float b) throws Exception {
-        float[][] tab = new float[2][];
-        tab[0] = new float[POINTS_NUMBER];
-        tab[1] = new float[POINTS_NUMBER];
-        float diff = (b-a)/POINTS_NUMBER;
-        float x =a;
-
-        for(int i=0; i < POINTS_NUMBER-1; i++){
-            tab[0][i] = x;
-            tab[1][i] = this.getValue(x);
-            x+=diff;
-        }
-        tab[0][POINTS_NUMBER-1] = b;
-        tab[1][POINTS_NUMBER-1] = this.getValue(b);
-            
-        return tab;
-    }
+  
 
 
 

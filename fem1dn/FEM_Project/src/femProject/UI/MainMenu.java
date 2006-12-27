@@ -26,6 +26,7 @@ public class MainMenu extends JFrame {
     private Neumann neumann = null;
     private Dirichlet dirichlet = null;
     private JFrame frame;
+    private static final int COUNT = 1000;
     private static final int WIDTH = 300,
                              HEIGHT = 380;
 
@@ -86,15 +87,9 @@ public class MainMenu extends JFrame {
                         result.addFunction(Color.green, tab);
 
                         if (errorCheckBox.isSelected()) {
-                            float[][] fTab = new float[2][];
-                            fTab[0] = new float[n + 1];
-                            fTab[1] = new float[n + 1];
-                            for (int i = 0; i <= n; ++i) {
-                                fTab[0][i] = xi[i];
-                                fTab[1][i] = dirichlet.getU(xi[i]);
-                            }
-                            result.addFunction(Color.BLUE, dirichlet.getUFun(a,b));
-                            result.setFunctionLists(tab, fTab[1]);
+                            float[][] fTab = dirichlet.getU(COUNT);
+                            result.addFunction(Color.BLUE, fTab);
+                            result.setFunctionLists(tab, dirichlet.getU(xi));
                             result.setError(dirichlet.error());
                         } else result.setFunctionLists(tab);
 
@@ -150,9 +145,8 @@ public class MainMenu extends JFrame {
                         ResultForm result = new ResultForm();
                         result.addFunction(Color.green, tab);
 
-                        if (errorCheckBox.isSelected()) {
-                            int count = 1000;
-                            float[][] u = neumann.getU(count);
+                        if (errorCheckBox.isSelected()) {                            
+                            float[][] u = neumann.getU(COUNT);
                             result.addFunction(Color.BLUE, u);
                             result.setFunctionLists(tab, neumann.getU(n + 1)[1]);
                             result.setError(neumann.error());

@@ -97,7 +97,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="300"/>
+                  <text value="10"/>
                 </properties>
               </component>
               <component id="86b94" class="javax.swing.JTextField" binding="upaTextField">
@@ -172,7 +172,7 @@
             </constraints>
             <properties>
               <selected value="true"/>
-              <text value="uwzgledniaj wczesniejsze funkcje"/>
+              <text value="Uwzględniaj wcześniejsze funkcje"/>
             </properties>
           </component>
           <component id="d8ead" class="javax.swing.JButton" binding="helpButton">

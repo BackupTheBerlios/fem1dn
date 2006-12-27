@@ -39,7 +39,7 @@ public class ResultForm extends JFrame {
     private DefaultListModel argListModel;
     private DefaultListModel valListModel;
 
-    private static final int WIDTH = 500,
+    private static final int WIDTH = 550,
             HEIGHT = 300;
     private DefaultListModel errListModel;
     private DefaultListModel fvalListModel;

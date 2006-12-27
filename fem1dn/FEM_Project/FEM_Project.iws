@@ -19,18 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" afterPath="$PROJECT_DIR$/src/femProject/Dirichlet/Dirichlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" afterPath="$PROJECT_DIR$/src/femProject/UI/MainMenu.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/MES1.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" afterPath="$PROJECT_DIR$/src/femProject/Function/StoredFunction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/start.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/start.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/Function/Function.java" afterPath="$PROJECT_DIR$/src/femProject/Function/Function.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iml" afterPath="$PROJECT_DIR$/FEM_Project.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/MainMenu.form" afterPath="$PROJECT_DIR$/src/femProject/UI/MainMenu.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FEM_Project.iws" afterPath="$PROJECT_DIR$/FEM_Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/ResultForm.java" afterPath="$PROJECT_DIR$/src/femProject/UI/ResultForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/femProject/UI/ResultForm.form" afterPath="$PROJECT_DIR$/src/femProject/UI/ResultForm.form" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />

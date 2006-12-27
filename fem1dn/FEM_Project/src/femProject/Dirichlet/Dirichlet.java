@@ -479,8 +479,28 @@ public class Dirichlet {
     public void setN(int n) {
         this.n = n;
     }
+ 
 
-    public float[][] getUFun(float a, float b) throws Exception {
-        return u.getValuesForRange(a,b);
+    public float[][] getU(int count) throws Exception {
+        float[][] y = new float[2][];
+        y[0] = new float[count];
+        y[1] = new float[count];
+        float step = (this.u.getMaxX() - this.u.getMinX())/count;
+        float curr = this.u.getMinX();
+        for(int i=0; i < count-1; i++){
+            y[0][i] = curr;
+            y[1][i]=this.u.getValue(y[0][i]);
+            curr+=step;
+        }
+        y[0][count-1]=this.u.getMaxX();
+        y[1][count-1]=this.u.getValue(u.getMaxX());
+        return y;
+    }
+     public float[] getU(float[] args) throws Exception {
+        float[] y = new float[args.length];
+        for(int i=0; i < args.length; i++){
+            y[i]=this.u.getValue(args[i]);
+        }
+        return y;
     }
 }

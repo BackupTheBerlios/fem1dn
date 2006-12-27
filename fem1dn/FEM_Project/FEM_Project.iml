@@ -6,12 +6,8 @@
         <attribute name="method" value="1" />
         <attribute name="URI" value="/" />
       </containerElement>
-      <containerElement type="library" name="JEP" level="project">
-        <attribute name="method" value="1" />
-        <attribute name="URI" value="/" />
-      </containerElement>
     </containerInfo>
-    <setting name="jarUrl" value="file://$MODULE_DIR$/FEM_Project.jar" />
+    <setting name="jarUrl" value="file://$MODULE_DIR$/MES1.jar" />
     <setting name="buildJar" value="true" />
     <setting name="mainClass" value="femProject.UI.MainMenu" />
   </component>
