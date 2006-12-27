@@ -24,37 +24,39 @@ public class Dirichlet {
     private float[] xi,aa,ab,ac,af,ax;
     private FunctionInterface functionInterfacep,functionInterfacepp,functionInterfaceq,
                                 functionInterfacer,functionInterfaceu,functionInterfacef;
+    private boolean firstUse;
 
     public Dirichlet() {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       firstUse = true;
 
-               functionInterfacep = new FunctionInterface();
-               int     posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
-                       posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
+       functionInterfacep = new FunctionInterface();
+       int     posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
+               posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
 
-               functionInterfacep.setLocation(posX,posY);
-               functionInterfacep.setFunctionName("p");
+       functionInterfacep.setLocation(posX,posY);
+       functionInterfacep.setFunctionName("p");
 
-               functionInterfacepp = new FunctionInterface();
-               functionInterfacepp.setLocation(posX,posY);
-               functionInterfacepp.setFunctionName("p'");
+       functionInterfacepp = new FunctionInterface();
+       functionInterfacepp.setLocation(posX,posY);
+       functionInterfacepp.setFunctionName("p'");
 
-               functionInterfaceq = new FunctionInterface();
-               functionInterfaceq.setLocation(posX,posY);
-               functionInterfaceq.setFunctionName("q");
+       functionInterfaceq = new FunctionInterface();
+       functionInterfaceq.setLocation(posX,posY);
+       functionInterfaceq.setFunctionName("q");
 
 
-               functionInterfacer = new FunctionInterface();
-               functionInterfacer.setLocation(posX,posY);
-               functionInterfacer.setFunctionName("r");
+       functionInterfacer = new FunctionInterface();
+       functionInterfacer.setLocation(posX,posY);
+       functionInterfacer.setFunctionName("r");
 
-               functionInterfacef = new FunctionInterface();
-               functionInterfacef.setLocation(posX,posY);
-               functionInterfacef.setFunctionName("f");
+       functionInterfacef = new FunctionInterface();
+       functionInterfacef.setLocation(posX,posY);
+       functionInterfacef.setFunctionName("f");
 
-               functionInterfaceu = new FunctionInterface();
-               functionInterfaceu.setLocation(posX,posY);
-               functionInterfaceu.setFunctionName("u");
+       functionInterfaceu = new FunctionInterface();
+       functionInterfaceu.setLocation(posX,posY);
+       functionInterfaceu.setFunctionName("u");
     }
     public void setConditions(float a, float b, int n, float ua, float ub, boolean inputU) throws Exception {
         this.a = a;
@@ -62,6 +64,7 @@ public class Dirichlet {
         this.n = n;
         this.ua = ua;
         this.ub = ub;
+
         
         functionInterfacep.setDefaultRange(a,b);
         functionInterfacep.setVisible(true);
@@ -96,6 +99,7 @@ public class Dirichlet {
         }
         
         this.tabInit();
+        this.firstUse = false;
     }
     private float v(int i, float x){
         if(i==0) return  (a-x)/h+1;
@@ -502,5 +506,9 @@ public class Dirichlet {
             y[i]=this.u.getValue(args[i]);
         }
         return y;
+    }
+
+    public boolean isNotUsed() {
+        return firstUse;
     }
 }

@@ -46,7 +46,10 @@ public class MainMenu extends JFrame {
                                                 "ln(x) log(x) exp(x) abs(x) sqrt(x)\n"+
                                                 "mod(x,y) - x modulo y\n"+
                                                 "x^y -  x do potêgi y\n"+
-                                                "oraz sta³e pi e"+                                                                                                
+                                                "oraz sta³e pi e"+
+                                                "\n\nKlawisze:" +
+                                                "\n strza³ki - poruszanie siê po wykresie:"+
+                                                "\n +/- przybli¿anie oddalanie wykresów"+
                                                 "\n\nAutorzy:\n\tJakub ¦lepowroñski\n\tPawe³ Zawistowski";
 
     public MainMenu() {
@@ -62,7 +65,7 @@ public class MainMenu extends JFrame {
                 if (getConditions()) {
 
                     try {
-                        if(!oldFunctions.isSelected() || neumann.isNotUsed())
+                        if(!oldFunctions.isSelected() || dirichlet.isNotUsed())
                             dirichlet.setConditions(a, b, n, upa, upb, errorCheckBox.isSelected());
                         else{
                             dirichlet.setA(a);
