@@ -1,7 +1,7 @@
 package femProject.Neumann;
 
 import femProject.Function.Function;
-import femProject.Function.FunctionInterface;
+import femProject.UI.FunctionInterface;
 
 import java.awt.*;
 
