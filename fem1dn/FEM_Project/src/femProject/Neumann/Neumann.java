@@ -1,7 +1,7 @@
 package femProject.Neumann;
 
 import femProject.Function.Function;
-import femProject.UI.FunctionInterface;
+import femProject.Function.FunctionInterface;
 
 import java.awt.*;
 
@@ -475,7 +475,6 @@ end{trojdiag};
               af[i]=calka(1,i,i,xi[i-1],xi[i])+calka(1,i,i,xi[i],xi[i+1]);
             af[n]=p.getValue(b)*upb+calka(1,n,n,xi[n-1],xi[n]);
 
-            //co to za dziwne cofanie indeksow
             for(int i=n+1;i>=1;--i){
                 ab[i]=ab[i-1];
                 aa[i]=aa[i-1];
@@ -483,10 +482,15 @@ end{trojdiag};
                 af[i]=af[i-1];
             }
             //{Rozwiazanie ukladu rownan}
-            //jaka kicha - jak tutaj daje n+1 to sie nawet psuje
             trojdiag(n+1,aa,ab,ac,af,ax);
             for(int i=1;i<=n+1;++i)
                 ax[i-1]=ax[i];
+        if(u!=null)
+        {
+            float C = ax[0] - u.getValue(a);
+            for(int i=0;i<n+1;++i)
+                ax[i]-=C;
+        }
         //} catch (Exception ex) {
         //}*
     }
