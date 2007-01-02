@@ -236,7 +236,7 @@ public class Dirichlet {
             return tau * (g1(a1) + g1(a2));
         }
      private float g1(float x) throws Exception{
-         return (float)Math.sqrt(Math.abs(u.getValue(x)-uu(x)));
+        return (u.getValue(x) - uu(x)) * (u.getValue(x) - uu(x));
     }
 
 
