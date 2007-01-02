@@ -6,8 +6,12 @@
         <attribute name="method" value="1" />
         <attribute name="URI" value="/" />
       </containerElement>
+      <containerElement type="library" name="JEP" level="project">
+        <attribute name="method" value="2" />
+        <attribute name="URI" value="/" />
+      </containerElement>
     </containerInfo>
-    <setting name="jarUrl" value="file://$MODULE_DIR$/../MES1.jar" />
+    <setting name="jarUrl" value="file://$MODULE_DIR$/../FEM_Project.jar" />
     <setting name="buildJar" value="true" />
     <setting name="mainClass" value="femProject.UI.MainMenu" />
   </component>
@@ -18,7 +22,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <content url="jar://$MODULE_DIR$/src/JEP.jar!/" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="IDEA 5784" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="JEP" level="project" />
     <orderEntryProperties />

@@ -86,6 +86,26 @@ public class Function {
         return maxX;
     }
 
+
+    public Range[] getRanges() {
+        return ranges;
+    }
+
+    public Range[] getRanges(float a, float b){
+        int ra=0, rb=ranges.length-1;
+        for(int i=0;i<ranges.length;++i){
+            if(ranges[i].isInRange(a))
+                ra=i;
+            if(ranges[i].isInRange(b))
+                rb=i;
+        }
+        //ra>=rb
+        Range[] r= new Range[ra-rb+1];
+        for(int i=0;i<r.length;++i)
+            r[i]=ranges[ra -i];
+        return r;
+    }
+
     public Function(Range[] ranges, String[] functions) throws Exception {
         if (ranges != null && functions != null && ranges.length > 0
                 && ranges.length == functions.length) {

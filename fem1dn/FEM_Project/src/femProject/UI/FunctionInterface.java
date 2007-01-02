@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.GridConstraints;
+
 /**
  * Created by IntelliJ IDEA.
  * User: zagi
@@ -51,15 +54,16 @@ public class FunctionInterface extends JDialog {
 
 
     private static final int WIDTH = 450,
-                                HEIGHT = 300;
+            HEIGHT = 300;
 
-       
+
     public FunctionInterface() {
         defBeg = 0;
-        defEnd = 1;        
+        defEnd = 1;
         construct();
     }
-    private void construct(){
+
+    private void construct() {
         textFunction = new StoredFunction();
         inclBeg = true;
         inclEnd = true;
@@ -116,7 +120,7 @@ public class FunctionInterface extends JDialog {
                         a = rangeBegTextField.getText(),
                         b = rangeEndTextField.getText();
                 if (!checkFunction(f, a, b))
-                    JOptionPane.showMessageDialog(dial,"B³êdna funkcja");
+                    JOptionPane.showMessageDialog(dial, "B³êdna funkcja");
             }
 
         });
@@ -134,23 +138,20 @@ public class FunctionInterface extends JDialog {
         });
         finishButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if(textFunction.isRangeOk()){
-                    if(textFunction.isInRange(defBeg) && textFunction.isInRange(defEnd))
+                if (textFunction.isRangeOk()) {
+                    if (textFunction.isInRange(defBeg) && textFunction.isInRange(defEnd))
                         try {
                             function = new femProject.Function.Function(textFunction);
                             setVisible(false);
-                        } catch (Exception e)
-                        {
-                            JOptionPane.showMessageDialog(dial,"Funkcja nie jest poprawna");
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(dial, "Funkcja nie jest poprawna");
                         }
                     else
-                        JOptionPane.showMessageDialog(dial,"Funkcja musi byæ okre¶lona na przedziale ["+defBeg+";"+defEnd+"]");
+                        JOptionPane.showMessageDialog(dial, "Funkcja musi byæ okre¶lona na przedziale [" + defBeg + ";" + defEnd + "]");
 
 
-
-                }else
-                    JOptionPane.showMessageDialog(dial,"Funkcja nie jest poprawnie okre¶lona na przedziale.");
-
+                } else
+                    JOptionPane.showMessageDialog(dial, "Funkcja nie jest poprawnie okre¶lona na przedziale.");
 
 
             }
@@ -168,8 +169,8 @@ public class FunctionInterface extends JDialog {
         });
         prevButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if(storedFunctions.size() > 0){
-                    currStoredFunctionIndx = ((storedFunctions.size()+currStoredFunctionIndx-1)%storedFunctions.size());
+                if (storedFunctions.size() > 0) {
+                    currStoredFunctionIndx = ((storedFunctions.size() + currStoredFunctionIndx - 1) % storedFunctions.size());
                     textFunction = storedFunctions.get(currStoredFunctionIndx);
                     resetLists();
                 }
@@ -178,8 +179,8 @@ public class FunctionInterface extends JDialog {
         });
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if(storedFunctions.size() > 0){
-                    currStoredFunctionIndx = (currStoredFunctionIndx+1)%storedFunctions.size();
+                if (storedFunctions.size() > 0) {
+                    currStoredFunctionIndx = (currStoredFunctionIndx + 1) % storedFunctions.size();
                     textFunction = storedFunctions.get(currStoredFunctionIndx);
                     resetLists();
                 }
@@ -187,10 +188,12 @@ public class FunctionInterface extends JDialog {
             }
         });
     }
-    public void setFunctionName(String name){
+
+    public void setFunctionName(String name) {
         this.functionName.setText(name);
         this.setStoredFunctions(StoredFunction.getStoredFunctions(name));
     }
+
     private void fillTextFields() {
         int indx = functionList.getSelectedIndex();
         if (indx >= 0 && indx < textFunction.getSize()) {
@@ -206,21 +209,22 @@ public class FunctionInterface extends JDialog {
         }
     }
 
-    public femProject.Function.Function getFunction(){
+    public femProject.Function.Function getFunction() {
         return function;
     }
 
-    private void resetLists(){
+    private void resetLists() {
         functionListModel.clear();
         rangeListModel.clear();
 
-        for(int i=0; i < textFunction.getSize(); i++){
+        for (int i = 0; i < textFunction.getSize(); i++) {
             functionListModel.addElement(textFunction.getFuction(i));
             rangeListModel.addElement(textFunction.getRanges(i).toString());
         }
 
-    
+
     }
+
     private boolean checkFunction(String fun, String a, String b) {
         try {
             if (a.length() < 1 || b.length() < 1 || fun.length() < 1) return false;
@@ -231,7 +235,7 @@ public class FunctionInterface extends JDialog {
 
             if (b.compareTo("+" + INFINITY_SYMBOL) == 0) end = Float.POSITIVE_INFINITY;
             else end = Float.valueOf(b);
-        
+
 
             if (end < beg || (end == beg && (!inclBeg || !inclEnd))) return false;
 
@@ -250,14 +254,14 @@ public class FunctionInterface extends JDialog {
             myParser.addVariable("x", val);
             myParser.parseExpression(fun);
             myParser.getValue();
-            
+
             Range range = new Range(beg, end, inclBeg, inclEnd);
             /*Range currRange;
             for (int i = 0; i < textFunction.getSize(); i++) {
                 currRange = textFunction.getRanges(i);
                 if (range.intersects(currRange)) return false;
             } */
-            textFunction.add(fun,range);
+            textFunction.add(fun, range);
             resetLists();
 
         } catch (Exception ex) {
@@ -275,6 +279,17 @@ public class FunctionInterface extends JDialog {
 
     }
 
+
+    public void setStoredFunctions(ArrayList<StoredFunction> storedFunctions) {
+        this.storedFunctions = storedFunctions;
+    }
+
+    public void setDefaultRange(float a, float b) {
+        rangeBegTextField.setText(String.valueOf(a));
+        rangeEndTextField.setText(String.valueOf(b));
+        defBeg = a;
+        defEnd = b;
+    }
 
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
@@ -294,11 +309,12 @@ public class FunctionInterface extends JDialog {
         createUIComponents();
         panel1 = new JPanel();
         panel1.setLayout(new GridBagLayout());
+        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         final JLabel label1 = new JLabel();
-        label1.setText("f(x) =");
+        label1.setText("(x) =");
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
-        gbc.gridx = 0;
+        gbc.gridx = 2;
         gbc.gridy = 2;
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -306,7 +322,7 @@ public class FunctionInterface extends JDialog {
         final JLabel label2 = new JLabel();
         label2.setText("   dla x  ");
         gbc = new GridBagConstraints();
-        gbc.gridx = 2;
+        gbc.gridx = 4;
         gbc.gridy = 2;
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -314,19 +330,19 @@ public class FunctionInterface extends JDialog {
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        gbc.gridx = 3;
+        gbc.gridx = 5;
         gbc.gridy = 0;
         gbc.gridheight = 2;
         panel1.add(panel2, gbc);
         leftBrBtn = new JButton();
-        leftBrBtn.setText("(");
+        leftBrBtn.setText("[");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;
         panel2.add(leftBrBtn, gbc);
         rightBrBtn = new JButton();
-        rightBrBtn.setText(") ");
+        rightBrBtn.setText("]");
         gbc = new GridBagConstraints();
         gbc.gridx = 4;
         gbc.gridy = 1;
@@ -362,23 +378,23 @@ public class FunctionInterface extends JDialog {
         gbc.gridwidth = 2;
         panel2.add(leftInfBtn, gbc);
         finishButton = new JButton();
-        finishButton.setText("Zakoñcz");
+        finishButton.setText("OK");
         gbc = new GridBagConstraints();
-        gbc.gridx = 3;
+        gbc.gridx = 5;
         gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.NORTH;
         panel1.add(finishButton, gbc);
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 3;
         gbc.gridy = 3;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(panel3, gbc);
         addButton = new JButton();
-        addButton.setText("Dodaj/Zmieñ");
+        addButton.setText("Dodaj");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -386,21 +402,15 @@ public class FunctionInterface extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel3.add(addButton, gbc);
         deleteButton = new JButton();
-        deleteButton.setText("Edytuj");
+        deleteButton.setText("Usuñ");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.NORTH;
         panel3.add(deleteButton, gbc);
-        final JPanel spacer1 = new JPanel();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel3.add(spacer1, gbc);
         final JScrollPane scrollPane1 = new JScrollPane();
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 3;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.BOTH;
         panel1.add(scrollPane1, gbc);
@@ -408,34 +418,52 @@ public class FunctionInterface extends JDialog {
         scrollPane1.setViewportView(functionList);
         final JScrollPane scrollPane2 = new JScrollPane();
         gbc = new GridBagConstraints();
-        gbc.gridx = 3;
+        gbc.gridx = 5;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.BOTH;
         panel1.add(scrollPane2, gbc);
+        rangeList.setLayoutOrientation(0);
         rangeList.setSelectionMode(0);
         scrollPane2.setViewportView(rangeList);
         functionTextField = new JTextField();
         functionTextField.setColumns(0);
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(functionTextField, gbc);
+        textArea1 = new JTextArea();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        panel1.add(textArea1, gbc);
+        functionName = new JLabel();
+        functionName.setHorizontalAlignment(4);
+        functionName.setHorizontalTextPosition(4);
+        functionName.setText("f");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        panel1.add(functionName, gbc);
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 4;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        panel1.add(panel4, gbc);
+        prevButton = new JButton();
+        prevButton.setText("<-");
+        panel4.add(prevButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        nextButton = new JButton();
+        nextButton.setText("->");
+        panel4.add(nextButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     public JComponent $$$getRootComponent$$$() {
         return panel1;
-    }
-
-    public void setStoredFunctions(ArrayList<StoredFunction> storedFunctions) {
-        this.storedFunctions = storedFunctions;
-    }
-
-    public void setDefaultRange(float a, float b) {
-        rangeBegTextField.setText(String.valueOf(a));
-        rangeEndTextField.setText(String.valueOf(b));
-        defBeg = a;
-        defEnd = b;
     }
 }

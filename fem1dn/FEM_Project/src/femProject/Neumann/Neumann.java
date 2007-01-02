@@ -1,6 +1,7 @@
 package femProject.Neumann;
 
 import femProject.Function.Function;
+import femProject.Function.Range;
 import femProject.UI.FunctionInterface;
 
 import java.awt.*;
@@ -71,8 +72,8 @@ end{u};
     private float a, b, upa, upb, h;
     private boolean bb;
     private float[] xi, aa, ab, ac, af, ax;
-    private FunctionInterface    functionInterfacep,functionInterfaceq,functionInterfacer,
-                                functionInterfaceu,functionInterfacef;
+    private FunctionInterface functionInterfacep, functionInterfaceq, functionInterfacer,
+            functionInterfaceu, functionInterfacef;
     private boolean firstUse;
 
     public Neumann() {
@@ -81,7 +82,7 @@ end{u};
 
         functionInterfacep = new FunctionInterface();
         int posX = (int) (dim.getWidth() / 2) - functionInterfacep.getWidth() / 2,
-                        posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
+                posY = (int) (dim.getHeight() / 2) - functionInterfacep.getHeight() / 2;
 
         functionInterfacep.setLocation(posX, posY);
         functionInterfacep.setFunctionName("p");
@@ -103,40 +104,38 @@ end{u};
         functionInterfaceu = new FunctionInterface();
         functionInterfaceu.setLocation(posX, posY);
         functionInterfaceu.setFunctionName("u");
-      
+
     }
 
-    public void setConditions(float a, float b, int n, float upa, float upb,  boolean inputU) throws Exception{
+    public void setConditions(float a, float b, int n, float upa, float upb, boolean inputU) throws Exception {
 
-        functionInterfacep.setDefaultRange(a,b);
+        functionInterfacep.setDefaultRange(a, b);
         functionInterfacep.setVisible(true);
         p = functionInterfacep.getFunction();
-        if(p==null) throw new Exception("Nie wprowadzono funkcji p");
+        if (p == null) throw new Exception("Nie wprowadzono funkcji p");
 
-        functionInterfaceq.setDefaultRange(a,b);
+        functionInterfaceq.setDefaultRange(a, b);
         functionInterfaceq.setVisible(true);
         q = functionInterfaceq.getFunction();
-        if(q==null) throw new Exception("Nie wprowadzono funkcji q");
+        if (q == null) throw new Exception("Nie wprowadzono funkcji q");
 
-        functionInterfacer.setDefaultRange(a,b);
+        functionInterfacer.setDefaultRange(a, b);
         functionInterfacer.setVisible(true);
         r = functionInterfacer.getFunction();
-        if(r==null) throw new Exception("Nie wprowadzono funkcji r");
+        if (r == null) throw new Exception("Nie wprowadzono funkcji r");
 
-        functionInterfacef.setDefaultRange(a,b);
+        functionInterfacef.setDefaultRange(a, b);
         functionInterfacef.setVisible(true);
         f = functionInterfacef.getFunction();
-        if(f==null) throw new Exception("Nie wprowadzono funkcji f");
+        if (f == null) throw new Exception("Nie wprowadzono funkcji f");
 
-        if(inputU)
-        {
-            functionInterfaceu.setDefaultRange(a,b);
+        if (inputU) {
+            functionInterfaceu.setDefaultRange(a, b);
             functionInterfaceu.setVisible(true);
             u = functionInterfaceu.getFunction();
-            if(u==null) throw new Exception("Nie wprowadzono funkcji u");
-        }
-        else
-        u = null;
+            if (u == null) throw new Exception("Nie wprowadzono funkcji u");
+        } else
+            u = null;
 
         this.a = a;
         this.b = b;
@@ -146,9 +145,10 @@ end{u};
         this.firstUse = false;
     }
 
-    public boolean isNotUsed(){
+    public boolean isNotUsed() {
         return firstUse;
     }
+
     public int getN() {
         return n;
     }
@@ -189,38 +189,7 @@ end{u};
         this.upb = upb;
     }
 
-
-    public float[] getY() {
-        float[] y = new float[n+1];
-        bb = false;
-        for(int i=0; i < n+1; i++)
-            y[i]=this.uu(xi[i]);
-        return y;
-    }
-
-    public float[][] getU(int count) throws Exception{
-        float[][] y = new float[2][];
-        y[0] = new float[count];
-        y[1] = new float[count];
-        float step = (this.u.getMaxX() - this.u.getMinX())/count;
-        float min = this.u.getMinX();
-        for(int i=0; i < count-1; i++){
-            y[0][i] = min+i*step;
-            y[1][i]=this.u.getValue(y[0][i]);
-        }
-        y[0][count-1]=this.u.getMaxX();
-        y[1][count-1]=this.u.getValue(u.getMaxX());
-        return y;
-    }
-
-    public float[] getX() {
-        return xi;
-    }
-
-        public float getU(float v) throws Exception {
-        return u.getValue(v);
-    }
-/*
+    /*
     {**********************************************************}
 
     function v(i:integer;x:real):real;
@@ -293,7 +262,7 @@ end{s};
 
     */
     private float s(int i, int j, float x) throws Exception {
-        return p.getValue(x) * dv(i, x)* dv(j, x) + q.getValue(x) * dv(i, x) * v(j, x) + r.getValue(x) * v(i, x) * v(j, x);
+        return p.getValue(x) * dv(i, x) * dv(j, x) + q.getValue(x) * dv(i, x) * v(j, x) + r.getValue(x) * v(i, x) * v(j, x);
     }
 
     /*
@@ -343,8 +312,8 @@ end{g};
         return tau * (g1(a1) + g1(a2));
     }
 
-    private float g1(float x) throws Exception{
-         return (float)Math.sqrt(Math.abs(u.getValue(x)-uu(x)));
+    private float g1(float x) throws Exception {
+        return (u.getValue(x) - uu(x)) * (u.getValue(x) - uu(x));
     }
 
     /*
@@ -396,7 +365,8 @@ end{trojdiag};
         for (int k = n - 1; k >= 0; k--) {
             x[k] = (f[k] - c[k] * x[k + 1]) / a[k];
         }
-*/    }
+*/
+    }
 
     /*
    for i:=0 to n-1 do xi[i]:=a+i*h;
@@ -450,67 +420,139 @@ end{trojdiag};
         ax = new float[n + 2];
     }
 
-    public void start()  throws Exception{
+    public void start() throws Exception {
         this.tabInit();
         h = (b - a) / n;
 
-        for (int i = 0; i <= n-1; ++i)
+        for (int i = 0; i <= n - 1; ++i)
             xi[i] = a + i * h;
         xi[n] = b;
 
         //try {
-            //{Obliczanie wspolczynnikow macierzy}
-            for (int i = 1; i <= n; ++i)
-                ab[i] = calka(0, i - 1, i, xi[i - 1], xi[i]);
-            aa[0] = calka(0, 0, 0, xi[0], xi[1]);
-            for (int i = 1; i <= n - 1; ++i)
-                aa[i] = calka(0, i, i, xi[i - 1], xi[i]) + calka(0, i, i, xi[i], xi[i + 1]);
-            aa[n] = calka(0, n, n, xi[n - 1], xi[n]);
-            for (int i = 0; i <= n - 1; ++i)
-                ac[i] = calka(0, i + 1, i, xi[i], xi[i + 1]);
+        //{Obliczanie wspolczynnikow macierzy}
+        for (int i = 1; i <= n; ++i)
+            ab[i] = calka(0, i - 1, i, xi[i - 1], xi[i]);
+        aa[0] = calka(0, 0, 0, xi[0], xi[1]);
+        for (int i = 1; i <= n - 1; ++i)
+            aa[i] = calka(0, i, i, xi[i - 1], xi[i]) + calka(0, i, i, xi[i], xi[i + 1]);
+        aa[n] = calka(0, n, n, xi[n - 1], xi[n]);
+        for (int i = 0; i <= n - 1; ++i)
+            ac[i] = calka(0, i + 1, i, xi[i], xi[i + 1]);
 
-            //{Obliczanie prawych stron}
-            af[0] = -p.getValue(a) * upa + calka(1, 0, 0, xi[0], xi[1]);
-            for(int i=1;i<=n-1;++i)
-              af[i]=calka(1,i,i,xi[i-1],xi[i])+calka(1,i,i,xi[i],xi[i+1]);
-            af[n]=p.getValue(b)*upb+calka(1,n,n,xi[n-1],xi[n]);
+        //{Obliczanie prawych stron}
+        af[0] = -p.getValue(a) * upa + calka(1, 0, 0, xi[0], xi[1]);
+        for (int i = 1; i <= n - 1; ++i)
+            af[i] = calka(1, i, i, xi[i - 1], xi[i]) + calka(1, i, i, xi[i], xi[i + 1]);
+        af[n] = p.getValue(b) * upb + calka(1, n, n, xi[n - 1], xi[n]);
 
-            for(int i=n+1;i>=1;--i){
-                ab[i]=ab[i-1];
-                aa[i]=aa[i-1];
-                ac[i]=ac[i-1];
-                af[i]=af[i-1];
-            }
-            //{Rozwiazanie ukladu rownan}
-            trojdiag(n+1,aa,ab,ac,af,ax);
-            for(int i=1;i<=n+1;++i)
-                ax[i-1]=ax[i];
-        if(u!=null)
-        {
+        for (int i = n + 1; i >= 1; --i) {
+            ab[i] = ab[i - 1];
+            aa[i] = aa[i - 1];
+            ac[i] = ac[i - 1];
+            af[i] = af[i - 1];
+        }
+        //{Rozwiazanie ukladu rownan}
+        trojdiag(n + 1, aa, ab, ac, af, ax);
+        for (int i = 1; i <= n + 1; ++i)
+            ax[i - 1] = ax[i];
+        if (u != null) {
             float C = ax[0] - u.getValue(a);
-            for(int i=0;i<n+1;++i)
-                ax[i]-=C;
+            for (int i = 0; i < n + 1; ++i)
+                ax[i] -= C;
         }
         //} catch (Exception ex) {
         //}*
     }
-    public float error() throws Exception{
+
+    public float error() throws Exception {
         int n3 = 0;
-        if(n<=33)
+        if (n <= 33)
             n3 = 100;
         else
-            n3 = 3*n;
-        float h3 = ((b-a)/n3);
+            n3 = 3 * n;
+        float h3 = ((b - a) / n3);
         float bs = 0;
-        for(int i=0;i<n3;++i){
-            float x3 = a+i*h3;
-            bs += calka1(x3, x3+h3);
+        for (int i = 0; i < n3; ++i) {
+            float x3 = a + i * h3;
+            bs += calka1(x3, x3 + h3);
         }
-        return (float)Math.sqrt(Math.abs(bs));
+        return (float) Math.sqrt(Math.abs(bs));
+    }
+
+    public float[] getY() {
+        float[] y = new float[n + 1];
+        bb = false;
+        for (int i = 0; i < n + 1; i++)
+            y[i] = this.uu(xi[i]);
+        return y;
+    }
+
+    public float[][] getU(int count) throws Exception {
+/*
+
+         float[][] y = new float[2][];
+        y[0] = new float[count];
+        y[1] = new float[count];
+        //float step = (this.u.getMaxX() - this.u.getMinX())/count;
+        float step = (b-a)/count;
+        //float min = this.u.getMinX();
+        float min = a;
+        for(int i=0; i < count-1; i++){
+            y[0][i] = min+i*step;
+            y[1][i]=this.u.getValue(y[0][i]);
+        }
+        //y[0][count-1]=this.u.getMaxX();
+        //y[1][count-1]=this.u.getValue(u.getMaxX());
+        y[0][count-1]=b;
+        y[1][count-1]=this.u.getValue(b);
+        return y;
+*/
+        float[][] y = new float[2][];
+        if (u.getRanges().length == 1) {
+            y[0] = new float[count];
+            y[1] = new float[count];
+            //float step = (this.u.getMaxX() - this.u.getMinX())/count;
+            float step = (b - a) / count;
+            //float min = this.u.getMinX();
+            float min = a;
+            for (int i = 0; i < count - 1; i++) {
+                y[0][i] = min + i * step;
+                y[1][i] = this.u.getValue(y[0][i]);
+            }
+            //y[0][count-1]=this.u.getMaxX();
+            //y[1][count-1]=this.u.getValue(u.getMaxX());
+            y[0][count - 1] = b;
+            y[1][count - 1] = this.u.getValue(b);
+        } else {
+            Range[] r = u.getRanges(a,b);
+            y[0] = new float[count*r.length];
+            y[1] = new float[count*r.length];
+            for(int i=0;i<r.length;++i){
+                float step = (r[i].getEnd()-r[i].getBeg())/count;
+                float min = r[i].getBeg();
+                for(int j=1;j<count-1;++j){
+                    y[0][i*count+j] = min + j * step;
+                    y[1][i*count+j] = this.u.getValue(y[0][i*count+j]);
+                }
+                y[0][i*count]=min;
+                y[1][i*count]=this.u.getValue(y[0][i*count +1]);
+                y[0][(i+1)*count - 1] = r[i].getEnd();
+                y[1][(i+1)*count - 1] = this.u.getValue(y[0][(i+1)*count - 2]);
+            }
+        }
+        return y;
+    }
+
+    public float[] getX() {
+        return xi;
+    }
+
+    public float getU(float v) throws Exception {
+        return u.getValue(v);
     }
 
 }
-  /*
+/*
 procedure ENTER;
 begin
  writeln;
